@@ -10,19 +10,19 @@
 
 * 事项提醒功能模块
 
-  <img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/提醒列表-占位.jpeg" alt="提醒列表-占位" style="zoom:25%;" /><img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/新建提醒.jpeg" alt="新建提醒" style="zoom:25%;" /><img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/提醒列表.jpeg" alt="提醒列表" style="zoom:25%;" /><img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/提醒倒计时.jpeg" alt="提醒倒计时" style="zoom:25%;" />
+  <img src="screenshot/提醒列表-占位.jpeg" alt="提醒列表-占位" style="zoom:25%;" /><img src="screenshot/新建提醒.jpeg" alt="新建提醒" style="zoom:25%;" /><img src="screenshot/提醒列表.jpeg" alt="提醒列表" style="zoom:25%;" /><img src="screenshot/提醒倒计时.jpeg" alt="提醒倒计时" style="zoom:25%;" />
 
 * 目标管理功能模块
 
-  <img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/目标列表-占位.jpeg" alt="目标列表-占位" style="zoom:25%;" /><img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/新建目标.jpeg" alt="新建目标" style="zoom:25%;" /><img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/目标列表.jpeg" alt="目标列表" style="zoom:25%;" />
+  <img src="screenshot/目标列表-占位.jpeg" alt="目标列表-占位" style="zoom:25%;" /><img src="screenshot/新建目标.jpeg" alt="新建目标" style="zoom:25%;" /><img src="screenshot/目标列表.jpeg" alt="目标列表" style="zoom:25%;" />
 
 * 备忘记录功能模块
 
-  <img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/记录生活-占位.jpeg" alt="记录生活-占位" style="zoom:25%;" /><img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/新建记录.jpeg" alt="新建记录" style="zoom:25%;" /><img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/记录生活列表.jpeg" alt="记录生活列表" style="zoom:25%;" /><img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/记录详情.jpeg" alt="记录详情" style="zoom:25%;" />
+  <img src="screenshot/记录生活-占位.jpeg" alt="记录生活-占位" style="zoom:25%;" /><img src="screenshot/新建记录.jpeg" alt="新建记录" style="zoom:25%;" /><img src="screenshot/记录生活列表.jpeg" alt="记录生活列表" style="zoom:25%;" /><img src="screenshot/记录详情.jpeg" alt="记录详情" style="zoom:25%;" />
 
 * 个人设置功能模块
 
-  <img src="/Users/existmg/啊小马快跑/项目源码/RunFastXM/screenshot/个人设置.jpeg" alt="个人设置" style="zoom:25%;" />
+  <img src="screenshot/个人设置.jpeg" alt="个人设置" style="zoom:25%;" />
 
 #### 代码架构
 
