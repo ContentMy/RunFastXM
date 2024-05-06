@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.existmg.module_main.MainViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity"
+        android:fitsSystemWindows="true">
+
+        <androidx.viewpager2.widget.ViewPager2
+            android:id="@+id/main_vp2"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:overScrollMode="never"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/main_bot_nav"
+            app:layout_constraintTop_toTopOf="parent"/>
+
+        <View
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="4dp"
+            android:background="@drawable/ui_view_line_shadow"
+            app:layout_constraintBottom_toTopOf="@+id/main_bot_nav" />
+        <!--
+        id:用于DataBinding在View层中找到对应的控件进行初始化和对应的属性设置
+        menu:引入设置好的menu资源
+        labelVisibilityMode:设置图片和文字的展示模式
+            labeled(图片+文字) unlabeled（仅图片）selected(选中时图片+文字)
+        itemIconTint:设置图片的颜色(如果是透明的)
+        itemTextColor:设置文字的颜色
+        onNavigationItemSelectedListener:在ViewModel中处理监听的逻辑
+        -->
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:id="@+id/main_bot_nav"
+            android:layout_width="0dp"
+            android:layout_height="50dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:itemIconTint="@color/ui_bottom_nav_text_color"
+            app:itemTextColor="@color/ui_bottom_nav_text_color"
+            app:labelVisibilityMode="labeled"
+            app:menu="@menu/main_bottom_nav_menu"
+            app:itemRippleColor="@null"
+            app:itemTextAppearanceActive="@style/ui_bottom_nav_title_active"
+            app:itemTextAppearanceInactive="@style/ui_bottom_nav_title_inactive"
+            app:onNavigationItemSelectedListener="@{viewModel::onNavigationItemSelected}" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

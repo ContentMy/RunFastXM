@@ -1,0 +1,106 @@
+/*这个文件是针对功能为模块的部分的配置。在debug模式时，开发人员可以在各自负责的模块下进行开发并且运行单独的模块
+* 本文件是抽离公共的配置统一进行管理和依赖，各自模块的单独配置在自己的gradle文件中进行即可*/
+if (isRelease) {
+    plugins.apply('com.android.library')//生产环境的时候，功能模块作为一个library依赖到主模块下
+} else {
+    plugins.apply('com.android.application')//测试环境的时候，功能模块作为一个应用存在
+}
+plugins.apply('org.jetbrains.kotlin.android')
+plugins.apply('kotlin-kapt')
+//除去生产环境和测试环境，一些共同的配置，以及共同的依赖，可以统一抽离出来，方便统一管理和修改。
+//然后单独的配置和依赖在各自module下进行单独处理即可
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        if(isRelease){
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments = [AROUTER_MODULE_NAME: project.getName()]
+                }
+            }
+            kapt {
+                arguments {
+                    arg("AROUTER_MODULE_NAME", project.getName())
+                }
+            }
+
+        }
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    sourceSets {
+        /*
+        不使用main的原因是因为本项目中的针对module单独运行的AndroidManifest在src/debug下，
+        这个路径在main标签下处理逻辑会无法忽略src/debug下的清单文件，会造成多个图标的情况。
+        虽然main包含了debug和release的内容，但在这种特定的路径下的特定需求配置无法由main这种通用配置来完成，
+        所以单独对debug和release两部分进行了配置
+        */
+        debug{
+            if (isRelease) {
+                manifest.srcFile 'src/main/AndroidManifest.xml'
+                java.exclude '**/debug/**'
+            } else {
+                manifest.srcFile 'src/debug/AndroidManifest.xml'
+            }
+        }
+        release{
+            manifest.srcFile 'src/main/AndroidManifest.xml'
+            if(isRelease){
+                java.exclude '**/debug/**'
+            }
+        }
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+//    //调用抽离的公共依赖appcompat库
+//    testImplementation 'junit:junit:4.+'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+//    api project(':library-base')
+//
+    //组件依赖基础库
+    // TODO：这里使用api的原因是要把依赖关系传递给app壳。原因是app壳有用到基础模块和公共模块的对应内容，
+    //  目前因为功能模块依赖了基础和公共模块，所以暂时通过依赖传递的方式来完成。
+    //  也可以直接在app壳直接依赖基本模块和公共模块，后续项目成型后可能会修改依赖方式
+    api project(':library-base')
+    api project(':library-common')
+    api project(':library-ui')
+    api project(':library-data')
+    if(isRelease){
+        //ARouter配置
+        //TODO:这里的ARouter配置在app壳也配置了一份，没有使用依赖传递的原因是想区分出app壳与功能模块之间的资源依赖问题，
+        // 即在使用ARouter的过程中，宿主和功能都需要配置依赖
+        implementation 'com.alibaba:arouter-api:1.5.2'
+        kapt 'com.alibaba:arouter-compiler:1.5.2'
+    }
+}
+///*ARouter配置*/
+//kapt {
+//    arguments {
+//        arg("AROUTER_MODULE_NAME", project.getName())
+//    }
+//}

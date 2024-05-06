@@ -1,0 +1,37 @@
+apply from:'../appModule.gradle'
+
+//
+//plugins {
+//    id 'org.jetbrains.kotlin.android'
+//}
+//plugins.apply('com.google.dagger.hilt.android')
+android {
+    defaultConfig {
+        //只有是运行模块状态时才可以使用以下的参数，如果是依赖模块的话，以下参数是非法的
+        if (!isRelease){
+            applicationId "com.existmg.module_target"
+        }
+    }
+    resourcePrefix 'target_'//资源文件和属性名的命名规范
+}
+
+dependencies {
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+//    implementation rootProject.ext.dependencies.hilt
+//    kapt rootProject.ext.dependencies.hiltCompiler
+//    implementation 'androidx.appcompat:appcompat:1.6.1'
+//    implementation 'com.google.android.material:material:1.10.0'
+//    implementation 'androidx.activity:activity:1.8.0'
+//    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+
+//    implementation "org.jetbrains.kotlin:kotlin-stdlib:$KOTLIN_VERSION"
+//    implementation 'androidx.core:core-ktx:1.3.1'
+//    implementation 'androidx.appcompat:appcompat:1.2.0'
+//    implementation 'com.google.android.material:material:1.2.1'
+//    testImplementation 'junit:junit:4.+'
+//    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
+//    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
+}

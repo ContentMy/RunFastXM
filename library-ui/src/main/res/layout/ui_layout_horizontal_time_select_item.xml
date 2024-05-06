@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/ui_item_horizontal_time_select_cl"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="@dimen/ui_dp_10"
+        android:background="@drawable/ui_shape_rounded_rectangle_background_green">
+
+        <TextView
+            android:id="@+id/ui_item_horizontal_time_select_tv_time"
+            android:gravity="center"
+            android:textColor="@color/ui_black"
+            android:textSize="@dimen/ui_sp_12"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="@dimen/ui_dp_4"
+            android:layout_marginBottom="@dimen/ui_dp_4"
+            android:layout_marginStart="@dimen/ui_dp_8"
+            android:layout_marginEnd="@dimen/ui_dp_8"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

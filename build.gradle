@@ -1,0 +1,32 @@
+apply from: 'config.gradle'
+// Top-level build file where you can add configuration options common to all sub-projects/modules.
+buildscript {
+    ext.KOTLIN_VERSION = "1.8.0"//这个参数不能抽离到env.gradle中，原因暂时没有找到，所以先放到此文件中，也可以全局引用到
+    repositories {
+        google()
+        mavenCentral()
+    }
+//    plugins {
+//        id 'com.google.dagger.hilt.android' version '2.44' apply false
+//    }
+    dependencies {
+        classpath "com.android.tools.build:gradle:7.1.0"
+        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:$KOTLIN_VERSION"
+//        classpath 'com.google.dagger:hilt-android-gradle-plugin:2.44'
+//        classpath "org.jetbrains.kotlin:kotlin-gradle-plugin:1.5.0"
+        // NOTE: Do not place your application dependencies here; they belong
+        // in the individual module build.gradle files
+    }
+}
+
+allprojects {
+    repositories {
+        google()
+        mavenCentral()
+        jcenter() // Warning: this repository is going to shut down soon
+    }
+}
+
+task clean(type: Delete) {
+    delete rootProject.buildDir
+}

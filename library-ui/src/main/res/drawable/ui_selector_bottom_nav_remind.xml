@@ -1,0 +1,5 @@
+<?xml version="1.0" encoding="utf-8"?>
+<selector xmlns:android="http://schemas.android.com/apk/res/android">
+    <item android:drawable="@drawable/ui_nav_icon_remind" android:state_selected="true"/><!--选中按钮时展示的样式-->
+    <item android:drawable="@drawable/ui_nav_icon_remind" android:state_selected="false"/><!--默认按钮展示的样式-->
+</selector>

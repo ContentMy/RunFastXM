@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="item"
+            type="com.existmg.library_data.db.entity.TargetEntity" />
+    </data>
+
+    <com.google.android.material.card.MaterialCardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="@dimen/ui_dp_20"
+        android:layout_marginStart="@dimen/ui_dp_20"
+        android:layout_marginEnd="@dimen/ui_dp_20"
+        app:strokeColor="@color/ui_black"
+        app:strokeWidth="@dimen/ui_dp_1"
+        app:cardBackgroundColor="@color/ui_green_mid_next"
+        app:cardCornerRadius="@dimen/ui_dp_10"
+        app:cardElevation="@dimen/ui_dp_6"
+        app:rippleColor="@color/ui_green_mid">
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/ui_dp_80">
+
+            <ImageView
+                android:id="@+id/target_recycle_item_iv_icon"
+                android:layout_width="@dimen/ui_dp_50"
+                android:layout_height="@dimen/ui_dp_50"
+                android:padding="@dimen/ui_dp_4"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/target_recycle_item_tv_title"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:text="@{item.targetTitle}"
+                android:textColor="@color/ui_black"
+                android:textSize="@dimen/ui_sp_16"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toEndOf="@id/target_recycle_item_iv_icon"
+                app:layout_constraintTop_toTopOf="@id/target_recycle_item_iv_icon"
+                app:layout_constraintBottom_toTopOf="@id/target_recycle_item_tv_content"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <TextView
+                android:id="@+id/target_recycle_item_tv_content"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:text="@{item.targetContent}"
+                android:textColor="@color/ui_gray"
+                android:textSize="@dimen/ui_sp_10"
+                android:gravity="center_vertical"
+                app:layout_constraintStart_toEndOf="@id/target_recycle_item_iv_icon"
+                app:layout_constraintTop_toBottomOf="@id/target_recycle_item_tv_title"
+                app:layout_constraintBottom_toBottomOf="@id/target_recycle_item_iv_icon"
+                app:layout_constraintEnd_toEndOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.google.android.material.card.MaterialCardView>
+</layout>

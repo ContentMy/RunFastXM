@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.existmg.module_memorandum">
+
+    <application
+        android:allowBackup="true"
+        android:supportsRtl="true" >
+
+        <activity android:name=".ui.MemorandumCreateActivity"
+            android:theme="@style/ui.Theme.RunFastXM.Translucent"/>
+        <activity android:name=".ui.MemorandumUpdateActivity"/>
+    </application>
+</manifest>

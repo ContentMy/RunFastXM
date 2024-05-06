@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:orientation="horizontal"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/ui_dp_50">
+
+        <ImageView
+            android:id="@+id/ui_toolbar_iv_back"
+            android:src="@drawable/ui_top_back_black"
+            android:padding="@dimen/ui_dp_18"
+            android:layout_width="@dimen/ui_dp_50"
+            android:layout_height="@dimen/ui_dp_50" />
+
+        <TextView
+            android:id="@+id/ui_toolbar_tv_title"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/ui_sp_16"
+            android:textColor="@color/ui_black"
+            android:fontFamily="@font/ui_roboto_bold" />
+
+        <ImageView
+            android:id="@+id/ui_toolbar_iv_right"
+            android:layout_width="@dimen/ui_dp_50"
+            android:layout_height="@dimen/ui_dp_50"
+            android:padding="@dimen/ui_dp_12"
+            android:visibility="gone"
+            android:src="@drawable/ui_top_menu_green" />
+
+        <TextView
+            android:id="@+id/ui_toolbar_tv_right"
+            android:layout_width="@dimen/ui_dp_50"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:textSize="@dimen/ui_sp_14"
+            android:textColor="@color/ui_black"
+            android:fontFamily="@font/ui_roboto_bold"/>
+    </LinearLayout>
+</layout>

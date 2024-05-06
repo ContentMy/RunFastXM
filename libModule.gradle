@@ -1,0 +1,47 @@
+/*这个文件是针对通用基础模块的配置文件，是以lib开头的模块的通用配置
+* 本文件是抽离公共的配置统一进行管理和依赖，各自模块的单独配置在自己的gradle文件中进行即可*/
+
+plugins.apply('com.android.library')
+plugins.apply('kotlin-android')
+plugins.apply('kotlin-kapt')
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+
+    defaultConfig {
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        consumerProguardFiles "consumer-rules.pro"
+
+        multiDexEnabled true
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    buildFeatures {
+        dataBinding true
+    }
+}
+
+dependencies {
+    api rootProject.ext.androidx.multidex
+    api rootProject.ext.androidx.appcompat
+    api rootProject.ext.androidx.viewpager2
+    api rootProject.ext.androidx.navigation
+    api rootProject.ext.androidx.material
+    api rootProject.ext.androidx.constraintlayout
+    api rootProject.ext.androidx.work
+    api rootProject.ext.androidx.viewModelKtx
+    api rootProject.ext.dependencies.baseRecyclerViewAdapterHelper
+//    api rootProject.ext.androidx.kotlinCore
+}

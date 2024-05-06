@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.existmg.module_memorandum.viewmodel.MemorandumViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <include
+            android:id="@+id/memorandum_include_title_toolbar"
+            layout="@layout/ui_layout_base_title_toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/memorandum_tv_create"
+            android:background="@drawable/ui_shape_rounded_rectangle_background"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="记录一下今天的心情吧"
+            android:textSize="@dimen/ui_sp_16"
+            android:textColor="@color/ui_gray"
+            android:layout_margin="@dimen/ui_dp_20"
+            android:padding="@dimen/ui_dp_10"
+            android:onClick="@{() -> viewModel.showDialog()}"
+            app:layout_constraintTop_toBottomOf="@id/memorandum_include_title_toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent" />
+
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/memorandum_rv"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_marginTop="@dimen/ui_dp_10"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/memorandum_tv_create" />
+        <!--注意事项：使用wrap_content.因为如果固定大小的情况下，图片会偏移-->
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/memorandum_fab"
+            android:visibility="gone"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="16dp"
+            app:srcCompat="@drawable/ui_add"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:onClick="@{() -> viewModel.onFabClick()}"/>
+
+        <TextView
+            android:id="@+id/memorandum_tv_default_content"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:textSize="@dimen/ui_sp_16"
+            android:textColor="@color/ui_green_mid_next"
+            android:textStyle="bold"
+            android:text="@string/memorandum_default_content"
+            android:visibility="gone"
+            app:layout_constraintTop_toBottomOf="@id/memorandum_tv_create"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

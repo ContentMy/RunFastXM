@@ -1,0 +1,7 @@
+<resources>
+    <string name="user_app_name">module-user</string>
+
+    <string name="user_setting_string_privacy">隐私政策与用户协议</string>
+    <string name="user_setting_string_about_us">关于小马快跑</string>
+    <string name="user_setting_string_instructions">使用说明</string>
+</resources>

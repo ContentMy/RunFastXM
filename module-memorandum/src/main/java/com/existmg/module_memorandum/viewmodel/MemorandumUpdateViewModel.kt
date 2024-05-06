@@ -1,0 +1,79 @@
+package com.existmg.module_memorandum.viewmodel
+
+import android.app.Application
+import android.widget.Toast
+import androidx.databinding.ObservableField
+import androidx.databinding.ObservableLong
+import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.viewModelScope
+import com.existmg.library_base.viewmodel.BaseApplicationViewModel
+import com.existmg.library_common.utils.timeLongToString
+import com.existmg.library_common.utils.timeLongToStringWithHourMinSec
+import com.existmg.library_data.db.entity.MemorandumEntity
+import com.existmg.library_data.repository.MemorandumRepository
+import kotlinx.coroutines.launch
+
+/**
+ * @Author ContentMy
+ * @Date 2024/4/28 11:18 PM
+ * @Description 更改心情页面的viewmodel，主要是做了更新相关逻辑内容操作
+ */
+class MemorandumUpdateViewModel(
+    private var repository:MemorandumRepository,
+    application: Application):BaseApplicationViewModel(application) {
+
+    var memorandumTitleString = MutableLiveData<String>()
+
+    var memorandumContentString = MutableLiveData<String>()
+
+    var memorandumCreateTime = ObservableField<Long>()
+
+    var memorandumTimeString = MutableLiveData<String>()
+
+    var memorandumUpdateTime = ObservableField<Long>()
+
+    private lateinit var updateMemorandum: MemorandumEntity
+    fun initMemorandumData(memorandumEntity: MemorandumEntity) {
+        updateMemorandum = memorandumEntity
+        memorandumTitleString.value = memorandumEntity.memorandumTitle
+        memorandumContentString.value = memorandumEntity.memorandumContent
+        memorandumCreateTime.set(memorandumEntity.memorandumCreateTime)
+        memorandumUpdateTime.set(memorandumEntity.memorandumUpdateTime)
+        timeShowInString(memorandumEntity.memorandumCreateTime,memorandumEntity.memorandumUpdateTime)
+    }
+
+    fun updateMemorandum(){
+        if (memorandumTitleString.value.isNullOrEmpty()){
+            Toast.makeText(getApplication(), "记录下心情才能保存哦", Toast.LENGTH_SHORT).show()
+            return
+        }
+        viewModelScope.launch {
+            try {
+                val memorandumEntity = MemorandumEntity(
+                    id =  updateMemorandum.id,
+                    memorandumTitle = memorandumTitleString.value!!,
+                    memorandumContent = if(memorandumContentString.value == null) "" else memorandumContentString.value!!,
+                    memorandumCreateTime = memorandumCreateTime.get()!!,
+                    memorandumUpdateTime = System.currentTimeMillis()
+                )
+                repository.updateMemorandum(memorandumEntity)
+                timeShowInString(memorandumEntity.memorandumCreateTime,memorandumEntity.memorandumUpdateTime)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    private fun timeShowInString(createTime:Long?,updateTime:Long?){
+        if (createTime != 0L){
+            if (updateTime == 0L){
+                memorandumTimeString.value = "创建时间:${timeLongToStringWithHourMinSec(createTime!!)}"
+            }else{
+                memorandumTimeString.value = "创建时间:${timeLongToStringWithHourMinSec(createTime!!)}\n修改时间:${timeLongToStringWithHourMinSec(updateTime!!)}"
+            }
+        }else{
+            memorandumTimeString.value = ""
+        }
+    }
+
+}

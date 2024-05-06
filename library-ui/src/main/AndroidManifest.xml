@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="com.existmg.library_ui">
+    <application>
+        <receiver android:name="com.existmg.library_ui.notification.NotificationReceiver" />
+
+        <activity
+            android:name="com.existmg.library_ui.dialog.base.DialogBaseActivity"
+            android:theme="@style/ui_DialogBaseActivityTheme" />
+        <activity android:name="com.existmg.library_ui.dialog.activity.DialogTestActivity"/>
+    </application>
+</manifest>

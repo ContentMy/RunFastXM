@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+
+        <View
+            android:id="@+id/ui_title_toolbar_view_bg"
+            android:layout_width="0dp"
+            android:layout_height="@dimen/ui_dp_10"
+            android:background="@drawable/ui_shape_title_bg"
+            app:layout_constraintStart_toStartOf="@id/ui_title_toolbar_tv_title"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
+
+        <TextView
+            android:id="@+id/ui_title_toolbar_tv_title"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textSize="@dimen/ui_sp_24"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="@dimen/ui_dp_20"
+            android:textColor="@color/ui_green_dark"
+            android:fontFamily="@font/ui_font_zihunshiguang"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

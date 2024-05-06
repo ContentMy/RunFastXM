@@ -1,0 +1,9 @@
+apply from:'../libModule.gradle'
+android{
+    resourcePrefix 'common_'
+}
+dependencies {
+    //TODO:依赖base是为了使用base模块的BaseApplication去给每个组件初始化做了一个application传递，后续接入Hilt可能会对这里的依赖进行解耦
+    implementation project(':library-base')
+    api rootProject.ext.dependencies.arouterApi
+}

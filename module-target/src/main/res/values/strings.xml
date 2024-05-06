@@ -1,0 +1,19 @@
+<resources>
+    <string name="target_app_name">module-target</string>
+    <!--target_create_layout_prompt_string-->
+    <string name="target_create_title_string">目标名称：</string>
+    <string name="target_create_title_hint">请输入目标的名称</string>
+    <string name="target_create_content_string">对自己说一些什么吧：</string>
+    <string name="target_create_content_hint">小马快跑</string>
+    <string name="target_create_icon_string">请挑选目标的图标：</string>
+    <string name="target_create_start_time_string">目标开始时间：</string>
+    <string name="target_create_start_time_hint">请选择目标的开始时间</string>
+    <string name="target_create_end_time_string">目标结束时间：</string>
+    <string name="target_create_end_time_hint">请选择目标的结束时间</string>
+    <string name="target_create_status_string">目标状态：</string>
+    <string name="target_create_status_hint">请选择目标状态</string>
+    <string name="target_create_remind_string">目标提醒：</string>
+    <string name="target_create_btn_save_string">保存</string>
+
+    <string name="target_default_content">种下一棵树最好的时间是十年前，其次是现在~\n所以赶快点击“+”添加你的目标吧！</string>
+</resources>

@@ -1,0 +1,10 @@
+apply from:'../libModule.gradle'
+android{
+    resourcePrefix 'ui_'
+}
+dependencies {
+    //TODO:这里是数据库的依赖，单独依赖在了data模块下
+    implementation rootProject.ext.androidx.room
+    implementation rootProject.ext.androidx.roomKtx
+    kapt rootProject.ext.androidx.roomCompiler
+}

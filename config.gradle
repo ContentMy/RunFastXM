@@ -1,0 +1,78 @@
+//用于管理公共的参数
+//gradle中的ext属性相当于一个map属性，可以在根目录下扩充这个属性。其中定义的变量为全局变量，可以在各个module中调用
+//gradle中的def属性定义的变量则是局部变量，只能在当前的gradle下调用
+//注意：模块化处理不好的话，集成完毕会有多个icon出现在桌面。解决方案是清单文件，正式版的清单文件里不要有launcher和main
+ext {
+    isRelease = true
+    //android 开发版本
+    android = [
+            compileSdkVersion: 34,
+            minSdkVersion    : 21,
+            targetSdkVersion : 34,
+            applicationId    : "com.existmg.runfastxm",
+            versionCode      : 1,
+            versionName      : "1.0",
+    ]
+    libsVersion = [
+            butterknife_version = "10.0.0",
+            retrofit_version = "2.6.1",
+            lifecycle_version = "2.2.0",
+            room_version= "2.6.1",
+            androidx_version = "1.6.1"
+    ]
+    //公共依赖的抽离，数组中的key可以自定义，value是对应库的依赖
+    //androidx相关的依赖
+    androidx = [
+            kotlinCore            : "androidx.core:core-ktx:$KOTLIN_VERSION",
+            appcompat             : "androidx.appcompat:appcompat:$rootProject.androidx_version",
+            activityX             : "androidx.activity:activity-ktx:$rootProject.androidx_version",
+            fragmentX             : "androidx.fragment:fragment-ktx:$rootProject.androidx_version",
+            material              : "com.google.android.material:material:1.2.1",
+            constraintlayout      : "androidx.constraintlayout:constraintlayout:2.0.1",
+            viewpager2            : "androidx.viewpager2:viewpager2:1.0.0",
+            multidex              : "androidx.multidex:multidex:2.0.1",
+            junit                 : "androidx.test.ext:junit:1.1.2",
+            espresso              : "androidx.test.espresso:espresso-core:3.3.0",
+            viewModelKtx          : "androidx.lifecycle:lifecycle-viewmodel-ktx:2.6.2",
+//            viewModel             : "androidx.lifecycle:lifecycle-extensions:$rootProject.lifecycle_version",
+            /*room 数据库 ---start*/
+            room                  : "androidx.room:room-runtime:$rootProject.room_version",
+            roomCompiler          : "androidx.room:room-compiler:$rootProject.room_version",
+            roomKtx               : "androidx.room:room-ktx:$rootProject.room_version",
+            /*room 数据库 ---end*/
+            /*navigation --start*/
+            navigation            : "androidx.navigation:navigation-fragment:$rootProject.lifecycle_version",
+            navigationUI          : "androidx.navigation:navigation-ui:$rootProject.lifecycle_version",
+            /*navigation --end*/
+            work                  : "androidx.work:work-runtime:$rootProject.lifecycle_version",
+
+    ]
+    //依赖第三方配置
+    dependencies = [
+            arouterApi                      : "com.alibaba:arouter-api:1.5.2",
+            arouterCompiler                 : "com.alibaba:arouter-compiler:1.5.2",
+            baseRecyclerViewAdapterHelper   : "io.github.cymchad:BaseRecyclerViewAdapterHelper:3.0.14",
+            hilt                            : "com.google.dagger:hilt-android:2.44",
+            hiltCompiler                    : "com.google.dagger:hilt-android-compiler:2.44",
+            butterknife                     : "com.jakewharton:butterknife:$rootProject.butterknife_version",
+            butterknifeCompiler             : "com.jakewharton:butterknife-compiler:$rootProject.butterknife_version",
+            /*rxJava + retrofit -----start*/
+            retrofitConvertGson             : "com.squareup.retrofit2:converter-gson:$rootProject.retrofit_version",
+            retrofitConvertScalars          : "com.squareup.retrofit2:converter-scalars:$rootProject.retrofit_version",
+            retrofit                        : "com.squareup.retrofit2:retrofit:$rootProject.retrofit_version",
+            retrofitAdapterRxJava2          : "com.squareup.retrofit2:adapter-rxjava2:$rootProject.retrofit_version",
+            rxJava                          : "io.reactivex.rxjava2:rxjava:2.2.11",
+            rxAndroid                       : "io.reactivex.rxjava2:rxandroid:2.1.1",
+            okhttp                          : "com.squareup.okhttp3:okhttp:4.0.0",
+            /*rxJava + retrofit -----end*/
+            fastJson                        : "com.alibaba:fastjson:1.2.48",
+
+            swipebacklayout                 : "me.imid.swipebacklayout.lib:library:1.1.0",
+            rxpermissions                   : "com.github.tbruyelle:rxpermissions:0.10.2",
+            websocket                       : "com.neovisionaries:nv-websocket-client:2.7",
+            slidingpanellayout              : "androidx.slidingpanelayout:slidingpanelayout:1.1.0",
+            mmkv                            : "com.tencent:mmkv-static:1.2.2",
+            glide                           : "com.github.bumptech.glide:glide:4.9.0",
+    ]
+
+}

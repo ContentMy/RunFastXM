@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.existmg.module_user.viewmodel.UserViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <include
+            android:id="@+id/user_include_title_toolbar"
+            layout="@layout/ui_layout_base_title_toolbar"/>
+
+        <ImageView
+            android:layout_width="@dimen/ui_dp_50"
+            android:layout_height="@dimen/ui_dp_50"
+            android:layout_marginTop="@dimen/ui_dp_50"
+            android:layout_gravity="center_horizontal"
+            android:src="@mipmap/ic_launcher" />
+
+        <TextView
+            android:layout_marginTop="@dimen/ui_dp_10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:textColor="@color/ui_black"
+            android:textSize="@dimen/ui_sp_20"
+            android:text="@string/ui_app_name" />
+
+        <LinearLayout
+            android:id="@+id/user_ll_about"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/ui_dp_10"
+            android:layout_marginEnd="@dimen/ui_dp_10"
+            android:layout_marginTop="@dimen/ui_dp_50"
+            android:layout_height="@dimen/ui_dp_50">
+
+            <ImageView
+                android:layout_width="@dimen/ui_dp_20"
+                android:layout_height="@dimen/ui_dp_20"
+                android:src="@drawable/ui_small_icon_remind" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:textColor="@color/ui_black"
+                android:text="@string/user_setting_string_about_us" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/user_ll_privacy"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/ui_dp_10"
+            android:layout_marginEnd="@dimen/ui_dp_10"
+            android:layout_height="@dimen/ui_dp_50">
+
+            <ImageView
+                android:layout_width="@dimen/ui_dp_20"
+                android:layout_height="@dimen/ui_dp_20"
+                android:src="@drawable/ui_small_icon_remind" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:textColor="@color/ui_black"
+                android:text="@string/user_setting_string_privacy" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/user_ll_instructions"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/ui_dp_10"
+            android:layout_marginEnd="@dimen/ui_dp_10"
+            android:layout_height="@dimen/ui_dp_50">
+
+            <ImageView
+                android:layout_width="@dimen/ui_dp_20"
+                android:layout_height="@dimen/ui_dp_20"
+                android:src="@drawable/ui_small_icon_remind" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:textColor="@color/ui_black"
+                android:text="@string/user_setting_string_instructions" />
+        </LinearLayout>
+
+    </LinearLayout>
+</layout>

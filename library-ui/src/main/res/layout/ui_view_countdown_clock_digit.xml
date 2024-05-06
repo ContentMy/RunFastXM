@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <FrameLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:orientation="vertical"
+        android:clipChildren="false"
+        android:clipToPadding="false">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <FrameLayout
+                android:id="@+id/backUpper"
+                android:layout_width="62dp"
+                android:layout_height="34dp">
+
+                <com.existmg.library_ui.view.countdown.AlignedTextView
+                    android:id="@+id/backUpperText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/ui_roboto_bold"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:textColor="@color/ui_black"
+                    android:text="@string/ui_8"
+                    android:textSize="28sp"
+                    app:ui_alignment="2" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/backLower"
+                android:layout_width="62dp"
+                android:layout_height="34dp">
+
+                <com.existmg.library_ui.view.countdown.AlignedTextView
+                    android:id="@+id/backLowerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/ui_roboto_bold"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:text="@string/ui_8"
+                    android:textColor="@color/ui_black"
+                    android:textSize="28sp"
+                    app:ui_alignment="1" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_gravity="center">
+
+            <FrameLayout
+                android:id="@+id/frontUpper"
+                android:layout_width="62dp"
+                android:layout_height="34dp">
+
+                <com.existmg.library_ui.view.countdown.AlignedTextView
+                    android:id="@+id/frontUpperText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/ui_roboto_bold"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:text="@string/ui_8"
+                    android:textColor="@color/ui_black"
+                    android:textSize="28sp"
+                    app:ui_alignment="2" />
+            </FrameLayout>
+
+            <FrameLayout
+                android:id="@+id/frontLower"
+                android:layout_width="62dp"
+                android:layout_height="34dp">
+
+                <com.existmg.library_ui.view.countdown.AlignedTextView
+                    android:id="@+id/frontLowerText"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center_horizontal"
+                    android:fontFamily="@font/ui_roboto_bold"
+                    android:includeFontPadding="false"
+                    android:lineSpacingExtra="0dp"
+                    android:text="@string/ui_8"
+                    android:textColor="@color/ui_black"
+                    android:textSize="28sp"
+                    app:ui_alignment="1" />
+            </FrameLayout>
+        </LinearLayout>
+
+        <View
+            android:id="@+id/digitDivider"
+            android:layout_width="3dp"
+            android:layout_height="1dp"
+            android:layout_gravity="center_vertical"
+            android:background="#000000" />
+    </FrameLayout>
+</layout>

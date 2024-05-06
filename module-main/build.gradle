@@ -1,0 +1,16 @@
+apply from:'../appModule.gradle'
+android {
+    defaultConfig {
+        //只有是运行模块状态时才可以使用以下的参数，如果是依赖模块的话，以下参数是非法的
+        if (!isRelease){
+            applicationId "com.existmg.module_main"
+        }
+    }
+    resourcePrefix 'main_'
+}
+
+dependencies {
+//    //组件依赖基础库
+//    api project(':library-base')
+//    api project(':library-common')
+}

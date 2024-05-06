@@ -1,0 +1,96 @@
+plugins {
+    id 'com.android.application'
+    //kotlin配置
+    id 'org.jetbrains.kotlin.android'
+}
+//apply plugin: 'com.google.dagger.hilt.android'
+apply plugin: 'kotlin-kapt'//Kotlin annotation processing tool（Kotlin 注解处理工具）
+/*
+如果你以前使用 Android 支持作为注解处理器，那么以 kapt 取代 annotationProcessor 配置的使用。如果你的项目包含 Java 类，kapt 也会顾全到它们。
+如果为 androidTest 或 test 源代码使用注解处理器，那么相应的 kapt 配置名为 kaptAndroidTest 和 kaptTest。请注意 kaptAndroidTest 和 kaptTest 扩展了 kapt，所以你可以只提供 kapt 依赖而它对生产和测试源代码都可用
+*/
+//kotlin配置，配置存根文件，在特定复杂的注解处理场景中才会用到，一般场景kapt会自行处理，不需要手动调用操作
+kapt {
+    generateStubs = true
+}
+
+android {
+    compileSdkVersion rootProject.ext.android.compileSdkVersion
+    defaultConfig {
+        versionCode rootProject.ext.android.versionCode
+        versionName rootProject.ext.android.versionName
+        minSdkVersion rootProject.ext.android.minSdkVersion
+        targetSdkVersion rootProject.ext.android.targetSdkVersion
+        applicationId rootProject.ext.android.applicationId
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+        multiDexEnabled true
+        if(isRelease){
+            javaCompileOptions {
+                annotationProcessorOptions {
+                    arguments = [AROUTER_MODULE_NAME: project.getName()]
+                }
+            }
+
+            kapt {
+                arguments {
+                    arg("AROUTER_MODULE_NAME", project.getName())
+                }
+            }
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+    kotlinOptions {
+        jvmTarget = '1.8'
+    }
+//kotlin配置
+    buildFeatures{
+        dataBinding true
+    }
+}
+
+dependencies {
+    if(isRelease){
+        //引入功能模块
+        implementation project(':module-main')
+        implementation project(':module-remind')
+        implementation project(':module-target')
+        implementation project(':module-memorandum')
+        implementation project(':module-user')
+        //组件中依赖阿里路由编译框架
+        //ARouter配置
+        implementation 'com.alibaba:arouter-api:1.5.2'
+        kapt 'com.alibaba:arouter-compiler:1.5.2'
+    }else{
+        //引入基础模块保证编译
+        implementation project(':library-base')
+        implementation project(':library-common')
+        implementation project(':library-ui')
+        implementation project(':library-data')
+    }
+    implementation 'androidx.appcompat:appcompat:1.6.1'
+    implementation 'com.google.android.material:material:1.10.0'
+    implementation 'androidx.activity:activity:1.8.0'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.4'
+//    implementation rootProject.ext.dependencies.hilt
+//    kapt rootProject.ext.dependencies.hiltCompiler
+    implementation rootProject.ext.androidx.room
+    kapt rootProject.ext.androidx.roomCompiler
+    //查看数据库
+    debugImplementation 'com.facebook.stetho:stetho:1.5.0'
+//    debugImplementation 'com.facebook.stetho:stetho-okhttp3:1.5.0' // 如果你使用OkHttp
+
+}

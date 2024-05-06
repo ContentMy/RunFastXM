@@ -1,0 +1,13 @@
+rootProject.name = "RunFastXM"
+include ':app'
+/*==========================module============================*/
+include ':module-main'
+include ':module-target'
+include ':module-memorandum'
+include ':module-user'
+include ':module-remind'
+/*==========================library============================*/
+include ':library-base'
+include ':library-common'
+include ':library-ui'
+include ':library-data'

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.existmg.module_remind.viewmodel.RemindDetailViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".ui.RemindDetailActivity">
+        <include
+            android:id="@+id/remind_detail_tb"
+            layout="@layout/ui_layout_base_toolbar"
+            />
+        <com.existmg.library_ui.view.countdown.CountDownClock
+            android:id="@+id/remind_detail_cdc"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:layout_gravity="center"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:ui_almostFinishedCallbackTimeInSeconds="5"
+            app:ui_animationDuration="850"
+            app:ui_countdownTickInterval="1000"
+            app:ui_digitBottomDrawable="@drawable/ui_shape_background_bottom"
+            app:ui_digitDividerColor="@color/ui_transparent"
+            app:ui_digitPadding="2dp"
+            app:ui_digitTextColor="@color/ui_black"
+            app:ui_digitTextSize="24sp"
+            app:ui_digitTopDrawable="@drawable/ui_shape_background_top"
+            app:ui_digitWidth="40dp"
+            app:ui_halfDigitHeight="28dp"
+            app:ui_resetSymbol="0"
+            app:ui_splitterPadding="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@id/remind_detail_tb" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

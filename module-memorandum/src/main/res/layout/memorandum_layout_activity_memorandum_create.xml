@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.existmg.module_memorandum.viewmodel.MemorandumCreateViewModel" />
+    </data>
+
+    <com.existmg.library_ui.view.CustomLinearLayout
+        android:id="@+id/memorandum_create_ll"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+        <include
+            android:visibility="invisible"
+            layout="@layout/ui_layout_base_title_toolbar"/>
+
+        <EditText
+            android:id="@+id/memorandum_create_et_title"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@drawable/ui_shape_rounded_rectangle_background"
+            android:layout_margin="@dimen/ui_dp_20"
+            android:padding="@dimen/ui_dp_10"
+            android:textSize="@dimen/ui_sp_16"
+            android:textColor="@color/ui_black"
+            android:hint="@string/ui_memorandum_title_hint"
+            android:text="@={viewModel.memorandumTitleString}"
+            android:textColorHint="@color/ui_gray"
+            android:inputType="textMultiLine"/>
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/memorandum_create_cl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_margin="@dimen/ui_dp_10"
+            android:background="@drawable/ui_shape_background_rounded_white">
+            <TextView
+                android:id="@+id/memorandum_create_tv_content_prompt"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ui_dp_20"
+                android:text="@string/ui_memorandum_create_content_prompt"
+                android:layout_marginTop="@dimen/ui_dp_20"
+                android:textColor="@color/ui_gray"
+                android:textSize="@dimen/ui_sp_12"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"/>
+            <EditText
+                android:id="@+id/memorandum_create_et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/ui_dp_200"
+                android:background="@drawable/ui_shape_rounded_rectangle_background"
+                android:layout_marginStart="@dimen/ui_dp_20"
+                android:layout_marginEnd="@dimen/ui_dp_20"
+                android:layout_marginTop="@dimen/ui_dp_10"
+                android:paddingStart="@dimen/ui_dp_10"
+                android:paddingEnd="@dimen/ui_dp_10"
+                android:paddingTop="@dimen/ui_dp_14"
+                android:textSize="@dimen/ui_sp_16"
+                android:textColor="@color/ui_black"
+                android:hint="@string/ui_memorandum_create_content_hint"
+                android:text="@={viewModel.memorandumContentString}"
+                android:textColorHint="@color/ui_gray"
+                android:inputType="textMultiLine"
+                android:gravity="start"
+                app:layout_constraintTop_toBottomOf="@id/memorandum_create_tv_content_prompt"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+            <Button
+                android:id="@+id/memorandum_create_btn_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="bottom"
+                android:layout_margin="@dimen/ui_dp_20"
+                android:text="@string/ui_memorandum_create_save"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </com.existmg.library_ui.view.CustomLinearLayout>
+</layout>

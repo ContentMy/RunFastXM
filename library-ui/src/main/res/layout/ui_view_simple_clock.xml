@@ -1,0 +1,162 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_gravity="center"
+        android:clipChildren="false"
+        android:clipToPadding="false"
+        android:gravity="center"
+        android:orientation="horizontal">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content">
+
+            <com.existmg.library_ui.view.countdown.CountDownDigit
+                android:id="@+id/firstDigitDays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"/>
+
+            <com.existmg.library_ui.view.countdown.CountDownDigit
+                android:id="@+id/secondDigitDays"
+                android:layout_toEndOf="@+id/firstDigitDays"
+                android:layout_toRightOf="@+id/firstDigitDays"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false" />
+
+
+            <TextView
+                android:id="@+id/labelDays"
+                android:layout_below="@+id/firstDigitDays"
+                android:layout_centerInParent="true"
+                android:textSize="@dimen/ui_sp_10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/ui_Days" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginStart="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp">
+
+            <com.existmg.library_ui.view.countdown.CountDownDigit
+                android:id="@+id/firstDigitHours"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false" />
+
+            <com.existmg.library_ui.view.countdown.CountDownDigit
+                android:id="@+id/secondDigitHours"
+                android:layout_width="wrap_content"
+                android:layout_toEndOf="@+id/firstDigitHours"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:layout_toRightOf="@+id/firstDigitHours" />
+
+            <TextView
+                android:layout_below="@+id/firstDigitHours"
+                android:id="@+id/labelHours"
+                android:layout_width="wrap_content"
+                android:textSize="@dimen/ui_sp_10"
+                android:layout_height="wrap_content"
+                android:layout_centerInParent="true"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:includeFontPadding="false"
+                android:text="@string/ui_Hours" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginStart="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp">
+
+            <com.existmg.library_ui.view.countdown.CountDownDigit
+                android:id="@+id/firstDigitMinute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false" />
+
+            <com.existmg.library_ui.view.countdown.CountDownDigit
+                android:id="@+id/secondDigitMinute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/firstDigitMinute"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:layout_toRightOf="@+id/firstDigitMinute" />
+
+            <TextView
+                android:layout_below="@+id/firstDigitMinute"
+                android:id="@+id/labelMinute"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="@dimen/ui_sp_10"
+                android:gravity="center"
+                android:layout_centerInParent="true"
+                android:includeFontPadding="false"
+                android:text="@string/ui_Mins" />
+
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:layout_marginStart="4dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginLeft="4dp">
+
+            <com.existmg.library_ui.view.countdown.CountDownDigit
+                android:id="@+id/firstDigitSecond"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:clipChildren="false"
+                android:clipToPadding="false" />
+
+            <com.existmg.library_ui.view.countdown.CountDownDigit
+                android:id="@+id/secondDigitSecond"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_toEndOf="@+id/firstDigitSecond"
+                android:clipChildren="false"
+                android:clipToPadding="false"
+                android:layout_toRightOf="@+id/firstDigitSecond" />
+
+
+            <TextView
+                android:layout_below="@+id/firstDigitSecond"
+                android:id="@+id/labelSecond"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:textSize="@dimen/ui_sp_10"
+                android:layout_centerInParent="true"
+                android:includeFontPadding="false"
+                android:text="@string/ui_Secs" />
+
+        </RelativeLayout>
+
+    </LinearLayout>
+</layout>

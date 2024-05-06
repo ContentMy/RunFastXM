@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="ui_black">#000</color>
+    <color name="ui_transparent">#00ffffff</color>
+    <color name="ui_white">#FFFFFFFF</color>
+    <color name="ui_green">#029F72</color><!--003E19-->
+    <color name="ui_green_dark">#072A24</color>
+    <color name="ui_green_mid">#02BC6A</color>
+    <color name="ui_green_mid_next">#7BC5AE</color>
+    <color name="ui_green_mid_next_light">#D1EDE1</color>
+    <color name="ui_green_icons">#029F72</color>
+    <color name="ui_gray">#8C8C8C</color>
+    <color name="ui_gray_light">#EDEDED</color>
+</resources>

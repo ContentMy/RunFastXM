@@ -1,0 +1,21 @@
+<resources>
+    <string name="ui_app_name">小马快跑</string>
+    <!--时间String-->
+    <string name="ui_Days">Days</string>
+    <string name="ui_Hours">Hours</string>
+    <string name="ui_Mins">Mins</string>
+    <string name="ui_Secs">Secs</string>
+    <string name="ui_8">8</string>
+
+    <!--底部按钮-->
+    <string name="ui_bottom_nav_menu_remind">提醒</string>
+    <string name="ui_bottom_nav_menu_target">目标</string>
+    <string name="ui_bottom_nav_menu_memorandum">日记</string>
+    <string name="ui_bottom_nav_menu_user">我的</string>
+
+    <!--memorandumString-->
+    <string name="ui_memorandum_title_hint">记录一下今天的心情吧</string>
+    <string name="ui_memorandum_create_content_prompt">记录一下详细内容吧：</string>
+    <string name="ui_memorandum_create_content_hint">我还想说…</string>
+    <string name="ui_memorandum_create_save">保存</string>
+</resources>

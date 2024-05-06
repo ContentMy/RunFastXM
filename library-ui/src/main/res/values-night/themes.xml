@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources xmlns:tools="http://schemas.android.com/tools">
+    <!-- Base application theme. -->
+    <style name="ui.Theme.RunFastXM" parent="Theme.MaterialComponents.DayNight.NoActionBar">
+        <!-- Primary brand color. -->
+        <item name="colorPrimary">@color/ui_green</item>
+        <item name="colorPrimaryVariant">@color/ui_green</item>
+        <item name="colorOnPrimary">@color/ui_white</item>
+        <!-- Secondary brand color. -->
+        <item name="colorSecondary">@color/ui_green</item>
+        <item name="colorSecondaryVariant">@color/ui_green</item>
+        <item name="colorOnSecondary">@color/ui_white</item>
+        <!-- Status bar color. -->
+        <item name="android:statusBarColor" tools:targetApi="l">?attr/colorPrimaryVariant</item>
+        <!-- Customize your theme here. -->
+    </style>
+
+    <style name="ui.Theme.RunFastXM.NoActionBar">
+        <item name="windowActionBar">false</item>
+        <item name="windowNoTitle">true</item>
+    </style>
+
+    <style name="ui.Theme.RunFastXM.AppBarOverlay" parent="ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <style name="ui.Theme.RunFastXM.PopupOverlay" parent="ThemeOverlay.AppCompat.Light" />
+</resources>
