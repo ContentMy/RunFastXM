@@ -1,5 +1,6 @@
 package com.existmg.runfastxm
 
+import com.alibaba.android.arouter.launcher.ARouter
 import com.existmg.library_base.application.BaseApplication
 import com.existmg.library_data.accessor.MemorandumModuleRoomAccessor
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
@@ -20,7 +21,7 @@ class App: BaseApplication() {
         super.onCreate()
         // 初始化需要初始化的组件
 //        ModuleLifecycleConfig.getInstance().initModuleAhead(this)
-
+        ARouter.init(this)
         /*==============数据库初始化==================*/ // TODO: 考虑将数据库初始化放在子线程处理或者放到各个模块中各自初始化，目前统一初始化在app壳会导致冷启动时间过长
         val database by lazy { AppDatabase.getDatabase(this) }
         val remindRepository by lazy { RemindRepository(database.remindDao()) }
