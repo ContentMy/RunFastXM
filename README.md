@@ -10,15 +10,15 @@
 
 * 事项提醒功能模块
 
-  <img src="screenshot/提醒列表-占位.jpeg" alt="提醒列表-占位" style="zoom:25%;" /><img src="screenshot/新建提醒.jpeg" alt="新建提醒" style="zoom:25%;" /><img src="screenshot/提醒列表.jpeg" alt="提醒列表" style="zoom:25%;" /><img src="screenshot/提醒倒计时.jpeg" alt="提醒倒计时" style="zoom:25%;" />
+  <img src="screenshot/提醒列表-占位.jpeg" alt="提醒列表-占位" width="100"/><img src="screenshot/新建提醒.jpeg" alt="新建提醒" width="100"/><img src="screenshot/提醒列表.jpeg" alt="提醒列表" width="100"/><img src="screenshot/提醒倒计时.jpeg" alt="提醒倒计时" width="100" />
 
 * 目标管理功能模块
 
-  <img src="screenshot/目标列表-占位.jpeg" alt="目标列表-占位" style="zoom:25%;" /><img src="screenshot/新建目标.jpeg" alt="新建目标" style="zoom:25%;" /><img src="screenshot/目标列表.jpeg" alt="目标列表" style="zoom:25%;" />
+  <img src="screenshot/目标列表-占位.jpeg" alt="目标列表-占位" width="200"/><img src="screenshot/新建目标.jpeg" alt="新建目标" width="200"/><img src="screenshot/目标列表.jpeg" alt="目标列表" width="200"/>
 
 * 备忘记录功能模块
 
-  <img src="screenshot/记录生活-占位.jpeg" alt="记录生活-占位" style="zoom:25%;" /><img src="screenshot/新建记录.jpeg" alt="新建记录" style="zoom:25%;" /><img src="screenshot/记录生活列表.jpeg" alt="记录生活列表" style="zoom:25%;" /><img src="screenshot/记录详情.jpeg" alt="记录详情" style="zoom:25%;" />
+  <img src="screenshot/记录生活-占位.jpeg" alt="记录生活-占位" width="300"/><img src="screenshot/新建记录.jpeg" alt="新建记录" width="300"/><img src="screenshot/记录生活列表.jpeg" alt="记录生活列表" width="300"/><img src="screenshot/记录详情.jpeg" alt="记录详情" width="300"/>
 
 * 个人设置功能模块
 
