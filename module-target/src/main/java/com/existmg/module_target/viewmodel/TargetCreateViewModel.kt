@@ -17,6 +17,7 @@ import com.existmg.library_data.db.entity.TargetEntity
 import com.existmg.library_data.repository.TargetRepository
 import com.existmg.library_common.utils.calenderToDateString
 import com.existmg.library_common.utils.dateStringToLong
+import com.existmg.library_ui.utils.getImageResourceId
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -183,7 +184,12 @@ class TargetCreateViewModel(
 
     fun startNotification(targetEntity: TargetEntity, application: Application){
 //        notificationRepository.startNotification(1, application)
-        notificationRepository.postNotification(application)
+        val dataId = targetEntity.id
+        val iconResId = getImageResourceId(targetEntity.targetImg)
+        val title = targetEntity.targetTitle
+        val content = targetEntity.targetContent
+        val duration = 1L //TODO:这里的写死数据是为了方便测试
+        notificationRepository.postNotification(application,dataId!!,iconResId,title,content,duration)
     }
 
     fun cancelNotification(application:Application){

@@ -2,12 +2,17 @@ package com.existmg.library_ui.notification
 
 import android.app.NotificationChannel
 import android.app.NotificationManager
+import android.app.PendingIntent
 import android.content.Context
+import android.content.Intent
 import android.os.Build
 import androidx.core.app.NotificationCompat
+import androidx.work.Data
+import androidx.work.OneTimeWorkRequest
 import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.existmg.library_ui.R
+import java.util.concurrent.TimeUnit
 
 /**
  * @Author ContentMy
@@ -18,27 +23,66 @@ class NotificationWork(
     val context: Context,
     workerParams: WorkerParameters
     ) : Worker(context, workerParams) {
+    companion object {
+        private const val NOTIFICATION_ID = 0
+        private const val CHANNEL_ID = "default_channel_id"
+        private const val CHANNEL_NAME = "Default Channel"
+        fun buildWorkRequest(dataId:Int,iconResId: Int, title: String, content: String,duration: Long): OneTimeWorkRequest {
+            val inputData = Data.Builder()
+                .putInt("dataId", dataId)
+                .putInt("iconResId", iconResId)
+                .putString("title", title)
+                .putString("content", content)
+                .build()
+
+            return OneTimeWorkRequest.Builder(NotificationWork::class.java)
+                .setInputData(inputData)
+                .setInitialDelay(duration, TimeUnit.MINUTES)
+                .build()
+        }
+    }
+
     override fun doWork(): Result {
-        postNotification(context)
+        // 获取通知所需的参数
+        val dataId = inputData.getInt("dataId",0)
+        val iconResId = inputData.getInt("iconResId", R.mipmap.ic_launcher)
+        val title = inputData.getString("title")
+        val content = inputData.getString("content")
+
+        // 调用通知方法，传递参数
+        postNotification(context,dataId, iconResId, if (title.isNullOrEmpty()) "" else title, if (content.isNullOrEmpty()) "" else content)
+
         return Result.success()
     }
 
-    private fun postNotification(context:Context){
+    private fun postNotification(context: Context, dataId: Int,iconResId: Int, title: String, content: String) {
         // 创建通知
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
-        val channelId = "default_channel_id"
-        val channelName = "Default Channel"
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            val channel = NotificationChannel(channelId, channelName, NotificationManager.IMPORTANCE_DEFAULT)
+            val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
             notificationManager.createNotificationChannel(channel)
         }
+        //创建广播接收器的意图，这个是点击通知会给出的反馈，而addAction是通知有对应的按钮，点击按钮会有对应的跳转
+        val broadcastIntent = Intent(context, NotificationReceiver::class.java)
+        val pendingIntent = PendingIntent.getBroadcast(context, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
-        val notificationBuilder = NotificationCompat.Builder(context, channelId)
-            .setContentTitle("提醒")
-            .setContentText("您有一个新提醒")
-            .setSmallIcon(R.drawable.abc_vector_test)
+        // 创建广播接收器的意图并添加操作到通知中
+        val actionIntent = Intent(context, NotificationReceiver::class.java)
+        println("在worker中拿到的id为：$dataId")
+        actionIntent.putExtra("dataId",dataId)
+        actionIntent.putExtra("notificationId", NOTIFICATION_ID)
+        val actionPendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        val action = NotificationCompat.Action.Builder(R.drawable.ui_remind, "Action", actionPendingIntent).build()
+
+
+        val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
+            .setContentTitle(title)
+            .setContentText(content)
+            .setSmallIcon(iconResId)
             .setAutoCancel(true)
+//            .setContentIntent(pendingIntent)
+            .addAction(action)
 
-        notificationManager.notify(0, notificationBuilder.build())
+        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
     }
 }

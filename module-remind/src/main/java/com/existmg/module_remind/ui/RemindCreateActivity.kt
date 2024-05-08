@@ -15,6 +15,7 @@ import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.repository.RemindRepository
 import com.existmg.library_ui.databinding.UiLayoutHorizontalTimeSelectItemBinding
 import com.existmg.library_ui.dialog.adapter.HorizontalItemTimeSelectRecycleViewAdapter
+import com.existmg.library_ui.notification.NotificationRepository
 import com.existmg.library_ui.view.CustomLinearLayout
 import com.existmg.module_remind.R
 import com.existmg.module_remind.databinding.RemindActivityRemindCreateBinding
@@ -42,8 +43,9 @@ class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel,RemindActivi
     }
 
     override fun provideViewModelFactory(): ViewModelProvider.Factory {
-        return viewModelFactoryWithParams(RemindModuleRoomAccessor.getRemindRepository(),application) {
-            RemindCreateViewModel(it[0] as RemindRepository,it[1] as Application)
+        return viewModelFactoryWithParams(RemindModuleRoomAccessor.getRemindRepository(),
+            NotificationRepository(), application) {
+            RemindCreateViewModel(it[0] as RemindRepository, it[1] as NotificationRepository, it[2] as Application)
         }
     }
 
@@ -98,6 +100,11 @@ class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel,RemindActivi
             if (hasFocus) {
                 mBinding.remindCreateEtTitle.requestFocus()
             }
+        }
+
+        // 数据插入后开启通知
+        mViewModel.remind.observe(this){
+            mViewModel.startNotification(it,application)
         }
     }
 

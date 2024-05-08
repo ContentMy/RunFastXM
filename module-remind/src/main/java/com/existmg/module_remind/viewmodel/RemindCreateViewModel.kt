@@ -9,6 +9,8 @@ import androidx.lifecycle.viewModelScope
 import com.existmg.library_base.viewmodel.BaseApplicationViewModel
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
+import com.existmg.library_ui.notification.NotificationRepository
+import com.existmg.module_remind.R
 import kotlinx.coroutines.launch
 
 /**
@@ -16,7 +18,10 @@ import kotlinx.coroutines.launch
  * @Date 2024/4/27 6:38 PM
  * @Description 这里是创建提醒页面对应的viewmodel，主要是处理数据插入相关的操作
  */
-class RemindCreateViewModel(private var remindRepository: RemindRepository, application: Application) : BaseApplicationViewModel(application) {
+class RemindCreateViewModel(
+    private var remindRepository: RemindRepository,
+    private var notificationRepository: NotificationRepository,
+    application: Application) : BaseApplicationViewModel(application) {
     val editTextContent = MutableLiveData<String>()
     var mTime = ObservableField<String>()
 
@@ -35,6 +40,8 @@ class RemindCreateViewModel(private var remindRepository: RemindRepository, appl
         mTime.set(time)
     }
 
+    private val _remind = MutableLiveData<RemindEntity>()
+    var remind:LiveData<RemindEntity>  = _remind
     fun insertRemind(){
         if (hasSendData.get()){//如果是能发送的情况，发送到
             viewModelScope.launch {
@@ -43,7 +50,11 @@ class RemindCreateViewModel(private var remindRepository: RemindRepository, appl
                         remindTitle =  editTextContent.value!!,
                         remindTime = getTimeFromString(mTime.get()!!)
                     )
-                    remindRepository.insertRemind(remindEntity)
+                    //这里得到的id是long，原因是因为insert注解返回long类型是id，int类型是表的行号，
+                    // 并且自增长的主键定义是int型的，所以在查询是将long转为int也不会丢失精度导致数据错误
+                    val remindLongId = remindRepository.insertRemind(remindEntity)
+                    val remindUpdateEntity = remindRepository.getRemindById(remindLongId.toInt())
+                    _remind.value = remindUpdateEntity //TODO:这里是问题所在，id在传递的一开始就为null，方案是去dao中返回id，但是是异步的，需要考虑怎么进行优化
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
@@ -64,4 +75,22 @@ class RemindCreateViewModel(private var remindRepository: RemindRepository, appl
             else -> 0
         }
     }
+
+    /*================通知操作 - 开始===================*/
+
+    fun startNotification(remindEntity: RemindEntity, application: Application){
+        val dataId = if (remindEntity.id == null) 0 else remindEntity.id
+        val iconResId = R.drawable.ui_remind //TODO：目前提醒模块的icon统一是使用remind图标，后续有改动的话，这里再进行动态获取
+        val title = remindEntity.remindTitle
+        val content = "提醒时间到了哦！"
+        val duration = 1L //TODO:这里写死是为了测试
+        println("在创建提醒时，id为：$dataId")
+        notificationRepository.postNotification(application, dataId!!,iconResId, title, content, duration)
+    }
+
+    fun cancelNotification(application:Application){
+        notificationRepository.cancelNotification(application)
+    }
+
+    /*================通知操作 - 结束===================*/
 }

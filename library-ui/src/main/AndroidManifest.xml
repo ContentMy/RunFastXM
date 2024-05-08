@@ -7,6 +7,6 @@
         <activity
             android:name="com.existmg.library_ui.dialog.base.DialogBaseActivity"
             android:theme="@style/ui_DialogBaseActivityTheme" />
-        <activity android:name="com.existmg.library_ui.dialog.activity.DialogTestActivity"/>
+
     </application>
 </manifest>

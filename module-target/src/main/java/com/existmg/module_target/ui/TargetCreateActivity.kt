@@ -102,6 +102,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
     override fun initData() {
         isNewTarget = intent.getBooleanExtra("isNewTarget",true)
         mBinding.targetCreateToolbar.uiToolbarTvTitle.text = if (isNewTarget) "新建目标" else "编辑目标"
+        mBinding.targetCreateToolbar.uiToolbarTvRight.text = "保存"
         if (isNewTarget){
             mViewModel.initNewTarget()
         }else{
@@ -157,7 +158,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
         mViewModel.target.observe(this){
             if (it.targetRemind){
                 // TODO: 待完成对于通知的测试和优化 
-//                mViewModel.startNotification(it,application)
+                mViewModel.startNotification(it,application)
             }
             finish()
         }

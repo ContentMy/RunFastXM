@@ -12,6 +12,12 @@
             android:name=".ui.RemindCreateActivity"
             android:theme="@style/ui.Theme.RunFastXM.Translucent"
             android:exported="false" />
+        <receiver android:name=".notification.RemindNotificationBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.existmg.notification.ACTION_START_ACTIVITY" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>
