@@ -78,6 +78,7 @@
             android:layout_width="@dimen/ui_dp_80"
             android:layout_height="@dimen/ui_dp_80">
             <TextView
+                android:id="@+id/target_recycle_item_tv_delete"
                 android:background="@color/ui_green"
                 android:text="删除"
                 android:gravity="center"

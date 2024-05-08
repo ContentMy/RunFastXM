@@ -63,4 +63,14 @@ class RemindViewModel(private var repository: RemindRepository) : BaseViewModel(
             }
         }
     }
+
+    fun deleteRemind(remindEntity: RemindEntity){
+        viewModelScope.launch {
+            try {
+                repository.deleteRemind(remindEntity)
+            } catch (e: Throwable) {
+                e.printStackTrace()
+            }
+        }
+    }
 }

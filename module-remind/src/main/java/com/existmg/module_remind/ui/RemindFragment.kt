@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.existmg.library_base.fragment.BaseMvvmFragment
 import com.existmg.library_base.manager.viewModelFactoryWithParams
 import com.existmg.library_common.router.RouterFragmentPath
@@ -19,6 +20,7 @@ import com.existmg.library_data.repository.RemindRepository
 import com.existmg.library_ui.dialog.interfaces.DialogDatabaseDelegate
 import com.existmg.module_remind.viewmodel.RemindViewModel
 import com.existmg.module_remind.databinding.RemindLayoutRemindFragmentBinding
+import com.existmg.module_remind.databinding.RemindRecycleItemViewBinding
 import com.existmg.module_remind.ui.adapter.RemindRecycleAdapter
 
 /**
@@ -34,7 +36,8 @@ import com.existmg.module_remind.ui.adapter.RemindRecycleAdapter
  *
  */
 @Route(path = RouterFragmentPath.Remind.PAGER_REMIND)
-class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragmentBinding>(),DialogDatabaseDelegate{
+class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragmentBinding>(),DialogDatabaseDelegate,
+    RemindRecycleAdapter.OnItemDeleteClickCallback {
     private lateinit var adapter: RemindRecycleAdapter
 
     override fun getViewModelClass(): Class<RemindViewModel> {
@@ -68,13 +71,6 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
     }
 
     override fun initListener() {
-        adapter.setOnItemClickListener { adapter, view, position ->
-            val entity = adapter.data[position] as RemindEntity
-            val intent = Intent(context, RemindDetailActivity::class.java)
-            intent.putExtra("remindEntity", entity)
-            startActivity(intent)//点击item时，把数据传递给activity
-        }
-
         mViewModel.navigateToCreateTargetActivity.observe(viewLifecycleOwner, Observer {
             if (it){
 //                displayDialogBottomFragment(childFragmentManager,this) TODO：暂时不使用dialogFragment的效果来完成了，有点击外部区域软键盘无法收回的问题，使用activity的dialog方案作为替代
@@ -89,6 +85,15 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
         }
     }
 
+    override fun initObserver() {
+        adapter.setOnItemDeleteClickCallback(this)
+        adapter.setOnItemClickListener { adapter, view, position ->
+            val entity = adapter.data[position] as RemindEntity
+            val intent = Intent(context, RemindDetailActivity::class.java)
+            intent.putExtra("remindEntity", entity)
+            startActivity(intent)//点击item时，把数据传递给activity
+        }
+    }
     override fun processBusinessLogic(data: Map<String, Any>) {
         println("创建数据")
 //        mViewModel.insertData(data)
@@ -104,5 +109,14 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
         if (v.windowToken != null)println("${v.javaClass}")
         val manager = requireContext().getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
         manager.hideSoftInputFromWindow(v.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
+    }
+
+    override fun itemDeleteClick(
+        holder: BaseDataBindingHolder<RemindRecycleItemViewBinding>,
+        position: Int,
+        item: RemindEntity
+    ) {
+        println("点击了删除按钮")
+        mViewModel.deleteRemind(item)
     }
 }

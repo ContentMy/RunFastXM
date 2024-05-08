@@ -16,5 +16,22 @@ class RemindRecycleAdapter(list:MutableList<RemindEntity>?):BaseQuickAdapter<Rem
     override fun convert(holder: BaseDataBindingHolder<RemindRecycleItemViewBinding>, item: RemindEntity) {
         holder.dataBinding?.item = item
         holder.dataBinding?.targetRecycleItemIvIcon?.setImageResource(R.drawable.ui_remind)
+        holder.dataBinding?.targetRecycleItemTvDelete?.setOnClickListener{
+            mCallback?.itemDeleteClick(holder,holder.layoutPosition,item)
+            remove(item)
+            notifyItemChanged(holder.layoutPosition)
+        }
+    }
+    private var mCallback:OnItemDeleteClickCallback? = null
+
+    fun setOnItemDeleteClickCallback(callback: OnItemDeleteClickCallback){
+        mCallback = callback
+    }
+    interface OnItemDeleteClickCallback{
+        fun itemDeleteClick(
+            holder: BaseDataBindingHolder<RemindRecycleItemViewBinding>,
+            position: Int,
+            item: RemindEntity
+        )
     }
 }
