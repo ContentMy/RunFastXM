@@ -30,7 +30,6 @@ abstract class BaseMVVMActivity<VM : ViewModel, VB : ViewDataBinding> : BaseActi
      */
     override fun beforeInit() {
         super.beforeInit()
-        setLightActionBar()
         mBinding = DataBindingUtil.setContentView(this, getLayoutId())
         mBinding.lifecycleOwner = this
         mViewModel = createViewModel()
@@ -64,18 +63,6 @@ abstract class BaseMVVMActivity<VM : ViewModel, VB : ViewDataBinding> : BaseActi
     open fun initObserver(){
 
     }
-
-    /**
-     * @Author: ContentMy
-     * @Description: 状态栏的颜色设置。 TODO:后续考虑统一放到util中，然后在BaseActivity中统一处理
-     */
-    private fun setLightActionBar(){
-        val window = window
-        window.statusBarColor = Color.TRANSPARENT
-        val flags = window.decorView.systemUiVisibility
-        window.decorView.systemUiVisibility = flags or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-    }
-
 
     /**
      * @Author: ContentMy

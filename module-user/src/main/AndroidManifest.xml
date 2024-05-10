@@ -4,6 +4,8 @@
 
     <application
         android:allowBackup="true"
-        android:supportsRtl="true"/>
-
+        android:supportsRtl="true">
+        <activity android:name=".ui.activity.UserAboutAppActivity"
+            android:exported="false"/>
+    </application>
 </manifest>
