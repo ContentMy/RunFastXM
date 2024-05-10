@@ -6,6 +6,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.existmg.library_base.fragment.BaseMvvmFragment
 import com.existmg.library_base.manager.viewModelFactoryWithParams
 import com.existmg.library_common.router.RouterFragmentPath
@@ -16,6 +17,7 @@ import com.existmg.module_target.ui.adapter.TargetRecycleViewAdapter
 import com.existmg.library_data.db.entity.TargetEntity
 import com.existmg.library_data.repository.TargetRepository
 import com.existmg.module_target.databinding.TargetLayoutFragmentBinding
+import com.existmg.module_target.databinding.TargetRecycleItemViewBinding
 
 /**
  * @Author ContentMy
@@ -23,7 +25,7 @@ import com.existmg.module_target.databinding.TargetLayoutFragmentBinding
  * @Description 这里是目标模块的入口Fragment
  */
 @Route(path = RouterFragmentPath.Target.PAGER_TARGET)
-class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBinding>(){
+class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBinding>(),TargetRecycleViewAdapter.OnItemDeleteClickCallback{
 
     private lateinit var adapter: TargetRecycleViewAdapter
     private var list: MutableList<TargetEntity> = ArrayList()
@@ -66,8 +68,10 @@ class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBindin
             intent.putExtra("targetEntity", entity)
             startActivity(intent)//点击item时，把数据传递给activity
         }
+        adapter.setOnItemDeleteClickCallback(this)
+    }
 
-
+    override fun initObserver() {
         mViewModel.targetData.observe(viewLifecycleOwner){
             mBinding.targetTvDefaultContent.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             adapter.setList(it)
@@ -80,5 +84,13 @@ class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBindin
                 startActivity(intent)
             }
         })
+    }
+
+    override fun itemDeleteClick(
+        holder: BaseDataBindingHolder<TargetRecycleItemViewBinding>,
+        position: Int,
+        item: TargetEntity
+    ) {
+        mViewModel.deleteTarget(item)
     }
 }

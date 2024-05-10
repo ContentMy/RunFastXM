@@ -12,22 +12,25 @@ import com.existmg.module_target.databinding.TargetRecycleItemViewBinding
  * @Description 这里是目标列表的adapter
  */
 class TargetRecycleViewAdapter(list:MutableList<TargetEntity>?):
-    BaseQuickAdapter<TargetEntity,BaseDataBindingHolder<TargetRecycleItemViewBinding>>(R.layout.target_recycle_item_view,list)
-//    OnItemClickListener,
-//    OnItemChildClickListener
-    {
-    private var mList = list
+    BaseQuickAdapter<TargetEntity,BaseDataBindingHolder<TargetRecycleItemViewBinding>>(R.layout.target_recycle_item_view,list) {
     override fun convert(holder: BaseDataBindingHolder<TargetRecycleItemViewBinding>, item: TargetEntity) {
         holder.dataBinding?.item = item
         holder.dataBinding?.targetRecycleItemIvIcon?.setImageResource(context.resources.getIdentifier(item.targetImg, "drawable", context.packageName))
+        holder.dataBinding?.targetRecycleItemTvDelete?.setOnClickListener {
+            mCallback?.itemDeleteClick(holder,holder.layoutPosition,item)
+            remove(item)
+            notifyItemChanged(holder.layoutPosition)
+        }
     }
-
-//    override fun onItemClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-//        println("这里是adapter的回调 onItemClick ")
-//    }
-//
-//    override fun onItemChildClick(adapter: BaseQuickAdapter<*, *>, view: View, position: Int) {
-////        Toast.makeText(view.context,"点击了item",Toast.LENGTH_SHORT).show()
-//    }
-
+    private var mCallback:OnItemDeleteClickCallback? = null
+    fun setOnItemDeleteClickCallback(callback: OnItemDeleteClickCallback){
+        mCallback = callback
+    }
+    interface OnItemDeleteClickCallback{
+        fun itemDeleteClick(
+            holder: BaseDataBindingHolder<TargetRecycleItemViewBinding>,
+            position: Int,
+            item: TargetEntity
+        )
+    }
 }
