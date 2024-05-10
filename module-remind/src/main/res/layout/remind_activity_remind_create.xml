@@ -12,7 +12,8 @@
         android:id="@+id/remind_create_ll"
         android:gravity="bottom"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/remind_create_cl"
             android:layout_width="match_parent"

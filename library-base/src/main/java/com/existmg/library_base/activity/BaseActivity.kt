@@ -19,12 +19,14 @@ import com.existmg.library_base.R
 abstract class BaseActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        /*==============沉浸式逻辑开始================*/
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
             setupTransparentStatusBar()
         } else {
             setupLegacyTransparentStatusBar()
         }
         setStatusBarTextColor(isLightStatusBar())
+        /*==============沉浸式逻辑结束================*/
         setContentView(getLayoutId())
         beforeInit()
         initView()
@@ -71,6 +73,7 @@ abstract class BaseActivity: AppCompatActivity() {
 
     }
 
+    /*==============沉浸式逻辑开始================*/
     /**
      * @Author: ContentMy
      * @Description: 子类重写这个方法来决定状态栏文字颜色
@@ -121,4 +124,5 @@ abstract class BaseActivity: AppCompatActivity() {
             }
         }
     }
+    /*==============沉浸式逻辑结束================*/
 }
