@@ -12,7 +12,7 @@ import com.existmg.library_base.manager.viewModelFactoryWithParams
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
-import com.existmg.library_ui.view.countdown.CountDownClock
+import com.existmg.library_ui.views.countdown.CountDownClock
 import com.existmg.module_remind.R
 import com.existmg.module_remind.databinding.RemindActivityDetailBinding
 import com.existmg.module_remind.viewmodel.RemindDetailViewModel

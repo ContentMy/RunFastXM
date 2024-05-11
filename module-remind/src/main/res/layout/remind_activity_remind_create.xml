@@ -8,7 +8,7 @@
             name="viewModel"
             type="com.existmg.module_remind.viewmodel.RemindCreateViewModel" />
     </data>
-    <com.existmg.library_ui.view.CustomLinearLayout
+    <com.existmg.library_ui.views.CustomLinearLayout
         android:id="@+id/remind_create_ll"
         android:gravity="bottom"
         android:layout_width="match_parent"
@@ -108,5 +108,5 @@
                 app:layout_constraintStart_toEndOf="@id/remind_create_btn_left"
                 app:layout_constraintTop_toBottomOf="@+id/remind_create_et_title" />
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.existmg.library_ui.view.CustomLinearLayout>
+    </com.existmg.library_ui.views.CustomLinearLayout>
 </layout>

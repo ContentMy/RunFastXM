@@ -2,7 +2,6 @@ package com.existmg.module_memorandum.ui
 
 import android.app.Application
 import android.content.Context
-import android.os.Handler
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.lifecycle.ViewModelProvider
@@ -10,11 +9,10 @@ import com.existmg.library_base.activity.BaseMVVMActivity
 import com.existmg.library_base.manager.viewModelFactoryWithParams
 import com.existmg.library_data.accessor.MemorandumModuleRoomAccessor
 import com.existmg.library_data.repository.MemorandumRepository
-import com.existmg.library_ui.view.CustomLinearLayout
+import com.existmg.library_ui.views.CustomLinearLayout
 import com.existmg.module_memorandum.R
 import com.existmg.module_memorandum.databinding.MemorandumLayoutActivityMemorandumCreateBinding
 import com.existmg.module_memorandum.viewmodel.MemorandumCreateViewModel
-import com.existmg.module_memorandum.viewmodel.MemorandumViewModel
 
 
 /**

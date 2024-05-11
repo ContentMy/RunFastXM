@@ -50,7 +50,18 @@ class MemorandumViewModel(private var repository: MemorandumRepository):BaseView
                     _memorandumData.value = it
                 }
             }catch (e:Throwable){
-                println("从数据库中获取数据列表是发生了异常" + e.message)
+                println("从数据库中获取数据列表时发生了异常" + e.message)
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun deleteMemorandum(entity: MemorandumEntity) {
+        viewModelScope.launch {
+            try {
+                repository.deleteMemorandum(entity)
+            }catch (e:Throwable){
+                println("从数据库中删除数据时发生了异常" + e.message)
                 e.printStackTrace()
             }
         }

@@ -16,7 +16,7 @@
             layout="@layout/ui_layout_base_title_toolbar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
-        <com.existmg.library_ui.view.SlideRecycleView
+        <com.existmg.library_ui.views.SlideRecycleView
             android:id="@+id/remind_rv"
             android:layout_width="match_parent"
             android:layout_height="0dp"

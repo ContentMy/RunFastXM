@@ -16,7 +16,7 @@ import com.existmg.library_data.repository.RemindRepository
 import com.existmg.library_ui.databinding.UiLayoutHorizontalTimeSelectItemBinding
 import com.existmg.library_ui.dialog.adapter.HorizontalItemTimeSelectRecycleViewAdapter
 import com.existmg.library_ui.notification.NotificationRepository
-import com.existmg.library_ui.view.CustomLinearLayout
+import com.existmg.library_ui.views.CustomLinearLayout
 import com.existmg.module_remind.R
 import com.existmg.module_remind.databinding.RemindActivityRemindCreateBinding
 import com.existmg.module_remind.viewmodel.RemindCreateViewModel

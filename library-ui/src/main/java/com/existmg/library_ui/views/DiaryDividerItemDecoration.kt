@@ -1,4 +1,4 @@
-package com.existmg.library_ui.view
+package com.existmg.library_ui.views
 
 import android.annotation.SuppressLint
 import android.app.Activity

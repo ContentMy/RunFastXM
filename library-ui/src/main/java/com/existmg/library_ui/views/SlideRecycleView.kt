@@ -1,4 +1,4 @@
-package com.existmg.library_ui.view
+package com.existmg.library_ui.views
 
 import android.content.Context
 import android.graphics.Rect
@@ -8,10 +8,7 @@ import android.view.VelocityTracker
 import android.view.View
 import android.view.ViewConfiguration
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Scroller
-import androidx.cardview.widget.CardView
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.abs

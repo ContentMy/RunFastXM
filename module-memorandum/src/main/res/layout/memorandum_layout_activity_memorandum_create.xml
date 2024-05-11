@@ -8,11 +8,12 @@
             type="com.existmg.module_memorandum.viewmodel.MemorandumCreateViewModel" />
     </data>
 
-    <com.existmg.library_ui.view.CustomLinearLayout
+    <com.existmg.library_ui.views.CustomLinearLayout
         android:id="@+id/memorandum_create_ll"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:fitsSystemWindows="true">
         <include
             android:visibility="invisible"
             layout="@layout/ui_layout_base_title_toolbar"/>
@@ -84,5 +85,5 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toBottomOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-    </com.existmg.library_ui.view.CustomLinearLayout>
+    </com.existmg.library_ui.views.CustomLinearLayout>
 </layout>
