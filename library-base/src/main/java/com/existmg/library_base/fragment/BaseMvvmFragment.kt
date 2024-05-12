@@ -42,6 +42,10 @@ abstract class BaseMvvmFragment<VM : BaseViewModel, VB : ViewDataBinding> : Base
         bindViewModel()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initObserver()
+    }
     /**
      * @Author: ContentMy
      * @return: 返回viewmodel的class对象
@@ -61,6 +65,14 @@ abstract class BaseMvvmFragment<VM : BaseViewModel, VB : ViewDataBinding> : Base
      * @Description: 是一个子类需要实现的抽象方法，会返回一个viewmodel的工厂类对象，主要是为了处理携带参数的viewmodel的初始化问题
      */
     abstract fun provideViewModelFactory(): ViewModelProvider.Factory
+
+    /**
+     * @Author: ContentMy
+     * @Description: 初始化observe的相关操作
+     */
+    open fun initObserver(){
+
+    }
 
     /**
      * @Author: ContentMy

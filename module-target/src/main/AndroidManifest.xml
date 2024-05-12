@@ -8,6 +8,12 @@
         <activity
             android:name=".ui.TargetCreateActivity"
             android:exported="false" />
+        <receiver android:name=".notification.TargetNotificationBroadcastReceiver"
+            android:exported="false">
+            <intent-filter>
+                <action android:name="com.existmg.notification.ACTION_START_ACTIVITY" />
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

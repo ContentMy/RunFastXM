@@ -8,9 +8,11 @@ import android.widget.Toast
 import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactory
+import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.db.entity.RemindEntity
-import com.existmg.library_ui.view.countdown.CountDownClock
+import com.existmg.library_data.repository.RemindRepository
+import com.existmg.library_ui.views.countdown.CountDownClock
 import com.existmg.module_remind.R
 import com.existmg.module_remind.databinding.RemindActivityDetailBinding
 import com.existmg.module_remind.viewmodel.RemindDetailViewModel
@@ -42,8 +44,8 @@ class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel,RemindActivi
     }
 
     override fun provideViewModelFactory(): ViewModelProvider.Factory {
-        return viewModelFactory{
-            RemindDetailViewModel()
+        return viewModelFactoryWithParams(RemindModuleRoomAccessor.getRemindRepository()){
+            RemindDetailViewModel(it[0] as RemindRepository)
         }
     }
 
@@ -58,12 +60,16 @@ class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel,RemindActivi
         } else {
             intent.getParcelableExtra<RemindEntity>("remindEntity")
         }
-        mCountDownTime = remindData?.remindTime!!
-
-        mBinding.remindDetailCdc.startCountDown(mCountDownTime)
-
-        mBinding.remindDetailTb.uiToolbarTvTitle.text = remindData.remindTitle
-        mBinding.remindDetailTb.uiToolbarTvRight.text = "修改"
+        if (remindData != null){//如果不为空，是从提醒列表item点击进入的页面
+            mCountDownTime = remindData.remindTime
+            mBinding.remindDetailCdc.startCountDown(mCountDownTime)
+            mBinding.remindDetailTb.uiToolbarTvTitle.text = remindData.remindTitle
+        }else{//如果为空，是从通知点击进入的页面
+            val dataId = intent.getIntExtra("dataId",0)
+            println("通知进入 id为：$dataId")
+            mViewModel.queryRemindEntity(dataId)
+        }
+//        mBinding.remindDetailTb.uiToolbarTvRight.text = "修改"
     }
 
     override fun initListener(){
@@ -83,6 +89,13 @@ class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel,RemindActivi
         mBinding.remindDetailTb.uiToolbarTvRight.setOnClickListener(this)
     }
 
+    override fun initObserver() {
+        mViewModel.remindById.observe(this){
+            mCountDownTime = it.remindTime
+            mBinding.remindDetailCdc.startCountDown(mCountDownTime)
+            mBinding.remindDetailTb.uiToolbarTvTitle.text = it.remindTitle
+        }
+    }
     override fun onClick(v: View?) {
         when(v){
             mBinding.remindDetailTb.uiToolbarIvBack->{

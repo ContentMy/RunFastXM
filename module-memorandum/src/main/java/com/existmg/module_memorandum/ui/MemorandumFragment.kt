@@ -4,18 +4,23 @@ import android.content.Intent
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.existmg.library_base.fragment.BaseMvvmFragment
 import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.interfaces.OnItemClickListener
+import com.existmg.library_common.interfaces.OnItemLongClickListener
 import com.existmg.library_common.router.RouterFragmentPath
 import com.existmg.library_data.accessor.MemorandumModuleRoomAccessor
 import com.existmg.library_data.db.entity.MemorandumEntity
 import com.existmg.library_data.repository.MemorandumRepository
-import com.existmg.library_ui.view.DiaryDividerItemDecoration
+import com.existmg.library_ui.views.DiaryDividerItemDecoration
 import com.existmg.module_memorandum.R
 import com.existmg.module_memorandum.databinding.MemorandumLayoutFragmentBinding
+import com.existmg.module_memorandum.interfaces.MemorandumItemDeleteCallback
 import com.existmg.module_memorandum.ui.adapter.MemorandumRecycleViewAdapter
 import com.existmg.module_memorandum.viewmodel.MemorandumViewModel
+import kotlin.math.abs
 
 /**
  * @Author ContentMy
@@ -59,6 +64,41 @@ class MemorandumFragment : BaseMvvmFragment<MemorandumViewModel,MemorandumLayout
     }
 
     override fun initListener() {
+        mAdapter.setOnItemClickListener(object:OnItemClickListener{
+            override fun onItemClick(view: View, position: Int) {
+                val entity = mList[position]
+                val intent = Intent(context, MemorandumUpdateActivity::class.java)
+                intent.putExtra("memorandumEntity", entity)
+                startActivity(intent)//点击item时，把数据传递给activity
+            }
+        })
+        
+        mAdapter.setOnItemLongClickListener(object:OnItemLongClickListener{
+            override fun onItemLongClick(view: View, position: Int) {
+//                mAdapter.setShaking(true)
+            }
+        })
+
+        mAdapter.setMemorandumItemDeleteCallback(object : MemorandumItemDeleteCallback{
+            override fun itemDelete(entity: MemorandumEntity, position: Int) {
+                mViewModel.deleteMemorandum(entity)
+                mList.remove(entity)
+            }
+
+        })
+
+        mBinding.memorandumRv.addOnScrollListener(object : RecyclerView.OnScrollListener() {
+            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
+                super.onScrolled(recyclerView, dx, dy)
+                // 如果RecyclerView正在滚动，隐藏所有删除按钮
+                if (abs(dy) > 10) {//暂时避免轻微滑动就执行隐藏代码
+                    mAdapter.hideDeleteButton()
+                }
+            }
+        })
+    }
+
+    override fun initObserver() {
         mViewModel.navigateToCreateMemorandumActivity.observe(this){
             if (it){
                 val intent = Intent(context,MemorandumCreateActivity::class.java)
@@ -73,21 +113,24 @@ class MemorandumFragment : BaseMvvmFragment<MemorandumViewModel,MemorandumLayout
             }
         }
 
-        mAdapter.setOnItemClickListener { adapter, view, position ->
-            val entity = adapter.data[position] as MemorandumEntity
-            val intent = Intent(context, MemorandumUpdateActivity::class.java)
-            intent.putExtra("memorandumEntity", entity)
-            startActivity(intent)//点击item时，把数据传递给activity
-        }
-
+        
         mViewModel.memorandumData.observe(viewLifecycleOwner){
             mBinding.memorandumTvDefaultContent.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
-            mAdapter.setList(it)
+            mList.clear()
+            it.forEach { entity ->
+                mList.add(entity)
+            }
+            mAdapter.setListDeleteStatus(it.size)
         }
     }
 
     override fun onResume() {
         super.onResume()
         mViewModel.refreshData()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        mAdapter.hideDeleteButton()
     }
 }

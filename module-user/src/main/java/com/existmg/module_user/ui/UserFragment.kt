@@ -1,5 +1,6 @@
 package com.existmg.module_user.ui
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -13,6 +14,7 @@ import com.existmg.library_base.manager.viewModelFactory
 import com.existmg.library_common.router.RouterFragmentPath
 import com.existmg.module_user.R
 import com.existmg.module_user.databinding.UserLayoutFragmentBinding
+import com.existmg.module_user.ui.activity.UserAboutAppActivity
 import com.existmg.module_user.viewmodel.UserViewModel
 
 /**
@@ -58,7 +60,8 @@ class UserFragment:BaseMvvmFragment<UserViewModel,UserLayoutFragmentBinding>(),
     override fun onClick(v: View?) {
         when(v){
             mBinding.userLlAbout->{
-                Toast.makeText(requireContext(), "下版本完成", Toast.LENGTH_SHORT).show()
+                //跳转到应用信息页面
+                startActivity(Intent(requireContext(),UserAboutAppActivity::class.java))
             }
             mBinding.userLlPrivacy->{
                 Toast.makeText(requireContext(), "下版本完成", Toast.LENGTH_SHORT).show()

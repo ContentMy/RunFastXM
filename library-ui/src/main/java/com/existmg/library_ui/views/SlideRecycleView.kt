@@ -1,4 +1,4 @@
-package com.existmg.library_ui.view
+package com.existmg.library_ui.views
 
 import android.content.Context
 import android.graphics.Rect
@@ -8,10 +8,7 @@ import android.view.VelocityTracker
 import android.view.View
 import android.view.ViewConfiguration
 import android.view.ViewGroup
-import android.widget.LinearLayout
 import android.widget.Scroller
-import androidx.cardview.widget.CardView
-import androidx.databinding.ViewDataBinding
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import kotlin.math.abs
@@ -22,21 +19,21 @@ import kotlin.math.abs
  * @Description
  */
 class SlideRecycleView : RecyclerView{
-    private val INVALID_POSITION = -1 //触摸到的点不在子view范围内
-    private val INVALID_CHILD_WIDTH = -1 //子itemView不含两个子view
-    private val SNAP_VELOCITY = -1 //最小滑动速度
+    private val INVALID_POSITION = -1 //用于判断触摸点位置是否在item范围内
+    private val INVALID_CHILD_WIDTH = -1 //左滑隐藏控件的默认宽度
+    private val SNAP_VELOCITY = 1000 //最小滑动速度
 
     private var mVelocityTracker:VelocityTracker? = null //速度追踪器
     private var mTouchSlop = 0 //认为是最小的滑动距离（一般由系统提供）
-    private var mTouchFrame: Rect? = null //子view所在的矩形范围
-    private var mScroller:Scroller? = null
+    private var mTouchFrame: Rect? = null //item所在的矩形范围
+    private var mScroller:Scroller? = null //用于处理item的滑动效果
     private var mLastX = 0f //滑动过程中上次碰触点的x
     private var mFirstX = 0f //首次触碰范围
     private var mFirstY = 0f
-    private var mIsSlide = false //是否滑动子view
-    private var mFlingView:ViewGroup? = null //触碰的子view
-    private var mPosition = 0 // 触碰的view的位置
-    private var mMenuViewWidth = 0 // 菜单按钮宽度
+    private var mIsSlide = false //是否滑动item
+    private var mFlingView:ViewGroup? = null //触碰的item
+    private var mPosition = 0 // 触碰的item的位置
+    private var mMenuViewWidth = 0 // 隐藏控件的宽度
     constructor(context: Context) : this(context, null)
 
     constructor(context: Context, attrs: AttributeSet?) : this(context, attrs, 0)
@@ -55,15 +52,10 @@ class SlideRecycleView : RecyclerView{
         obtainVelocity(e)
         when(e.action){
             MotionEvent.ACTION_DOWN->{
-                println("拦截down")
-                if (mScroller?.isFinished == false){ //如果动画没有停止，那么立即停止动画
-                    mScroller?.abortAnimation()
-                }
                 mLastX = x
                 mFirstX = x
                 mFirstY = y
                 mPosition = pointToPosition(x.toInt(),y.toInt())//触碰点所在的position
-                println("x为：$x,mLastX为:$mLastX,mFirstX为：$mFirstX,mFirstY为：$mFirstY,mPosition为：$mPosition")
                 if(mPosition != INVALID_POSITION){
                     val view = mFlingView
                     //因为这里的布局是使用了CardView嵌套了了一个LinearLayout，所以需要先拿到外层的viewGroup，再通过这个对象去获取LinearLayout
@@ -103,6 +95,7 @@ class SlideRecycleView : RecyclerView{
             MotionEvent.ACTION_UP->{
                 println("拦截up")
                 releaseVelocity()
+                return false
             }
         }
         return super.onInterceptTouchEvent(e)
@@ -118,18 +111,23 @@ class SlideRecycleView : RecyclerView{
             when(e.action){
                 MotionEvent.ACTION_DOWN->{//因为没有拦截，所以不会被调用到
                     println("touch down")
+                    mLastX = x
                 }
                 MotionEvent.ACTION_MOVE->{
-                    println("touch move === $mMenuViewWidth")
+                    println("touch move")
                     //随手指滑动
-                    if (mMenuViewWidth != INVALID_CHILD_WIDTH){
+                    if (mMenuViewWidth != INVALID_CHILD_WIDTH ){
                         val dx = mLastX - x
-                        if (mFlingView?.scrollX!! + dx <= mMenuViewWidth
-                            && mFlingView?.scrollX!! + dx > 0){
-                            mFlingView?.scrollTo(dx.toInt(),0)
-                        }
+                        val scrollX = mFlingView?.scrollX ?: 0
+                        // 计算滑动后的位置
+                        val newScrollX = scrollX + (dx).toInt()
+                        // 边界检查，确保滑动不超出范围
+                        val validScrollX = newScrollX.coerceIn(0, mMenuViewWidth)
+                        mFlingView?.scrollTo(validScrollX, 0)
                         mLastX = x
                     }
+                    // 更新 mLastX 的值
+//                    mLastX = x
                 }
                 MotionEvent.ACTION_UP->{
                     println("touch up")
@@ -179,13 +177,22 @@ class SlideRecycleView : RecyclerView{
 
     override fun computeScroll() {
         super.computeScroll()
+        if (mScroller != null && mScroller!!.computeScrollOffset()) {
+            mFlingView?.scrollTo(mScroller!!.currX, mScroller!!.currY)
+            postInvalidate()
+        }
     }
 
+    /**
+     * @Author: ContentMy
+     * @params: event 手势事件
+     * @Description: 初始化Velocity并处理event，方便后续计算手势速度
+     */
     private fun obtainVelocity(event: MotionEvent) {
         if (mVelocityTracker == null) {
-            mVelocityTracker = VelocityTracker.obtain()
+            mVelocityTracker = VelocityTracker.obtain()//创建VelocityTracker对象
         }
-        mVelocityTracker!!.addMovement(event)
+        mVelocityTracker!!.addMovement(event)//将event加入到VelocityTracker中，方便后续计算数据
     }
 
     private fun releaseVelocity() {

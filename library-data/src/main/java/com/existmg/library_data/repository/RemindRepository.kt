@@ -11,17 +11,17 @@ import kotlinx.coroutines.flow.Flow
  */
 //@AndroidEntryPoint
 class RemindRepository(private val remindDao: RemindDao) {
-    suspend fun insertRemind(remind: RemindEntity){
-        remindDao.insertRemind(remind)
+    suspend fun insertRemind(remind: RemindEntity):Long{
+        return remindDao.insertRemind(remind)
     }
 
     suspend fun insertReminds(reminds: List<RemindEntity>){
         remindDao.insertReminds(reminds)
     }
 
-//    suspend fun getRemindById(id: Int): RemindEntity{
-//       return remindDao.getRemindById(id)
-//    }
+    suspend fun getRemindById(id: Int): RemindEntity{
+       return remindDao.getRemindById(id)
+    }
 
     fun getAllReminds(): Flow<List<RemindEntity>>{
         println("查询数据")

@@ -58,15 +58,23 @@ class TargetViewModel(private val repository: TargetRepository): BaseViewModel()
                     _targetData.value = it
                 }
             }catch (e:Throwable){
-                println("从数据库中获取数据列表是发生了异常" + e.message)
+                println("从数据库中获取数据列表时发生了异常" + e.message)
                 e.printStackTrace()
             }
         }
     }
 
-//    fun refreshData() = viewModelScope.launch {
-//        _targetData.value = repository.getAllTargets()
-//    }
+    fun deleteTarget(item: TargetEntity) {
+        viewModelScope.launch {
+            try {
+                repository.deleteTarget(item)
+            } catch (e: Exception) {
+                println("从数据库中删除数据时发生了异常" + e.message)
+                e.printStackTrace()
+            }
+        }
+    }
+
 
     /*===================数据库的处理-结束=======================*/
 

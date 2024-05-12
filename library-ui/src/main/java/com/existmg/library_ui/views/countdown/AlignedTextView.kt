@@ -1,4 +1,4 @@
-package com.existmg.library_ui.view.countdown
+package com.existmg.library_ui.views.countdown
 
 import android.content.Context
 import android.graphics.Canvas

@@ -25,7 +25,7 @@
                 android:layout_width="62dp"
                 android:layout_height="34dp">
 
-                <com.existmg.library_ui.view.countdown.AlignedTextView
+                <com.existmg.library_ui.views.countdown.AlignedTextView
                     android:id="@+id/backUpperText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -44,7 +44,7 @@
                 android:layout_width="62dp"
                 android:layout_height="34dp">
 
-                <com.existmg.library_ui.view.countdown.AlignedTextView
+                <com.existmg.library_ui.views.countdown.AlignedTextView
                     android:id="@+id/backLowerText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -70,7 +70,7 @@
                 android:layout_width="62dp"
                 android:layout_height="34dp">
 
-                <com.existmg.library_ui.view.countdown.AlignedTextView
+                <com.existmg.library_ui.views.countdown.AlignedTextView
                     android:id="@+id/frontUpperText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -89,7 +89,7 @@
                 android:layout_width="62dp"
                 android:layout_height="34dp">
 
-                <com.existmg.library_ui.view.countdown.AlignedTextView
+                <com.existmg.library_ui.views.countdown.AlignedTextView
                     android:id="@+id/frontLowerText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

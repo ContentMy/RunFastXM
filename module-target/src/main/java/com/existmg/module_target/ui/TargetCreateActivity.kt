@@ -52,13 +52,6 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
     private lateinit var iconsAdapter: TargetIconsRecycleViewAdapter
     private var currentStatusPosition = 0
     private var currentIconsPosition = 0
-    @SuppressLint("UnspecifiedRegisterReceiverFlag")
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        window.statusBarColor = Color.TRANSPARENT
-        setLightStatusBar(window)//结合布局中根布局的android:fitsSystemWindows="true"属性设置沉浸式状态栏，然后设置状态栏为透明，设置状态栏图标为深色
-    }
-
     override fun getLayoutId(): Int {
         return R.layout.target_activity_target_create
     }
@@ -102,6 +95,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
     override fun initData() {
         isNewTarget = intent.getBooleanExtra("isNewTarget",true)
         mBinding.targetCreateToolbar.uiToolbarTvTitle.text = if (isNewTarget) "新建目标" else "编辑目标"
+        mBinding.targetCreateToolbar.uiToolbarTvRight.text = "保存"
         if (isNewTarget){
             mViewModel.initNewTarget()
         }else{
@@ -157,7 +151,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
         mViewModel.target.observe(this){
             if (it.targetRemind){
                 // TODO: 待完成对于通知的测试和优化 
-//                mViewModel.startNotification(it,application)
+                mViewModel.startNotification(it,application)
             }
             finish()
         }
