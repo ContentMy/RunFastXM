@@ -81,7 +81,7 @@ class RemindCreateViewModel(
     fun startNotification(remindEntity: RemindEntity, application: Application){
         val dataId = if (remindEntity.id == null) 0 else remindEntity.id
         val iconResId = R.drawable.ui_remind //TODO：目前提醒模块的icon统一是使用remind图标，后续有改动的话，这里再进行动态获取
-        val title = remindEntity.remindTitle
+        val title = remindEntity.remindTitle!!
         val content = "提醒时间到了哦！"
         val duration = 1L //TODO:这里写死是为了测试
         println("在创建提醒时，id为：$dataId")

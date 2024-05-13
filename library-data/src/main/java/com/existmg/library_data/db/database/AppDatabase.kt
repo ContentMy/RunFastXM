@@ -10,6 +10,7 @@ import com.existmg.library_data.db.dao.TargetDao
 import com.existmg.library_data.db.entity.MemorandumEntity
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.db.entity.TargetEntity
+import com.existmg.library_data.db.migrations.DatabaseMigrations
 
 /**
  * @Author ContentMy
@@ -18,7 +19,7 @@ import com.existmg.library_data.db.entity.TargetEntity
  */
 @Database(
     entities = [RemindEntity::class,TargetEntity::class,MemorandumEntity::class],
-    version = 1,
+    version = 2,
     exportSchema = false
 )
 abstract class AppDatabase: RoomDatabase() {// Room 需要使用工厂模式来创建数据库实例，所以必须声明一个抽象类，并且这个类不能被直接实例化
@@ -40,8 +41,9 @@ abstract fun memorandumDao():MemorandumDao
                 val instance = Room.databaseBuilder(
                     context.applicationContext,
                     AppDatabase::class.java,
-                    "run_fast_xm_database"
-                ).build()
+                    "run_fast_xm_database")
+                    .addMigrations(DatabaseMigrations.MIGRATION_1_2)
+                    .build()
                 INSTANCE = instance
                 // return instance
                 instance

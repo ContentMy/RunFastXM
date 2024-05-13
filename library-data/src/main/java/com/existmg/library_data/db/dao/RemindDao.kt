@@ -31,6 +31,12 @@ interface RemindDao {
     // 查询所有目标
     @Query("SELECT * FROM remind_table")
     fun getAllReminds(): Flow<List<RemindEntity>>
+
+    @Query("SELECT * FROM remind_table WHERE remindCompleteStatus = 0")
+    fun getAllInProgressReminds(): Flow<List<RemindEntity>>
+
+    @Query("SELECT * FROM remind_table WHERE remindCompleteStatus = 1")
+    fun getAllCompletedReminds(): Flow<List<RemindEntity>>
     // 更新目标
     @Update
     suspend fun updateRemind(remind: RemindEntity)
@@ -42,4 +48,7 @@ interface RemindDao {
     // 删除所有目标
     @Query("DELETE FROM remind_table")
     suspend fun deleteAllReminds()
+
+    @Query("DELETE FROM remind_table WHERE remindCompleteStatus = 1")
+    suspend fun deleteAllCompletedReminds()
 }

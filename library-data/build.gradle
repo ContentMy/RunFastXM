@@ -3,7 +3,7 @@ android{
     resourcePrefix 'ui_'
 }
 dependencies {
-    //TODO:这里是数据库的依赖，单独依赖在了data模块下
+    //TODO:这里是数据库的依赖，单独依赖在了data模块下。兼容问题：androidx.room的插件无法引用，报错找不到，但是room的相关依赖已经配置。后续优化处理兼容问题时需要进一步排查
     implementation rootProject.ext.androidx.room
     implementation rootProject.ext.androidx.roomKtx
     kapt rootProject.ext.androidx.roomCompiler

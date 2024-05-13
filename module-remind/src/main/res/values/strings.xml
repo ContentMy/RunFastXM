@@ -2,4 +2,5 @@
     <string name="remind_app_name">module-remind</string>
 
     <string name="remind_default_content">再也不怕忘掉啦~\n点击“+”添加提醒吧！</string>
+    <string name="remind_completed_default_content">再也不怕忘掉啦~\n点击“+”添加提醒吧！</string>
 </resources>

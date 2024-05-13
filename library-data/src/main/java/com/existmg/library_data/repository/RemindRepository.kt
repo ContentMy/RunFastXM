@@ -28,6 +28,15 @@ class RemindRepository(private val remindDao: RemindDao) {
         return remindDao.getAllReminds()
     }
 
+    fun getAllInProgressReminds(): Flow<List<RemindEntity>>{
+        println("查询数据")
+        return remindDao.getAllReminds()
+    }
+    fun getAllCompletedReminds(): Flow<List<RemindEntity>>{
+        println("查询数据")
+        return remindDao.getAllReminds()
+    }
+
     suspend fun updateRemind(remind: RemindEntity){
         remindDao.updateRemind(remind)
     }
@@ -37,6 +46,10 @@ class RemindRepository(private val remindDao: RemindDao) {
     }
 
     suspend fun deleteAllReminds(){
+        remindDao.deleteAllReminds()
+    }
+
+    suspend fun deleteAllCompletedReminds(){
         remindDao.deleteAllReminds()
     }
 }
