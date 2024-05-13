@@ -8,6 +8,8 @@
 #### 分支
 Beta1：https://github.com/ContentMy/RunFastXM/tree/beta1
 
+Beta2:  https://github.com/ContentMy/RunFastXM/tree/beta2
+
 #### 应用快照
 
 * 事项提醒功能模块
