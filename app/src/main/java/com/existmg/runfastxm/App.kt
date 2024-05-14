@@ -1,5 +1,7 @@
 package com.existmg.runfastxm
 
+import androidx.work.OneTimeWorkRequest
+import androidx.work.WorkManager
 import com.alibaba.android.arouter.launcher.ARouter
 import com.existmg.library_base.application.BaseApplication
 import com.existmg.library_data.accessor.MemorandumModuleRoomAccessor
@@ -9,6 +11,7 @@ import com.existmg.library_data.accessor.TargetModuleRoomAccessor
 import com.existmg.library_data.db.database.AppDatabase
 import com.existmg.library_data.repository.MemorandumRepository
 import com.existmg.library_data.repository.TargetRepository
+import com.existmg.module_remind.works.RemindInitStatusWork
 
 
 /**
@@ -50,6 +53,10 @@ class App: BaseApplication() {
                 return  memorandumRepository
             }
         }
+
+        //TODO：遍历提醒列表修改提醒状态的任务，后续考虑通过反射或者其他手段在remind模块去初始化启动这个入口代码
+        val workRequest = OneTimeWorkRequest.Builder(RemindInitStatusWork::class.java).build()
+        WorkManager.getInstance(this).enqueue(workRequest)
 //        //初始化查看数据库的依赖库 //chrome://inspect/#devices
 //        Stetho.initializeWithDefaults(this)
     }

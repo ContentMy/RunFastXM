@@ -8,6 +8,7 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.work.WorkManager
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.existmg.library_base.activity.BaseMVVMActivity
 import com.existmg.library_base.manager.viewModelFactoryWithParams
@@ -105,6 +106,7 @@ class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel,RemindActivi
         // 数据插入后开启通知
         mViewModel.remind.observe(this){
             mViewModel.startNotification(it,application)
+            mViewModel.startRemindStatusWork(it,application)
         }
     }
 

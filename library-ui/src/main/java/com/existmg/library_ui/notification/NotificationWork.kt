@@ -37,7 +37,7 @@ class NotificationWork(
 
             return OneTimeWorkRequest.Builder(NotificationWork::class.java)
                 .setInputData(inputData)
-                .setInitialDelay(duration, TimeUnit.MINUTES)
+                .setInitialDelay(duration, TimeUnit.MILLISECONDS)//这里使用时间戳的格式也就是毫秒来统一时间单位
                 .build()
         }
     }

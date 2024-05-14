@@ -188,7 +188,7 @@ class TargetCreateViewModel(
         val iconResId = getImageResourceId(targetEntity.targetImg)
         val title = targetEntity.targetTitle
         val content = targetEntity.targetContent
-        val duration = 1L //TODO:这里的写死数据是为了方便测试
+        val duration = 5*1000L //TODO:这里的写死数据是为了方便测试
         notificationRepository.postNotification(application,dataId!!,iconResId,title,content,duration)
     }
 

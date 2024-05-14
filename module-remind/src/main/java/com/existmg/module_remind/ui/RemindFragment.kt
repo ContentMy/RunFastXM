@@ -63,14 +63,31 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
         val layoutManager = LinearLayoutManager(context)//需设置布局方向，否则不会展示数据
         mBinding.remindRv.layoutManager = layoutManager
         mBinding.remindRv.adapter = adapter
+        mBinding.remindIncludeTitleToolbar.uiTitleToolbarIvRight.visibility = View.VISIBLE
     }
 
     override fun initData() {
         mViewModel.refreshData()
         mBinding.remindIncludeTitleToolbar.uiTitleToolbarTvTitle.text = "提醒列表"
+        mBinding.remindIncludeTitleToolbar.uiTitleToolbarIvRight.setImageResource(R.drawable.ui_more_menu)
     }
 
     override fun initListener() {
+        adapter.setOnItemDeleteClickCallback(this)
+
+        adapter.setOnItemClickListener { adapter, view, position ->
+            val entity = adapter.data[position] as RemindEntity
+            val intent = Intent(context, RemindDetailActivity::class.java)
+            intent.putExtra("remindEntity", entity)
+            startActivity(intent)//点击item时，把数据传递给activity
+        }
+
+        mBinding.remindIncludeTitleToolbar.uiTitleToolbarIvRight.setOnClickListener {
+            startActivity(Intent(requireContext(),RemindCompletedActivity::class.java))
+        }
+    }
+
+    override fun initObserver() {
         mViewModel.navigateToCreateTargetActivity.observe(viewLifecycleOwner, Observer {
             if (it){
 //                displayDialogBottomFragment(childFragmentManager,this) TODO：暂时不使用dialogFragment的效果来完成了，有点击外部区域软键盘无法收回的问题，使用activity的dialog方案作为替代
@@ -82,16 +99,6 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
         mViewModel.remindData.observe(viewLifecycleOwner){
             mBinding.remindTvDefaultContent.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             adapter.setList(it)
-        }
-    }
-
-    override fun initObserver() {
-        adapter.setOnItemDeleteClickCallback(this)
-        adapter.setOnItemClickListener { adapter, view, position ->
-            val entity = adapter.data[position] as RemindEntity
-            val intent = Intent(context, RemindDetailActivity::class.java)
-            intent.putExtra("remindEntity", entity)
-            startActivity(intent)//点击item时，把数据传递给activity
         }
     }
     override fun processBusinessLogic(data: Map<String, Any>) {

@@ -91,9 +91,16 @@ class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel,RemindActivi
 
     override fun initObserver() {
         mViewModel.remindById.observe(this){
-            mCountDownTime = it.remindTime
-            mBinding.remindDetailCdc.startCountDown(mCountDownTime)
-            mBinding.remindDetailTb.uiToolbarTvTitle.text = it.remindTitle
+            if (it != null){
+                mCountDownTime = it.remindTime
+                mBinding.remindDetailCdc.startCountDown(mCountDownTime)
+                mBinding.remindDetailTb.uiToolbarTvTitle.text = it.remindTitle
+            }else{
+                //这里处理的逻辑原因场景为：通知栏已经弹出了通知，但是用户删除了对应的提醒
+                //此时从通知点击进入时，id是携带者删除之前的那个id，但是用这个id去查询时，就会返回空
+                //这个页面也就没有展示必要了，所以结束这个页面 TODO：考虑跳转到Main模块的MainActivity同时结束这个activity
+                finishActivity()
+            }
         }
     }
     override fun onClick(v: View?) {

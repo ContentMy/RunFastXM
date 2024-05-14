@@ -30,11 +30,11 @@ class RemindRepository(private val remindDao: RemindDao) {
 
     fun getAllInProgressReminds(): Flow<List<RemindEntity>>{
         println("查询数据")
-        return remindDao.getAllReminds()
+        return remindDao.getAllInProgressReminds()
     }
     fun getAllCompletedReminds(): Flow<List<RemindEntity>>{
         println("查询数据")
-        return remindDao.getAllReminds()
+        return remindDao.getAllCompletedReminds()
     }
 
     suspend fun updateRemind(remind: RemindEntity){

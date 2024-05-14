@@ -51,6 +51,7 @@ class RemindCompletedActivity : BaseMVVMActivity<RemindCompletedViewmodel,Remind
     override fun initData() {
         mViewModel.refreshData()
         mBinding.remindCompletedToolbar.uiToolbarTvRight.text = "清空"
+        mBinding.remindCompletedToolbar.uiToolbarTvTitle.text = "已完成提醒"
     }
 
     override fun initListener() {

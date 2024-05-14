@@ -55,7 +55,7 @@ class RemindViewModel(private var repository: RemindRepository) : BaseViewModel(
     fun refreshData(){
         viewModelScope.launch {
             try {
-                repository.getAllReminds().collect{
+                repository.getAllInProgressReminds().collect{
                     _remindData.value = it
                 }
             } catch (e: Throwable) {
