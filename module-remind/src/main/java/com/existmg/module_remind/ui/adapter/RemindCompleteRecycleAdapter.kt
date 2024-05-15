@@ -22,6 +22,12 @@ class RemindCompleteRecycleAdapter(list:MutableList<RemindEntity>?):BaseQuickAda
             remove(item)
             notifyItemChanged(holder.layoutPosition)
         }
+
+        holder.dataBinding?.targetCompletedRecycleItemTvReset?.setOnClickListener {
+            mCallback?.itemResetClick(item)
+            remove(item)
+            notifyItemChanged(holder.layoutPosition)
+        }
     }
     private var mCallback:OnItemDeleteClickCallback? = null
 
@@ -30,6 +36,10 @@ class RemindCompleteRecycleAdapter(list:MutableList<RemindEntity>?):BaseQuickAda
     }
     interface OnItemDeleteClickCallback{
         fun itemDeleteClick(
+            item: RemindEntity
+        )
+
+        fun itemResetClick(
             item: RemindEntity
         )
     }

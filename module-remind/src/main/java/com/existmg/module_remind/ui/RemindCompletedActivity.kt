@@ -8,6 +8,7 @@ import com.existmg.library_base.manager.viewModelFactoryWithParams
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
+import com.existmg.library_ui.notification.NotificationRepository
 import com.existmg.module_remind.R
 import com.existmg.module_remind.databinding.RemindActivityRemindCompletedBinding
 import com.existmg.module_remind.ui.adapter.RemindCompleteRecycleAdapter
@@ -30,8 +31,8 @@ class RemindCompletedActivity : BaseMVVMActivity<RemindCompletedViewmodel,Remind
     }
 
     override fun provideViewModelFactory(): ViewModelProvider.Factory {
-        return viewModelFactoryWithParams(RemindModuleRoomAccessor.getRemindRepository()){
-            RemindCompletedViewmodel(it[0] as RemindRepository)
+        return viewModelFactoryWithParams(RemindModuleRoomAccessor.getRemindRepository(),NotificationRepository()){
+            RemindCompletedViewmodel(it[0] as RemindRepository,it[1] as NotificationRepository)
         }
     }
 
@@ -72,6 +73,10 @@ class RemindCompletedActivity : BaseMVVMActivity<RemindCompletedViewmodel,Remind
                 mViewModel.deleteRemind(item)
             }
 
+            override fun itemResetClick(item: RemindEntity) {
+                mViewModel.resetRemind(item)//TODO:优化方向：点击重新提醒时，item的消失动画以及item下面的item列表上移较为生硬，需要优化
+            }
+
         })
     }
 
@@ -79,6 +84,11 @@ class RemindCompletedActivity : BaseMVVMActivity<RemindCompletedViewmodel,Remind
         mViewModel.remindCompleteData.observe(this){
             mBinding.remindCompletedTvDefaultContent.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             mAdapter.setList(it)
+        }
+
+        mViewModel.remindResetData.observe(this){
+            mViewModel.startNotification(it,application)
+            mViewModel.startRemindStatusWork(it,application)
         }
     }
 }

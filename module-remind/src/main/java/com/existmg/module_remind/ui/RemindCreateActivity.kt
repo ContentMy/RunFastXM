@@ -54,7 +54,7 @@ class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel,RemindActivi
     }
 
     override fun initView() {
-        //初始化适配器时接入默认的时间选择
+        //初始化适配器时接入默认的时间选择 TODO:这里写死的时间集合，后续也要考虑封装起来以及放开自定义添加时间
         mAdapter = HorizontalItemTimeSelectRecycleViewAdapter(mutableListOf(
             "5分钟","10分钟","15分钟","20分钟","25分钟","30分钟","45分钟","1小时"
         ))

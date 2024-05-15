@@ -48,8 +48,8 @@ class RemindCreateViewModel(
         if (hasSendData.get()){//如果是能发送的情况，发送到
             viewModelScope.launch {
                 try {
-//                    val remindTime = getTimeFromString(mTime.get()!!)
-                    val remindTime = 30 * 1000L //TODO:这里写死是为了测试
+                    val remindTime = getTimeFromString(mTime.get()!!)
+//                    val remindTime = 30 * 1000L //TODO:这里写死是为了测试
                     val remindStartTime = System.currentTimeMillis()
                     val remindEntity = RemindEntity(
                         remindTitle =  editTextContent.value!!,
