@@ -4,7 +4,6 @@ import android.content.Intent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -68,7 +67,7 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
 
     override fun initData() {
         mViewModel.refreshData()
-        mBinding.remindIncludeTitleToolbar.uiTitleToolbarTvTitle.text = "提醒列表"
+        mBinding.remindIncludeTitleToolbar.uiTitleToolbarTvTitle.text = resources.getString(R.string.remind_module_list_name)
         mBinding.remindIncludeTitleToolbar.uiTitleToolbarIvRight.setImageResource(R.drawable.ui_more_menu)
     }
 

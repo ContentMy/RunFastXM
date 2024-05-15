@@ -69,7 +69,7 @@ class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel,RemindActivi
             println("通知进入 id为：$dataId")
             mViewModel.queryRemindEntity(dataId)
         }
-//        mBinding.remindDetailTb.uiToolbarTvRight.text = "修改"
+//        mBinding.remindDetailTb.uiToolbarTvRight.text = resources.getString(R.string.remind_string_exchanged)
     }
 
     override fun initListener(){

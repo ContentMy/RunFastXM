@@ -8,7 +8,6 @@ import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import androidx.work.WorkManager
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.existmg.library_base.activity.BaseMVVMActivity
 import com.existmg.library_base.manager.viewModelFactoryWithParams
@@ -133,7 +132,7 @@ class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel,RemindActivi
                     hideSoftInput(mBinding.remindCreateIvSave)
                     finish()
                 }else{
-                    Toast.makeText(this, "请输入想要提醒的事项哦", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(this, resources.getString(R.string.remind_toast_create_name_content), Toast.LENGTH_SHORT).show()
                 }
             }
 

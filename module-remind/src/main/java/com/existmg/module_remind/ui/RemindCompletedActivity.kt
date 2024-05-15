@@ -3,9 +3,6 @@ package com.existmg.module_remind.ui
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.chad.library.adapter.base.BaseQuickAdapter
-import com.chad.library.adapter.base.listener.OnItemClickListener
-import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.existmg.library_base.activity.BaseMVVMActivity
 import com.existmg.library_base.manager.viewModelFactoryWithParams
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
@@ -13,7 +10,6 @@ import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
 import com.existmg.module_remind.R
 import com.existmg.module_remind.databinding.RemindActivityRemindCompletedBinding
-import com.existmg.module_remind.databinding.RemindCompletedRecycleItemViewBinding
 import com.existmg.module_remind.ui.adapter.RemindCompleteRecycleAdapter
 import com.existmg.module_remind.viewmodel.RemindCompletedViewmodel
 
@@ -52,8 +48,8 @@ class RemindCompletedActivity : BaseMVVMActivity<RemindCompletedViewmodel,Remind
     }
     override fun initData() {
         mViewModel.refreshData()
-        mBinding.remindCompletedToolbar.uiToolbarTvRight.text = "清空"
-        mBinding.remindCompletedToolbar.uiToolbarTvTitle.text = "已完成提醒"
+        mBinding.remindCompletedToolbar.uiToolbarTvRight.text = resources.getString(R.string.remind_string_clear)
+        mBinding.remindCompletedToolbar.uiToolbarTvTitle.text = resources.getString(R.string.remind_string_completed_remind)
     }
 
     override fun initListener() {
