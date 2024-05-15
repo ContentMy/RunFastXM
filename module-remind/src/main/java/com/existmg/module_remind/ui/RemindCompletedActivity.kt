@@ -3,6 +3,8 @@ package com.existmg.module_remind.ui
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
+import com.chad.library.adapter.base.BaseQuickAdapter
+import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.existmg.library_base.activity.BaseMVVMActivity
 import com.existmg.library_base.manager.viewModelFactoryWithParams
@@ -63,6 +65,10 @@ class RemindCompletedActivity : BaseMVVMActivity<RemindCompletedViewmodel,Remind
             mViewModel.deleteAllCompletedRemind()
         }
 
+        //TODO：目前使用了BaseQuickAdapter,但自定义实现的RecycleView的左滑效果必须基于这个adapter的点击事件监听后，事件才能被处理，后续优化考虑统一使用memorandum模块的封装adapter
+        mAdapter.setOnItemClickListener { adapter, view, position ->
+            println("点击了item哦")
+        }
         mAdapter.setOnItemDeleteClickCallback(object : RemindCompleteRecycleAdapter.OnItemDeleteClickCallback{
             override fun itemDeleteClick(
                 item: RemindEntity
