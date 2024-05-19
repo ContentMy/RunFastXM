@@ -15,6 +15,7 @@ import com.existmg.library_data.accessor.TargetModuleRoomAccessor
 import com.existmg.module_target.viewmodel.TargetViewModel
 import com.existmg.module_target.ui.adapter.TargetRecycleViewAdapter
 import com.existmg.library_data.db.entity.TargetEntity
+import com.existmg.library_data.db.entity.TargetWithTodayCheckIn
 import com.existmg.library_data.repository.TargetRepository
 import com.existmg.module_target.databinding.TargetLayoutFragmentBinding
 import com.existmg.module_target.databinding.TargetRecycleItemViewBinding
@@ -25,10 +26,11 @@ import com.existmg.module_target.databinding.TargetRecycleItemViewBinding
  * @Description 这里是目标模块的入口Fragment
  */
 @Route(path = RouterFragmentPath.Target.PAGER_TARGET)
-class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBinding>(),TargetRecycleViewAdapter.OnItemDeleteClickCallback{
+class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBinding>(),TargetRecycleViewAdapter.OnItemDeleteClickCallback,
+    TargetRecycleViewAdapter.OnItemCheckInCallback {
 
     private lateinit var adapter: TargetRecycleViewAdapter
-    private var list: MutableList<TargetEntity> = ArrayList()
+    private var list: MutableList<TargetWithTodayCheckIn> = ArrayList()
 
     override fun getViewModelClass(): Class<TargetViewModel> {
         return TargetViewModel::class.java
@@ -69,6 +71,7 @@ class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBindin
             startActivity(intent)//点击item时，把数据传递给activity
         }
         adapter.setOnItemDeleteClickCallback(this)
+        adapter.setOnItemCheckInCallback(this)
     }
 
     override fun initObserver() {
@@ -92,5 +95,20 @@ class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBindin
         item: TargetEntity
     ) {
         mViewModel.deleteTarget(item)
+    }
+
+    override fun itemCheckIn(item: TargetWithTodayCheckIn, targetCheckIn: Boolean) {
+        println("点击了打卡按钮$targetCheckIn")
+        val targetEntity = item.targetEntity
+        val targetCheckInEntity = item.targetCheckInEntity
+        if (targetCheckIn){
+            if(targetCheckInEntity != null){
+                mViewModel.deleteCheckInTarget(targetCheckInEntity)
+            }
+        }else{
+            if (targetEntity!= null){
+                mViewModel.checkInTarget(targetEntity.id!!)
+            }
+        }
     }
 }

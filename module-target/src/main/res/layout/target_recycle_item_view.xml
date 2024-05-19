@@ -42,6 +42,22 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
+                    android:id="@+id/target_recycle_item_tv_check_in"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginEnd="@dimen/ui_dp_20"
+                    android:paddingTop="@dimen/ui_dp_6"
+                    android:paddingBottom="@dimen/ui_dp_6"
+                    android:paddingStart="@dimen/ui_dp_8"
+                    android:paddingEnd="@dimen/ui_dp_8"
+                    android:background="@drawable/ui_shape_rounded_rectangle_background_yellow"
+                    android:text="@string/target_item_check_in_string"
+                    android:textColor="@color/ui_black"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+
+                <TextView
                     android:id="@+id/target_recycle_item_tv_title"
                     android:layout_width="0dp"
                     android:layout_height="0dp"
@@ -53,7 +69,7 @@
                     app:layout_constraintStart_toEndOf="@id/target_recycle_item_iv_icon"
                     app:layout_constraintTop_toTopOf="@id/target_recycle_item_iv_icon"
                     app:layout_constraintBottom_toTopOf="@id/target_recycle_item_tv_content"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toStartOf="@id/target_recycle_item_tv_check_in"/>
 
                 <TextView
                     android:id="@+id/target_recycle_item_tv_content"
@@ -67,7 +83,7 @@
                     app:layout_constraintStart_toEndOf="@id/target_recycle_item_iv_icon"
                     app:layout_constraintTop_toBottomOf="@id/target_recycle_item_tv_title"
                     app:layout_constraintBottom_toBottomOf="@id/target_recycle_item_iv_icon"
-                    app:layout_constraintEnd_toEndOf="parent"/>
+                    app:layout_constraintEnd_toStartOf="@id/target_recycle_item_tv_check_in"/>
             </androidx.constraintlayout.widget.ConstraintLayout>
         </com.google.android.material.card.MaterialCardView>
         <LinearLayout

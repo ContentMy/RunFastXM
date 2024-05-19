@@ -50,4 +50,39 @@ object DatabaseMigrations {
 
         }
     }
+
+    val MIGRATION_2_3 = object : Migration(2,3){
+        override fun migrate(db: SupportSQLiteDatabase) {
+            // 1. 创建一个新的临时表
+            db.execSQL("CREATE TABLE IF NOT EXISTS target_table_temp (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "targetImg TEXT DEFAULT '', " +
+                    "targetTitle TEXT DEFAULT '', " +
+                    "targetStartTime INTEGER  NOT NULL DEFAULT 0, " +
+                    "targetEndTime INTEGER  NOT NULL DEFAULT 0, " +
+                    "targetStatus INTEGER  NOT NULL DEFAULT 0, " +
+                    "targetContent TEXT DEFAULT '', " +
+                    "targetRemind INTEGER  NOT NULL DEFAULT 0)")
+
+            // 2. 将旧表中的数据复制到临时表中
+            db.execSQL("INSERT INTO target_table_temp " +
+                    "(id, targetImg, targetTitle, targetStartTime, targetEndTime, targetStatus, targetContent, targetRemind) " +
+                    "SELECT id, targetImg, targetTitle, targetStartTime, targetEndTime, targetStatus, targetContent, targetRemind " +
+                    "FROM target_table")
+
+            // 3. 删除旧表
+            db.execSQL("DROP TABLE IF EXISTS target_table")
+
+            // 4. 重命名临时表为原表名
+            db.execSQL("ALTER TABLE target_table_temp RENAME TO target_table")
+
+            //增加新表（目标打卡）的创建
+            db.execSQL("CREATE TABLE IF NOT EXISTS target_check_in_table (" +
+                    "id INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                    "targetId INTEGER  NOT NULL DEFAULT 0, " +
+                    "targetCheckIn INTEGER  NOT NULL DEFAULT 0, " +
+                    "targetCheckInTime INTEGER  NOT NULL DEFAULT 0)")
+        }
+
+    }
 }

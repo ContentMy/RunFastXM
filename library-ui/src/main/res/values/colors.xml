@@ -9,6 +9,8 @@
     <color name="ui_green_mid_next">#7BC5AE</color>
     <color name="ui_green_mid_next_light">#D1EDE1</color>
     <color name="ui_green_icons">#029F72</color>
+    <color name="ui_yellow">#FADB88</color>
+    <color name="ui_yellow_branch">#EBE5D9</color>
     <color name="ui_gray">#8C8C8C</color>
     <color name="ui_gray_light">#EDEDED</color>
 </resources>

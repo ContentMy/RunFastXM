@@ -185,9 +185,9 @@ class TargetCreateViewModel(
     fun startNotification(targetEntity: TargetEntity, application: Application){
 //        notificationRepository.startNotification(1, application)
         val dataId = targetEntity.id
-        val iconResId = getImageResourceId(targetEntity.targetImg)
-        val title = targetEntity.targetTitle
-        val content = targetEntity.targetContent
+        val iconResId = getImageResourceId(targetEntity.targetImg!!)
+        val title = targetEntity.targetTitle!!
+        val content = targetEntity.targetContent!!
         val duration = 5*1000L //TODO:这里的写死数据是为了方便测试
         notificationRepository.postNotification(application,dataId!!,iconResId,title,content,duration)
     }

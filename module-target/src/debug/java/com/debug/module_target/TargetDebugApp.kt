@@ -15,7 +15,7 @@ class TargetDebugApp: BaseApplication() {
         super.onCreate()
         /*==============数据库初始化==================*/
         val database by lazy { AppDatabase.getDatabase(this) }
-        val repository by lazy { TargetRepository(database.targetDao()) }
+        val repository by lazy { TargetRepository(database.targetDao(),database.targetCheckInDao()) }
 
         //暂时使用接口回调将repository传回module
         TargetModuleRoomAccessor.onGetTargetRepositoryCallback = object :

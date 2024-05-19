@@ -64,3 +64,34 @@ fun timeLongToStringWithHourMinSec(time:Long):String{
     val dateFormat = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale.getDefault())
     return dateFormat.format(calendar.time)
 }
+
+/**
+ * @Author: ContentMy
+ * @return: Long型 返回当天的开始时间 00:00:00
+ * @Description: 获取当天的开始时间
+ */
+fun getStartTimeOfDay():Long{
+    val calendar = Calendar.getInstance()
+    // 设置时间为当天的 00:00:00
+    calendar.set(Calendar.HOUR_OF_DAY, 0)
+    calendar.set(Calendar.MINUTE, 0)
+    calendar.set(Calendar.SECOND, 0)
+    calendar.set(Calendar.MILLISECOND, 0)
+
+    return calendar.timeInMillis
+}
+
+/**
+ * @Author: ContentMy
+ * @return: Long型 返回当天的结束时间 23:59:59
+ * @Description: 获取当天的结束时间
+ */
+fun getEndTimeOfDay():Long{
+    val calendar = Calendar.getInstance()
+    // 设置时间为当天的 23:59:59
+    calendar.set(Calendar.HOUR_OF_DAY, 23)
+    calendar.set(Calendar.MINUTE, 59)
+    calendar.set(Calendar.SECOND, 59)
+    calendar.set(Calendar.MILLISECOND, 999)
+    return calendar.timeInMillis
+}

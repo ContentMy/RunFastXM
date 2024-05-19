@@ -104,7 +104,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
                 mViewModel.initExistTarget(target)
                 println("目标状态为：${target.targetStatus}")
                 currentStatusPosition = target.targetStatus
-                currentIconsPosition = IconsManager().getIconPosition(target.targetImg)//因为目前是固定的资源，所以直接去根据icon的name去获取了固定列表中的下标来平替上次选择的对应下标
+                currentIconsPosition = IconsManager().getIconPosition(target.targetImg!!)//因为目前是固定的资源，所以直接去根据icon的name去获取了固定列表中的下标来平替上次选择的对应下标
             }
         }
     }
@@ -189,7 +189,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
         mBinding.targetCreateIvIcon.setImageResource(R.drawable.ui_icon_sleep)
     }
 
-    override fun onClick(v: View?) {
+    override fun onClick(v: View?) {//TODO:bug.在软键盘弹出时，点击其他非输入框，会有事件响应，保存关闭页面，软键盘也不会收回。待解决
         when(v){
             mBinding.targetCreateToolbar.uiToolbarTvRight ->
                 mViewModel.saveTarget(isNewTarget)
