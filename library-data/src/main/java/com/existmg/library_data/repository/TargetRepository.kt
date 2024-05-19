@@ -117,6 +117,10 @@ class TargetRepository(
     }
 
 
+    suspend fun deleteTargetCheckInWithTargetId(id: Int) {//TODO:id如果变为long，这里也要进行更新
+        targetCheckInDao.deleteTargetCheckInWithId(id)
+    }
+
     /**
      * @Author: ContentMy
      * @params: targetId 目标id
@@ -137,6 +141,20 @@ class TargetRepository(
         return targetCheckInDao.getAllCheckIns()
     }
 
+    /**
+     * @Author: ContentMy
+     * @params:
+     *       startOfDay  当天开始的时间
+     *       endOfDay    当天结束的时间
+     * @return:
+     *       返回当天所有的打卡情况的集合
+     * @Description:
+     */
+    @Deprecated("这个是为了测试添加的相关代码")
+    suspend fun getCheckInsForToday(startOfDay: Long, endOfDay: Long): List<TargetCheckInEntity>{
+        return targetCheckInDao.getCheckInsForToday(startOfDay, endOfDay)
+    }
+
     /*========================关联表的相关数据库操作=============================*/
     /**
      * @Author: ContentMy
@@ -148,6 +166,10 @@ class TargetRepository(
      * @Description: 这是关联表查询，根据当天的时间查询返回当天的目标以及打卡情况
      */
     fun getAllTargetsWithTodayCheckIn(startOfDay: Long, endOfDay: Long): Flow<List<TargetWithTodayCheckIn>> {
+        //TODO：bug.并联表查询当天目标的打卡记录时，会在未打卡的时间里显示已打卡，具体如下，
+        // 创建新目标->进行打卡（显示已打卡）-> 杀死应用，更改系统时间一天后 -> 重新进入应用，查询目标显示已打卡（正常应该是未打卡）
+        // 增加日志想排查问题，结果加入以下堆栈数据时，数据正常展示了显示未打卡。目前怀疑是room的缓存问题，后续需求完成后，需要进行复现以及查找问题
+        println("开始时间：\n$startOfDay,\n结束时间：\n$endOfDay")
         return targetDao.getAllTargetsWithTodayCheckIn(startOfDay, endOfDay)
     }
 

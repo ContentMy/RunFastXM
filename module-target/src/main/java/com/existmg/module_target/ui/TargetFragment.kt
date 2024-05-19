@@ -64,7 +64,7 @@ class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBindin
 
     override fun initListener() {
         adapter.setOnItemClickListener { adapter, view, position ->
-            val entity = adapter.data[position] as TargetEntity
+            val entity = (adapter.data[position] as TargetWithTodayCheckIn).targetEntity
             val intent = Intent(context, TargetCreateActivity::class.java)
             intent.putExtra("isNewTarget",false)
             intent.putExtra("targetEntity", entity)
@@ -89,11 +89,12 @@ class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBindin
         })
     }
 
-    override fun itemDeleteClick(
+    override fun itemDeleteClick(//TODO:bug：点击左滑出来的删除按钮后，item被移除，但是后续如果添加一条数据，左滑的状态依然存在，待解决
         holder: BaseDataBindingHolder<TargetRecycleItemViewBinding>,
         position: Int,
         item: TargetEntity
     ) {
+        mViewModel.deleteTargetCheckInWithTargetId(item.id)
         mViewModel.deleteTarget(item)
     }
 

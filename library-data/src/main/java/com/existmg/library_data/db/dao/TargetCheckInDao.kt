@@ -29,10 +29,8 @@ interface TargetCheckInDao {
     @Delete
     suspend fun deleteTargetCheckInEntity(targetCheckInEntity: TargetCheckInEntity)
 
-    @Deprecated("这个是为了测试添加的相关代码")
-    @Query("SELECT * FROM target_check_in_table")
-    suspend fun getAllCheckIns(): List<TargetCheckInEntity>
-
+    @Query("DELETE FROM target_check_in_table WHERE targetId = :targetId")
+    suspend fun deleteTargetCheckInWithId(targetId: Int)
     /**
      * @Author: ContentMy
      * @params: targetId 目标id
@@ -41,5 +39,13 @@ interface TargetCheckInDao {
      */
     @Query("SELECT * FROM target_check_in_table WHERE targetId = :targetId")
     fun getTargetCheckInEntityListByTargetId(targetId: Int): Flow<List<TargetCheckInEntity>>
+
+    @Deprecated("这个是为了测试添加的相关代码")
+    @Query("SELECT * FROM target_check_in_table")
+    suspend fun getAllCheckIns(): List<TargetCheckInEntity>
+
+    @Deprecated("这个是为了测试添加的相关代码")
+    @Query("SELECT * FROM target_check_in_table WHERE targetCheckInTime >= :startOfDay AND targetCheckInTime < :endOfDay")
+    suspend fun getCheckInsForToday(startOfDay: Long, endOfDay: Long): List<TargetCheckInEntity>
 
 }

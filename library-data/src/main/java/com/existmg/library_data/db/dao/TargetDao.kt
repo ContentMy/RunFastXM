@@ -75,10 +75,11 @@ interface TargetDao {
     @Transaction//这是关联表查询。为了确保操作在一个事务中执行
     //"""用于多行文本，可以直接写出多行内容而不需要转义字符。对复杂查询非常有帮助，因为它避免了每行都需要使用 \n 来表示换行。
     @Query("""
-        SELECT t.*, c.id AS targetId, c.targetCheckIn, c.targetCheckInTime 
-        FROM target_table AS t 
-        LEFT JOIN target_check_in_table AS c 
-        ON t.id = c.targetId AND c.targetCheckInTime >= :startOfDay AND c.targetCheckInTime < :endOfDay
+    SELECT t.*, 
+           c.id AS checkIn_id, c.targetId AS checkIn_targetId, c.targetCheckIn AS checkIn_targetCheckIn, c.targetCheckInTime AS checkIn_targetCheckInTime 
+    FROM target_table AS t 
+    LEFT JOIN target_check_in_table AS c 
+    ON t.id = c.targetId AND c.targetCheckInTime >= :startOfDay AND c.targetCheckInTime < :endOfDay
     """)
     fun getAllTargetsWithTodayCheckIn(startOfDay: Long, endOfDay: Long): Flow<List<TargetWithTodayCheckIn>>
 

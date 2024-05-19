@@ -11,9 +11,6 @@ import androidx.room.Relation
 data class TargetWithTodayCheckIn(
     @Embedded
     val targetEntity: TargetEntity? = null,
-    @Relation(
-        parentColumn = "id",
-        entityColumn = "targetId"
-    )
+    @Embedded(prefix = "checkIn_")
     val targetCheckInEntity: TargetCheckInEntity? = null // 关联的打卡记录列表
 )

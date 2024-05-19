@@ -2,15 +2,12 @@ package com.existmg.module_target.viewmodel
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.existmg.library_base.viewmodel.BaseViewModel
 import com.existmg.library_common.utils.getEndTimeOfDay
 import com.existmg.library_common.utils.getStartTimeOfDay
 import com.existmg.library_data.db.entity.TargetCheckInEntity
 import com.existmg.library_data.db.entity.TargetEntity
-import com.existmg.library_data.db.entity.TargetWithCheckInList
 import com.existmg.library_data.db.entity.TargetWithTodayCheckIn
 import com.existmg.library_data.repository.TargetRepository
 import kotlinx.coroutines.launch
@@ -157,6 +154,23 @@ class TargetViewModel(private val repository: TargetRepository): BaseViewModel()
                     targetCheckInTime = 0L
                 )
                 repository.updateTargetCheckInEntity(targetCancelCheckInEntity)
+            } catch (e: Exception) {
+                println("从数据库中删除打卡数据时发生了异常" + e.message)
+                e.printStackTrace()
+            }
+        }
+    }
+
+
+    fun deleteTargetCheckInWithTargetId(id: Int?) {
+        if (id == null){
+            println("删除所有和目标相关的打卡记录时，目标的id为null")
+            return
+        }
+        viewModelScope.launch {
+            try {
+                println("删除打卡数据，他的id为：$id")
+                repository.deleteTargetCheckInWithTargetId(id)
             } catch (e: Exception) {
                 println("从数据库中删除打卡数据时发生了异常" + e.message)
                 e.printStackTrace()
