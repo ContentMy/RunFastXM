@@ -15,7 +15,8 @@
         <activity
             android:name=".ui.RemindCreateActivity"
             android:exported="false"
-            android:theme="@style/ui.Theme.RunFastXM.Translucent" />
+            android:theme="@style/ui.Theme.RunFastXM.Translucent"
+            android:windowSoftInputMode="adjustResize"/>
 
         <activity android:name=".ui.RemindCompletedActivity"
             android:exported="false"/>
