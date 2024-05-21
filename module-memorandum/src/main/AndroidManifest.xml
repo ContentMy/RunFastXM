@@ -7,7 +7,6 @@
         android:supportsRtl="true" >
 
         <activity android:name=".ui.MemorandumCreateActivity"
-            android:theme="@style/ui.Theme.RunFastXM.Translucent"
             android:windowSoftInputMode="stateVisible|adjustPan"/>
         <activity android:name=".ui.MemorandumUpdateActivity"/>
     </application>

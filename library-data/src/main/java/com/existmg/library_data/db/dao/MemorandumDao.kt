@@ -3,6 +3,7 @@ package com.existmg.library_data.db.dao
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
+import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.existmg.library_data.db.entity.MemorandumEntity
@@ -18,8 +19,8 @@ import kotlinx.coroutines.flow.Flow
 @Dao
 interface MemorandumDao {
     // 插入目标
-    @Insert
-    suspend fun insertMemorandum(memorandum: MemorandumEntity)
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    suspend fun insertMemorandum(memorandum: MemorandumEntity):Long
 
     // 插入多个目标
     @Insert

@@ -97,6 +97,9 @@ dependencies {
         implementation 'com.alibaba:arouter-api:1.5.2'
         kapt 'com.alibaba:arouter-compiler:1.5.2'
     }
+
+    implementation rootProject.ext.dependencies.glide
+    kapt rootProject.ext.dependencies.glideCompiler
 }
 ///*ARouter配置*/
 //kapt {

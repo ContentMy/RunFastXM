@@ -7,8 +7,9 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.existmg.library_base.viewmodel.BaseApplicationViewModel
 import com.existmg.library_data.db.entity.MemorandumEntity
+import com.existmg.library_data.db.entity.MemorandumImgEntity
 import com.existmg.library_data.repository.MemorandumRepository
-import com.existmg.module_memorandum.R
+import com.existmg.module_memorandum.model.MemorandumImageItem
 import kotlinx.coroutines.launch
 
 /**
@@ -26,7 +27,7 @@ class MemorandumCreateViewModel(
 
     private var _finishActivity = MutableLiveData<Boolean>()
     val finishActivity:LiveData<Boolean> get() = _finishActivity
-    fun insertMemorandum(){
+    fun insertMemorandum(imgList: List<MemorandumImageItem>) {
         if (memorandumTitleString.value.isNullOrEmpty()){
             Toast.makeText(getApplication(), "记录下心情才能保存哦", Toast.LENGTH_SHORT).show()
             return
@@ -35,10 +36,15 @@ class MemorandumCreateViewModel(
             try {
                 val memorandumEntity = MemorandumEntity(
                     memorandumTitle = memorandumTitleString.value!!,
-                    memorandumContent = if(memorandumContentString.value == null) "" else memorandumContentString.value!!,
+                    memorandumContent = memorandumContentString.value ?: "",
                     memorandumCreateTime = System.currentTimeMillis()
                 )
-                repository.insertMemorandum(memorandumEntity)
+                val imgEntities = imgList.map {
+                    MemorandumImgEntity(
+                        memorandumImgFilePath = it.uri.toString()
+                    )
+                }
+                repository.insertMemorandumWithImg(memorandumEntity,imgEntities)
                 _finishActivity.value = true
             } catch (e: Exception) {
                 e.printStackTrace()

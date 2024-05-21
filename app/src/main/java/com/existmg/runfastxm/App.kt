@@ -29,7 +29,7 @@ class App: BaseApplication() {
         val database by lazy { AppDatabase.getDatabase(this) }
         val remindRepository by lazy { RemindRepository(database.remindDao()) }
         val targetRepository by lazy { TargetRepository(database.targetDao(),database.targetCheckInDao()) }
-        val memorandumRepository by lazy { MemorandumRepository(database. memorandumDao()) }
+        val memorandumRepository by lazy { MemorandumRepository(database. memorandumDao(),database.memorandumImgDao()) }
 
         //暂时使用接口回调将repository传回module
         RemindModuleRoomAccessor.onGetRemindRepositoryCallback = object :

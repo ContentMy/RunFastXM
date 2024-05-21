@@ -17,5 +17,6 @@
     <string name="ui_memorandum_title_hint">记录一下今天的心情吧</string>
     <string name="ui_memorandum_create_content_prompt">记录一下详细内容吧：</string>
     <string name="ui_memorandum_create_content_hint">我还想说…</string>
+    <string name="ui_memorandum_create_img_prompt">选择想要添加的图片吧：</string>
     <string name="ui_memorandum_create_save">保存</string>
 </resources>

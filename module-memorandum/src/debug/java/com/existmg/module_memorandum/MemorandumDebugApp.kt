@@ -15,7 +15,7 @@ class MemorandumDebugApp: BaseApplication() {
         super.onCreate()
         /*==============数据库初始化==================*/
         val database by lazy { AppDatabase.getDatabase(this) }
-        val repository by lazy { MemorandumRepository(database.memorandumDao()) }
+        val repository by lazy { MemorandumRepository(database.memorandumDao(),database.memorandumImgDao()) }
 
         //暂时使用接口回调将repository传回module
         MemorandumModuleRoomAccessor.onGetMemorandumRepositoryCallback = object :

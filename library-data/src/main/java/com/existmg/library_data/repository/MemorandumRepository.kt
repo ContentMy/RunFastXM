@@ -1,7 +1,10 @@
 package com.existmg.library_data.repository
 
+import androidx.room.Transaction
 import com.existmg.library_data.db.dao.MemorandumDao
+import com.existmg.library_data.db.dao.MemorandumImgDao
 import com.existmg.library_data.db.entity.MemorandumEntity
+import com.existmg.library_data.db.entity.MemorandumImgEntity
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -10,9 +13,12 @@ import kotlinx.coroutines.flow.Flow
  * @Description 这里是记录生活模块的数据库操作的封装类
  */
 //@AndroidEntryPoint
-class MemorandumRepository(private val  memorandumDao: MemorandumDao) {
-    suspend fun insertMemorandum( memorandum: MemorandumEntity){
-         memorandumDao.insertMemorandum( memorandum)
+class MemorandumRepository(
+    private val  memorandumDao: MemorandumDao,
+    private val  memorandumImgDao: MemorandumImgDao
+) {
+    suspend fun insertMemorandum( memorandum: MemorandumEntity):Long{
+         return memorandumDao.insertMemorandum( memorandum)
     }
 
     suspend fun insertMemorandums( memorandums: List<MemorandumEntity>){
@@ -37,5 +43,25 @@ class MemorandumRepository(private val  memorandumDao: MemorandumDao) {
 
     suspend fun deleteAllMemorandums(){
          memorandumDao.deleteAllMemorandums()
+    }
+
+
+    suspend fun insertMemorandumImg(memorandumImgEntity: MemorandumImgEntity){
+        memorandumImgDao.insertMemorandumImg(memorandumImgEntity)
+    }
+
+
+
+    /*============================关联表处理===============================*/
+    @Transaction
+    suspend fun insertMemorandumWithImg(memorandumEntity: MemorandumEntity,imgList: List<MemorandumImgEntity>){
+        val memorandumId = memorandumDao.insertMemorandum(memorandumEntity).toInt()
+        imgList.forEach {
+            val memorandumImgEntity = MemorandumImgEntity(
+                memorandumId = memorandumId,
+                memorandumImgFilePath = it.memorandumImgFilePath
+            )
+            insertMemorandumImg(memorandumImgEntity)
+        }
     }
 }
