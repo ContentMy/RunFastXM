@@ -4,12 +4,15 @@ import android.app.Application
 import android.widget.Toast
 import androidx.databinding.ObservableField
 import androidx.databinding.ObservableLong
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.existmg.library_base.viewmodel.BaseApplicationViewModel
 import com.existmg.library_common.utils.timeLongToString
 import com.existmg.library_common.utils.timeLongToStringWithHourMinSec
 import com.existmg.library_data.db.entity.MemorandumEntity
+import com.existmg.library_data.db.entity.MemorandumImgEntity
+import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 import com.existmg.library_data.repository.MemorandumRepository
 import kotlinx.coroutines.launch
 
@@ -33,13 +36,18 @@ class MemorandumUpdateViewModel(
     var memorandumUpdateTime = ObservableField<Long>()
 
     private lateinit var updateMemorandum: MemorandumEntity
-    fun initMemorandumData(memorandumEntity: MemorandumEntity) {
+
+    private var _memorandumImgData = MutableLiveData<List<MemorandumImgEntity>>()
+    val memorandumImgData:LiveData<List<MemorandumImgEntity>> get() = _memorandumImgData
+    fun initMemorandumData(memorandumWithImagesEntity: MemorandumWithImagesEntity) {
+        val memorandumEntity = memorandumWithImagesEntity.memorandumEntity!!
         updateMemorandum = memorandumEntity
-        memorandumTitleString.value = memorandumEntity.memorandumTitle
-        memorandumContentString.value = memorandumEntity.memorandumContent
+        memorandumTitleString.value = memorandumEntity.memorandumTitle!!
+        memorandumContentString.value = memorandumEntity.memorandumContent!!
         memorandumCreateTime.set(memorandumEntity.memorandumCreateTime)
         memorandumUpdateTime.set(memorandumEntity.memorandumUpdateTime)
         timeShowInString(memorandumEntity.memorandumCreateTime,memorandumEntity.memorandumUpdateTime)
+        _memorandumImgData.value = memorandumWithImagesEntity.memorandumImgEntityList!!
     }
 
     fun updateMemorandum(){

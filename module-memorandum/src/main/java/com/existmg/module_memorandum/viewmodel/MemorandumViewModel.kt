@@ -5,8 +5,11 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.existmg.library_base.viewmodel.BaseViewModel
 import com.existmg.library_data.db.entity.MemorandumEntity
+import com.existmg.library_data.db.entity.MemorandumImgEntity
+import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.MemorandumRepository
+import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
 /**
@@ -39,16 +42,29 @@ class MemorandumViewModel(private var repository: MemorandumRepository):BaseView
     }
     /*========================数据库管理============================*/
 
-    private val _memorandumData = MutableLiveData<List<MemorandumEntity>>()
-    val memorandumData: LiveData<List<MemorandumEntity>> = _memorandumData
-
+    private val _memorandumData = MutableLiveData<List<MemorandumWithImagesEntity>>()
+    val memorandumData: LiveData<List<MemorandumWithImagesEntity>> = _memorandumData
+    private var hasCollectedData = false
+    fun resetDataCollectionFlag() {
+        hasCollectedData = false
+    }
     fun refreshData() {
+        if (hasCollectedData){
+            return
+        }
         println("try to query data")
         viewModelScope.launch {
             try {
-                repository.getAllMemorandums().collect{
+                repository.getAllMemorandumWithImg()
+                    .distinctUntilChanged() // 确保仅在数据实际变动时才触发
+                    .collect{
+                    println("获取到了数据${it.size}")
+                    it.forEach {
+                        println(it)
+                    }
                     _memorandumData.value = it
                 }
+                hasCollectedData = true
             }catch (e:Throwable){
                 println("从数据库中获取数据列表时发生了异常" + e.message)
                 e.printStackTrace()
@@ -56,10 +72,10 @@ class MemorandumViewModel(private var repository: MemorandumRepository):BaseView
         }
     }
 
-    fun deleteMemorandum(entity: MemorandumEntity) {
+    fun deleteMemorandum(entity: MemorandumWithImagesEntity) {
         viewModelScope.launch {
             try {
-                repository.deleteMemorandum(entity)
+//                repository.deleteMemorandum(entity)
             }catch (e:Throwable){
                 println("从数据库中删除数据时发生了异常" + e.message)
                 e.printStackTrace()

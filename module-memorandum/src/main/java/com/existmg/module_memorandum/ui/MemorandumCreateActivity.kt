@@ -1,7 +1,10 @@
 package com.existmg.module_memorandum.ui
 
+import android.Manifest
 import android.app.Application
 import android.content.Context
+import android.content.Intent
+import android.content.pm.PackageManager
 import android.net.Uri
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -33,8 +36,12 @@ class MemorandumCreateActivity : BaseMVVMActivity<MemorandumCreateViewModel,Memo
     }
     private lateinit var mAdapter:MemorandumCreateImgRecycleViewAdapter
     private val pickImageLauncher =
-        registerForActivityResult(ActivityResultContracts.GetContent()) { uri: Uri? ->
-            uri?.let { mAdapter.addImage(it) }
+        registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
+            uri?.let {
+                val takeFlags = Intent.FLAG_GRANT_READ_URI_PERMISSION or Intent.FLAG_GRANT_WRITE_URI_PERMISSION
+                contentResolver.takePersistableUriPermission(it, takeFlags)
+                mAdapter.addImage(it)
+            }
         }
     override fun getLayoutId(): Int {
         return R.layout.memorandum_layout_activity_memorandum_create
@@ -59,7 +66,7 @@ class MemorandumCreateActivity : BaseMVVMActivity<MemorandumCreateViewModel,Memo
         mAdapter = MemorandumCreateImgRecycleViewAdapter(
             this,
             onAddImageClick = {
-                pickImageLauncher.launch("image/*")
+                pickImageLauncher.launch(arrayOf("image/*"))
             },
             onDeleteImageClick = { position ->
                 mAdapter.deleteImage(position)

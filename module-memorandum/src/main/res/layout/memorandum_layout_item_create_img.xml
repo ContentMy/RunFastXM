@@ -7,7 +7,7 @@
     </data>
 
     <ImageView
-        android:id="@+id/memorandum_img_iv_img"
+        android:id="@+id/memorandum_item_create_img_iv_img"
         android:layout_width="@dimen/ui_dp_100"
         android:layout_height="@dimen/ui_dp_100"
         android:layout_margin="@dimen/ui_dp_10"/>

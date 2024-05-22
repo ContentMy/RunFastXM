@@ -12,5 +12,5 @@ data class TargetWithTodayCheckIn(
     @Embedded
     val targetEntity: TargetEntity? = null,
     @Embedded(prefix = "checkIn_")
-    val targetCheckInEntity: TargetCheckInEntity? = null // 关联的打卡记录列表
+    val targetCheckInEntity: TargetCheckInEntity? = null // 关联的打卡记录
 )

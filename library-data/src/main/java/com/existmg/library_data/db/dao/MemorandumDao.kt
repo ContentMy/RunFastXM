@@ -5,8 +5,10 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Transaction
 import androidx.room.Update
 import com.existmg.library_data.db.entity.MemorandumEntity
+import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 import kotlinx.coroutines.flow.Flow
 
 //import kotlinx.coroutines.flow.Flow
@@ -44,4 +46,9 @@ interface MemorandumDao {
     // 删除所有目标
     @Query("DELETE FROM memorandum_table")
     suspend fun deleteAllMemorandums()
+
+    /*========================关联表的相关数据库操作=============================*/
+    @Transaction
+    @Query("SELECT * FROM memorandum_table")
+    fun getAllMemorandumWithImg():Flow<List<MemorandumWithImagesEntity>>
 }

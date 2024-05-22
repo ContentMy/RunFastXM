@@ -1,6 +1,6 @@
 package com.existmg.module_memorandum.interfaces
 
-import com.existmg.library_data.db.entity.MemorandumEntity
+import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 
 /**
  * @Author ContentMy
@@ -8,5 +8,5 @@ import com.existmg.library_data.db.entity.MemorandumEntity
  * @Description
  */
 interface MemorandumItemDeleteCallback {
-    fun itemDelete(entity: MemorandumEntity, position: Int)
+    fun itemDelete(entity: MemorandumWithImagesEntity, position: Int)
 }

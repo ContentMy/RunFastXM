@@ -8,11 +8,8 @@ import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.bumptech.glide.Glide
 import com.bumptech.glide.request.RequestOptions
-import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
-import com.existmg.library_data.db.entity.TargetEntity
-import com.existmg.library_data.db.entity.TargetWithTodayCheckIn
 import com.existmg.module_memorandum.R
-import com.existmg.module_memorandum.databinding.MemorandumLayoutItemMemorandumImgBinding
+import com.existmg.module_memorandum.databinding.MemorandumLayoutItemCreateImgBinding
 import com.existmg.module_memorandum.model.MemorandumImageItem
 
 
@@ -35,9 +32,9 @@ class MemorandumCreateImgRecycleViewAdapter(
         parent: ViewGroup,
         viewType: Int
     ): MemorandumDataBindingViewHolder {
-        val view = DataBindingUtil.inflate<MemorandumLayoutItemMemorandumImgBinding>(
+        val view = DataBindingUtil.inflate<MemorandumLayoutItemCreateImgBinding>(
             LayoutInflater.from(parent.context),
-            R.layout.memorandum_layout_item_memorandum_img,parent,false);
+            R.layout.memorandum_layout_item_create_img,parent,false);
         return MemorandumDataBindingViewHolder(view)
     }
 
@@ -51,14 +48,14 @@ class MemorandumCreateImgRecycleViewAdapter(
             Glide.with(context)
                 .load(R.drawable.ui_add_img)
                 .apply(RequestOptions().centerCrop()) // 使用centerCrop()使图片居中裁剪
-                .into(holder.dataBinding.memorandumImgIvImg)
+                .into(holder.dataBinding.memorandumItemCreateImgIvImg)
         } else {
             Glide.with(context)
                 .load(item.uri)
                 .apply(RequestOptions().centerCrop()) // 使用centerCrop()使图片居中裁剪
-                .into(holder.dataBinding.memorandumImgIvImg)
+                .into(holder.dataBinding.memorandumItemCreateImgIvImg)
         }
-        holder.dataBinding.memorandumImgIvImg.setOnClickListener {
+        holder.dataBinding.memorandumItemCreateImgIvImg.setOnClickListener {
             if (item.isPlaceholder){
                 onAddImageClick()
             }
@@ -100,8 +97,8 @@ class MemorandumCreateImgRecycleViewAdapter(
 
 
     //创建使用DataBinding的Holder
-    class MemorandumDataBindingViewHolder(itemDataBinding:MemorandumLayoutItemMemorandumImgBinding):RecyclerView.ViewHolder(itemDataBinding.root){
-        var dataBinding:MemorandumLayoutItemMemorandumImgBinding = itemDataBinding
+    class MemorandumDataBindingViewHolder(itemDataBinding:MemorandumLayoutItemCreateImgBinding):RecyclerView.ViewHolder(itemDataBinding.root){
+        var dataBinding:MemorandumLayoutItemCreateImgBinding = itemDataBinding
 
     }
 }

@@ -1,25 +1,20 @@
 package com.existmg.module_memorandum.ui.adapter
 
-import android.animation.Animator
-import android.animation.AnimatorListenerAdapter
-import android.animation.AnimatorSet
-import android.animation.ObjectAnimator
-import android.graphics.Path
+import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.animation.PathInterpolator
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.existmg.library_common.interfaces.OnItemClickListener
 import com.existmg.library_common.interfaces.OnItemLongClickListener
 import com.existmg.library_common.utils.timeLongToString
-import com.existmg.library_data.db.entity.MemorandumEntity
+import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 import com.existmg.module_memorandum.R
 import com.existmg.module_memorandum.databinding.MemorandumLayoutItemMemorandumBinding
 import com.existmg.module_memorandum.interfaces.MemorandumItemDeleteCallback
-import kotlin.random.Random
 
 
 /**
@@ -27,16 +22,16 @@ import kotlin.random.Random
  * @Date 2024/4/28 2:00 PM
  * @Description
  */
-class MemorandumRecycleViewAdapter(private var list:MutableList<MemorandumEntity>):
+class MemorandumRecycleViewAdapter(
+    private val context: Context,
+    private var list:MutableList<MemorandumWithImagesEntity>):
     RecyclerView.Adapter<MemorandumRecycleViewAdapter.MemorandumDataBindingViewHolder>(){
-    private var mIsShaking = false
     private var isExistDelete = false
     private var mOnItemClickListener: OnItemClickListener? = null
     private var mOnItemLongClickListener: OnItemLongClickListener? = null
     private var mMemorandumItemDeleteCallback:MemorandumItemDeleteCallback? = null
     // 存储每个项目的删除按钮可见性状态
     private var deleteButtonVisibleList: MutableList<Boolean>? = null
-
     override fun onCreateViewHolder(
         parent: ViewGroup,
         viewType: Int
@@ -52,9 +47,10 @@ class MemorandumRecycleViewAdapter(private var list:MutableList<MemorandumEntity
         position: Int
     ) {
         val item = list[position]
-        holder.dataBinding.memorandumItemTvDate.text = timeLongToString(item.memorandumCreateTime)
-        holder.dataBinding.memorandumItemTvTitle.text = item.memorandumTitle
-        holder.dataBinding.memorandumItemTvContent.text = item.memorandumContent
+        val itemEntity = item.memorandumEntity
+        holder.dataBinding.memorandumItemTvDate.text = timeLongToString(itemEntity?.memorandumCreateTime!!)
+        holder.dataBinding.memorandumItemTvTitle.text = itemEntity.memorandumTitle
+        holder.dataBinding.memorandumItemTvContent.text = itemEntity.memorandumContent
         if (!deleteButtonVisibleList.isNullOrEmpty()){
             holder.dataBinding.memorandumItemIvDelete.visibility = if (deleteButtonVisibleList!![position]) View.VISIBLE else View.GONE
         }
@@ -83,21 +79,26 @@ class MemorandumRecycleViewAdapter(private var list:MutableList<MemorandumEntity
             }
             return@setOnLongClickListener false
         }
-        // 添加摇动效果
-//        if (mIsShaking) {
-//            holder.startShakeAnimation();
-//        } else {
-//            holder.stopShakeAnimation();
-//        }
+
+        /*=================item的adapter处理====================*/
+        val itemAdapter = MemorandumItemImgRecycleViewAdapter(context)
+        val linearLayoutManager = GridLayoutManager(context,3, GridLayoutManager.VERTICAL,false)
+        holder.dataBinding.memorandumItemRvImg.layoutManager = linearLayoutManager
+        holder.dataBinding.memorandumItemRvImg.adapter = itemAdapter
+        if (item.memorandumImgEntityList != null){
+            itemAdapter.setImages(item.memorandumImgEntityList!!)
+        }
+
+        /*=================item的背景错位图的动态设置高度处理====================*/
+        holder.dataBinding.memorandumItemViewBg.post {
+            val height: Int = holder.dataBinding.memorandumItemCl.height
+            holder.dataBinding.memorandumItemViewBg.layoutParams.height = height
+            holder.dataBinding.memorandumItemViewBg.requestLayout()
+        }
     }
 
     override fun getItemCount(): Int {
         return list.size
-    }
-
-    fun setShaking(isShaking:Boolean){
-        mIsShaking = isShaking
-        notifyDataSetChanged()
     }
 
     fun setListDeleteStatus(listSize:Int){
@@ -123,31 +124,6 @@ class MemorandumRecycleViewAdapter(private var list:MutableList<MemorandumEntity
     //创建使用DataBinding的Holder
     class MemorandumDataBindingViewHolder(itemDataBinding:MemorandumLayoutItemMemorandumBinding):RecyclerView.ViewHolder(itemDataBinding.root){
         var dataBinding:MemorandumLayoutItemMemorandumBinding = itemDataBinding
-        fun startShakeAnimation() {
-            val path = Path().apply {
-                moveTo(0f, 0f)
-                cubicTo(0.2f, 1f, 0.8f, 0f, 1f, 1f)
-            }
-            val interpolator = PathInterpolator(path)
-            val animatorX = ObjectAnimator.ofFloat(itemView, "translationX", (Random.nextInt(20) - 10).toFloat())
-            val animatorY = ObjectAnimator.ofFloat(itemView, "translationY", (Random.nextInt(20) - 10).toFloat())
-            val animatorSet = AnimatorSet()
-            animatorSet.playTogether(animatorX, animatorY)
-            animatorSet.duration = 400
-            animatorSet.interpolator = interpolator
-            animatorSet.addListener(object : AnimatorListenerAdapter() {
-                override fun onAnimationEnd(animation: Animator) {
-                    animation.startDelay = 0
-                    animation.start()
-                }
-            })
-            animatorSet.start()
-        }
-
-        fun stopShakeAnimation() {
-            itemView.clearAnimation()
-        }
-
     }
 
 

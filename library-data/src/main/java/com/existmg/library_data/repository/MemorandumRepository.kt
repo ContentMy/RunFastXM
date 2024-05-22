@@ -5,6 +5,7 @@ import com.existmg.library_data.db.dao.MemorandumDao
 import com.existmg.library_data.db.dao.MemorandumImgDao
 import com.existmg.library_data.db.entity.MemorandumEntity
 import com.existmg.library_data.db.entity.MemorandumImgEntity
+import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 import kotlinx.coroutines.flow.Flow
 
 /**
@@ -63,5 +64,9 @@ class MemorandumRepository(
             )
             insertMemorandumImg(memorandumImgEntity)
         }
+    }
+
+    fun getAllMemorandumWithImg():Flow<List<MemorandumWithImagesEntity>>{
+        return memorandumDao.getAllMemorandumWithImg()
     }
 }

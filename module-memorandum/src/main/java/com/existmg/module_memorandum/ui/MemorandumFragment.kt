@@ -13,6 +13,7 @@ import com.existmg.library_common.interfaces.OnItemLongClickListener
 import com.existmg.library_common.router.RouterFragmentPath
 import com.existmg.library_data.accessor.MemorandumModuleRoomAccessor
 import com.existmg.library_data.db.entity.MemorandumEntity
+import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 import com.existmg.library_data.repository.MemorandumRepository
 import com.existmg.library_ui.views.DiaryDividerItemDecoration
 import com.existmg.module_memorandum.R
@@ -30,7 +31,7 @@ import kotlin.math.abs
 @Route(path = RouterFragmentPath.Memorandum.PAGER_MEMORANDUM)
 class MemorandumFragment : BaseMvvmFragment<MemorandumViewModel,MemorandumLayoutFragmentBinding>(){
     private lateinit var mAdapter:MemorandumRecycleViewAdapter
-    private var mList = mutableListOf<MemorandumEntity>()
+    private var mList = mutableListOf<MemorandumWithImagesEntity>()
     override fun getLayoutId(): Int {
         return R.layout.memorandum_layout_fragment
     }
@@ -50,7 +51,7 @@ class MemorandumFragment : BaseMvvmFragment<MemorandumViewModel,MemorandumLayout
     }
 
     override fun initView() {
-        mAdapter = MemorandumRecycleViewAdapter(mList)
+        mAdapter = MemorandumRecycleViewAdapter(requireContext(),mList)
         val linearLayoutManager = LinearLayoutManager(context)
         mBinding.memorandumRv.layoutManager = linearLayoutManager
         mBinding.memorandumRv.adapter = mAdapter
@@ -68,7 +69,7 @@ class MemorandumFragment : BaseMvvmFragment<MemorandumViewModel,MemorandumLayout
             override fun onItemClick(view: View, position: Int) {
                 val entity = mList[position]
                 val intent = Intent(context, MemorandumUpdateActivity::class.java)
-                intent.putExtra("memorandumEntity", entity)
+                intent.putExtra("memorandumWithImagesEntity", entity)
                 startActivity(intent)//点击item时，把数据传递给activity
             }
         })
@@ -80,7 +81,7 @@ class MemorandumFragment : BaseMvvmFragment<MemorandumViewModel,MemorandumLayout
         })
 
         mAdapter.setMemorandumItemDeleteCallback(object : MemorandumItemDeleteCallback{
-            override fun itemDelete(entity: MemorandumEntity, position: Int) {
+            override fun itemDelete(entity: MemorandumWithImagesEntity, position: Int) {
                 mViewModel.deleteMemorandum(entity)
                 mList.remove(entity)
             }
@@ -126,6 +127,7 @@ class MemorandumFragment : BaseMvvmFragment<MemorandumViewModel,MemorandumLayout
 
     override fun onResume() {
         super.onResume()
+        mViewModel.resetDataCollectionFlag()
         mViewModel.refreshData()
     }
 
