@@ -1,12 +1,11 @@
 package com.existmg.module_remind.viewmodel
 
+import android.app.Application
+import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.existmg.library_base.viewmodel.BaseViewModel
-import com.existmg.library_data.accessor.RemindModuleRoomAccessor
+import com.existmg.library_base.viewmodel.BaseApplicationViewModel
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
 import kotlinx.coroutines.launch
@@ -16,7 +15,7 @@ import kotlinx.coroutines.launch
  * @Date 2024/4/15 11:25 PM
  * @Description 这里是提醒列表页面对应的viewmodel，主要是用于数据展示以及跳转的相关处理
  */
-class RemindViewModel(private var repository: RemindRepository) : BaseViewModel(){
+class RemindViewModel(private var repository: RemindRepository,application: Application) : BaseApplicationViewModel(application){
     /*===================页面跳转的处理-开始=======================*/
     //核心思想通过标志位来完成是否跳转的响应处理
     private val _navigateToCreateTargetActivity = MutableLiveData<Boolean>()
@@ -73,4 +72,21 @@ class RemindViewModel(private var repository: RemindRepository) : BaseViewModel(
             }
         }
     }
+
+    /*===================数据库的处理-结束=======================*/
+
+    /*===================引导功能处理-开始=======================*/
+    private val sharedPreferences = application.getSharedPreferences("AppPreferences", Context.MODE_PRIVATE)
+
+    private val _showGuide = MutableLiveData<Boolean>()
+    val showGuide: LiveData<Boolean> get() = _showGuide
+
+    fun checkIfFirstTime(activityName: String) {
+        val isFirstTime = sharedPreferences.getBoolean(activityName, true)
+//        if (isFirstTime) {
+//            sharedPreferences.edit().putBoolean(activityName, false).apply()
+//        }
+        _showGuide.value = isFirstTime
+    }
+    /*===================引导功能处理-开始=======================*/
 }

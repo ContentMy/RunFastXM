@@ -9,6 +9,7 @@
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/remind_cl"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
         <include
@@ -32,6 +33,7 @@
             android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
             app:srcCompat="@drawable/ui_add"
+            android:backgroundTint="@color/ui_green"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             android:onClick="@{() -> viewModel.onFabClick()}"/>

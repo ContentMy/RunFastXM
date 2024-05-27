@@ -1,5 +1,6 @@
 package com.existmg.module_remind.ui
 
+import android.app.Application
 import android.content.Intent
 import android.view.View
 import android.view.inputmethod.InputMethodManager
@@ -12,15 +13,16 @@ import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.existmg.library_base.fragment.BaseMvvmFragment
 import com.existmg.library_base.manager.viewModelFactoryWithParams
 import com.existmg.library_common.router.RouterFragmentPath
-import com.existmg.module_remind.R
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
 import com.existmg.library_ui.dialog.interfaces.DialogDatabaseDelegate
-import com.existmg.module_remind.viewmodel.RemindViewModel
+import com.existmg.module_remind.R
 import com.existmg.module_remind.databinding.RemindLayoutRemindFragmentBinding
 import com.existmg.module_remind.databinding.RemindRecycleItemViewBinding
+import com.existmg.module_remind.guide.RemindGuideActivity
 import com.existmg.module_remind.ui.adapter.RemindRecycleAdapter
+import com.existmg.module_remind.viewmodel.RemindViewModel
 
 /**
  * @Author ContentMy
@@ -48,8 +50,8 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
     }
 
     override fun provideViewModelFactory(): ViewModelProvider.Factory {
-        return viewModelFactoryWithParams(RemindModuleRoomAccessor.getRemindRepository()){
-            RemindViewModel(it[0] as RemindRepository)
+        return viewModelFactoryWithParams(RemindModuleRoomAccessor.getRemindRepository(),requireContext().applicationContext){
+            RemindViewModel(it[0] as RemindRepository,it[1] as Application)
         }
     }
 
@@ -63,6 +65,8 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
         mBinding.remindRv.layoutManager = layoutManager
         mBinding.remindRv.adapter = adapter
         mBinding.remindIncludeTitleToolbar.uiTitleToolbarIvRight.visibility = View.VISIBLE
+        // 检查是否首次进入
+        mViewModel.checkIfFirstTime("RemindGuideActivity")
     }
 
     override fun initData() {
@@ -99,7 +103,14 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
             mBinding.remindTvDefaultContent.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE
             adapter.setList(it)
         }
+
+        mViewModel.showGuide.observe(viewLifecycleOwner){
+            if (it) {
+                startActivity(Intent(requireContext(),RemindGuideActivity::class.java))
+            }
+        }
     }
+
     override fun processBusinessLogic(data: Map<String, Any>) {
         println("创建数据")
 //        mViewModel.insertData(data)

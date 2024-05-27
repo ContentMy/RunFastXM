@@ -7,7 +7,7 @@
         android:supportsRtl="true">
         <service
             android:name=".services.RemindIntentService"
-            android:exported="false"></service>
+            android:exported="false"/>
 
         <activity
             android:name=".ui.RemindDetailActivity"
@@ -20,6 +20,10 @@
 
         <activity android:name=".ui.RemindCompletedActivity"
             android:exported="false"/>
+
+        <activity android:name=".guide.RemindGuideActivity"
+            android:exported="false"
+            android:theme="@style/ui.Theme.RunFastXM.Translucent"/>
 
         <receiver
             android:name=".notification.RemindNotificationBroadcastReceiver"

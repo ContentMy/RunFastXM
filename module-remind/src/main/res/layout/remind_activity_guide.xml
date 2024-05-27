@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.existmg.module_remind.guide.RemindGuideViewModel" />
+    </data>
+
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+
+        <include
+            android:id="@+id/remind_guide_title_toolbar"
+            layout="@layout/ui_layout_base_title_toolbar"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"/>
+        <!--注意事项：使用wrap_content，如果固定大小的情况下，图片会偏移-->
+
+        <View
+            android:id="@+id/remind_guide_fab_view"
+            android:layout_width="@dimen/ui_dp_80"
+            android:layout_height="@dimen/ui_dp_80"
+            android:visibility="gone"
+            android:background="@drawable/ui_shape_circle_background_white"/>
+
+        <com.google.android.material.floatingactionbutton.FloatingActionButton
+            android:id="@+id/remind_guide_fab"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginBottom="66dp"
+            app:srcCompat="@drawable/ui_add"
+            android:visibility="gone"
+            android:backgroundTint="@color/ui_green"
+            android:layout_gravity="bottom|end"/>
+        <Button
+            android:id="@+id/remind_guide_btn_close"
+            android:layout_width="@dimen/ui_dp_200"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@null"
+            android:background="@drawable/ui_shape_rounded_rectangle_background_green"
+            android:textColor="@color/ui_white"
+            android:layout_marginBottom="@dimen/ui_dp_20"
+            android:layout_gravity="bottom|center_horizontal"
+            android:text="@string/remind_guide_btn_close_string"/>
+
+        <LinearLayout
+            android:id="@+id/remind_guide_ll_step_one"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginBottom="@dimen/ui_dp_100"
+            android:layout_gravity="bottom">
+            <TextView
+                android:id="@+id/remind_guide_tv_step_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ui_white"
+                android:textSize="@dimen/ui_sp_20"
+                android:textStyle="bold"
+                android:text="@string/remind_guide_tv_step_one_string"
+                android:layout_marginBottom="@dimen/ui_dp_10"/>
+            <Button
+                android:id="@+id/remind_guide_btn_step_one"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remind_guide_btn_step_one_string"
+                android:backgroundTint="@null"
+                android:background="@drawable/ui_shape_rounded_rectangle_background_yellow"/>
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/remind_guide_ll_step_two"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:gravity="center"
+            android:visibility="gone"
+            android:layout_marginTop="@dimen/ui_dp_50">
+            <TextView
+                android:id="@+id/remind_guide_tv_step_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:textColor="@color/ui_white"
+                android:textSize="@dimen/ui_sp_20"
+                android:textStyle="bold"
+                android:text="@string/remind_guide_tv_step_two_string"
+                android:layout_marginBottom="@dimen/ui_dp_10"/>
+            <Button
+                android:id="@+id/remind_guide_btn_step_two"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remind_guide_btn_step_two_string"
+                android:backgroundTint="@null"
+                android:background="@drawable/ui_shape_rounded_rectangle_background_yellow"/>
+        </LinearLayout>
+    </FrameLayout>
+</layout>

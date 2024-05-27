@@ -15,4 +15,10 @@
     <string name="remind_string_completed_remind">已完成提醒</string>
     <string name="remind_string_delete">删除</string>
     <string name="remind_string_reset">重新提醒</string>
+
+    <string name="remind_guide_btn_close_string">关闭引导</string>
+    <string name="remind_guide_btn_step_one_string">下一步</string>
+    <string name="remind_guide_tv_step_one_string">点击“+”添加提醒</string>
+    <string name="remind_guide_btn_step_two_string">结束引导</string>
+    <string name="remind_guide_tv_step_two_string">点击这里可以跳转查看结束的提醒喔！</string>
 </resources>

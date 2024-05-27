@@ -36,7 +36,16 @@
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toStartOf="parent"/>
         </androidx.constraintlayout.widget.ConstraintLayout>
-
+        <View
+            android:id="@+id/ui_title_toolbar_view_right"
+            android:layout_width="@dimen/ui_dp_50"
+            android:layout_height="@dimen/ui_dp_50"
+            android:layout_marginEnd="@dimen/ui_dp_10"
+            android:visibility="gone"
+            android:background="@drawable/ui_shape_circle_background_white"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
         <ImageView
             android:id="@+id/ui_title_toolbar_iv_right"
             android:layout_width="@dimen/ui_dp_50"
