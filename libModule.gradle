@@ -44,4 +44,6 @@ dependencies {
     api rootProject.ext.androidx.viewModelKtx
     api rootProject.ext.dependencies.baseRecyclerViewAdapterHelper
 //    api rootProject.ext.androidx.kotlinCore
+    api rootProject.ext.dependencies.immersionbar
+    api rootProject.ext.dependencies.immersionbarKtx
 }

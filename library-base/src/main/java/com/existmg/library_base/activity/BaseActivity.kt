@@ -9,7 +9,7 @@ import android.view.WindowInsetsController
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
-import com.existmg.library_base.R
+import com.gyf.immersionbar.ImmersionBar
 
 /**
  * @Author:ContentMy
@@ -20,12 +20,9 @@ abstract class BaseActivity: AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /*==============沉浸式逻辑开始================*/
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.R) {
-            setupTransparentStatusBar()
-        } else {
-            setupLegacyTransparentStatusBar()
-        }
-        setStatusBarTextColor(isLightStatusBar())
+        ImmersionBar.with(this)
+            .statusBarDarkFont(true) //状态栏字体是深色，不写默认为亮色
+            .init() //必须调用方可应用以上所配置的参数
         /*==============沉浸式逻辑结束================*/
         setContentView(getLayoutId())
         beforeInit()
