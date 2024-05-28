@@ -1,11 +1,14 @@
-package com.existmg.module_main
+package com.existmg.module_main.ui
 
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
 import com.existmg.library_base.activity.BaseMVVMActivity
 import com.existmg.library_base.manager.viewModelFactory
+import com.existmg.module_main.R
 import com.existmg.module_main.databinding.MainActivityMainBinding
+import com.existmg.module_main.ui.adapter.ViewPagerAdapter
+import com.existmg.module_main.viewmodel.MainViewModel
 
 /**
  * @Author:ContentMy
@@ -15,7 +18,8 @@ import com.existmg.module_main.databinding.MainActivityMainBinding
 class MainActivity : BaseMVVMActivity<MainViewModel, MainActivityMainBinding>() {
     private lateinit var adapter: ViewPagerAdapter
 //    private lateinit var vibrator: Vibrator
-
+    override fun beforeContentView() {
+    }
     override fun getLayoutId(): Int {
         return R.layout.main_activity_main
     }

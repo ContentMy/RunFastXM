@@ -9,10 +9,9 @@
         android:supportsRtl="true"
         android:label="@string/main_app_name"
         android:icon="@mipmap/ic_launcher"
-        android:roundIcon="@mipmap/ic_launcher_round"
         android:theme="@style/ui.Theme.RunFastXM"
         tools:replace="android:name, android:label">
-        <activity android:name=".MainActivity"
+        <activity android:name=".ui.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />

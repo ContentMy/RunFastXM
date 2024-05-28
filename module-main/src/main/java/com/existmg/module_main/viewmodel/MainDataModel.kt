@@ -1,4 +1,4 @@
-package com.existmg.module_main
+package com.existmg.module_main.viewmodel
 
 import android.os.Parcel
 import android.os.Parcelable

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.existmg.module_main.viewmodel.MainSplashViewModel" />
+    </data>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="horizontal"
+        android:gravity="bottom|center"
+        android:paddingBottom="@dimen/ui_dp_10">
+
+        <ImageView
+            android:src="@mipmap/ic_launcher"
+            android:layout_width="@dimen/ui_dp_50"
+            android:layout_height="@dimen/ui_dp_50" />
+
+        <TextView
+            android:text="@string/ui_app_name"
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/ui_dp_50"
+            android:gravity="center"
+            android:textColor="@color/ui_black"
+            android:fontFamily="@font/ui_font_zihunshiguang"
+            android:textSize="@dimen/ui_sp_20"
+            android:layout_marginStart="@dimen/ui_dp_10" />
+    </LinearLayout>
+</layout>

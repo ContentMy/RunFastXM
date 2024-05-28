@@ -1,8 +1,9 @@
-package com.existmg.module_main
+package com.existmg.module_main.viewmodel
 
 import android.view.MenuItem
 import androidx.lifecycle.MutableLiveData
 import com.existmg.library_base.viewmodel.BaseViewModel
+import com.existmg.module_main.R
 
 /**
  * @Author ContentMy

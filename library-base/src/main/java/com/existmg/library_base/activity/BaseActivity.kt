@@ -24,6 +24,7 @@ abstract class BaseActivity: AppCompatActivity() {
             .statusBarDarkFont(true) //状态栏字体是深色，不写默认为亮色
             .init() //必须调用方可应用以上所配置的参数
         /*==============沉浸式逻辑结束================*/
+        beforeContentView()
         setContentView(getLayoutId())
         beforeInit()
         initView()
@@ -61,7 +62,13 @@ abstract class BaseActivity: AppCompatActivity() {
     open fun initListener(){
 
     }
+    /**
+     * @Author: ContentMy
+     * @Description: 提供一个可以在setContentView操作之前进行调用的开放方法给子类使用
+     */
+    open fun beforeContentView(){
 
+    }
     /**
      * @Author: ContentMy
      * @Description: 提供一个可以在初始化一系列操作之前进行调用的开放方法给子类使用
