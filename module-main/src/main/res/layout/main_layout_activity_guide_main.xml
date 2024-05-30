@@ -49,6 +49,7 @@
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
                 android:gravity="center"
+                android:lineSpacingExtra="@dimen/ui_dp_10"
                 android:text="@string/main_guide_step_one_content_string" />
 
             <ImageView

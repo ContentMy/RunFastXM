@@ -54,7 +54,7 @@ class App: BaseApplication() {
             }
         }
 
-        //TODO：遍历提醒列表修改提醒状态的任务，后续考虑通过反射或者其他手段在remind模块去初始化启动这个入口代码
+        //TODO：遍历提醒列表修改提醒状态的任务，后续考虑通过反射或者其他手段在remind模块去初始化启动这个入口代码,模块单独执行时这里会报错
         val workRequest = OneTimeWorkRequest.Builder(RemindInitStatusWork::class.java).build()
         WorkManager.getInstance(this).enqueue(workRequest)
 //        //初始化查看数据库的依赖库 //chrome://inspect/#devices

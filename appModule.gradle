@@ -46,8 +46,11 @@ android {
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
     }
     sourceSets {
         /*
@@ -70,9 +73,6 @@ android {
                 java.exclude '**/debug/**'
             }
         }
-    }
-    kotlinOptions {
-        jvmTarget = '1.8'
     }
 
     buildFeatures {
@@ -106,6 +106,10 @@ dependencies {
     implementation rootProject.ext.dependencies.glide
     kapt rootProject.ext.dependencies.glideCompiler
     api rootProject.ext.dependencies.bugly
+    //TODO：离谱。在基础模块配置了room，功能模块依赖后依然需要配置，不然无法在对应模块调用
+    implementation rootProject.ext.androidx.room
+    implementation rootProject.ext.androidx.roomKtx
+    kapt rootProject.ext.androidx.roomCompiler
 }
 ///*ARouter配置*/
 //kapt {

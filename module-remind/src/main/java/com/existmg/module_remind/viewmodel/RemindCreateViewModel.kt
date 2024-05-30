@@ -98,7 +98,7 @@ class RemindCreateViewModel(
     }
 
     fun cancelNotification(application:Application){
-        notificationRepository.cancelNotification(application)
+//        notificationRepository.cancelNotification(application)
     }
 
     /*================通知操作 - 结束===================*/

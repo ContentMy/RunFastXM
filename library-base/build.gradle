@@ -1,6 +1,7 @@
 apply from:'../libModule.gradle'
 android{
     resourcePrefix 'ui_'
+    namespace 'com.existmg.library_base'
 }
 
 dependencies {

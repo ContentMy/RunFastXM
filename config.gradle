@@ -17,6 +17,7 @@ ext {
             butterknife_version = "10.0.0",
             retrofit_version = "2.6.1",
             lifecycle_version = "2.2.0",
+            work_version = "2.7.0",
             room_version= "2.6.1",
             androidx_version = "1.6.1"
     ]
@@ -44,7 +45,8 @@ ext {
             navigation            : "androidx.navigation:navigation-fragment:$rootProject.lifecycle_version",
             navigationUI          : "androidx.navigation:navigation-ui:$rootProject.lifecycle_version",
             /*navigation --end*/
-            work                  : "androidx.work:work-runtime:$rootProject.lifecycle_version",
+            work                  : "androidx.work:work-runtime:$rootProject.work_version",
+            workKtx               : "androidx.work:work-runtime-ktx:$rootProject.work_version",
 
     ]
     //依赖第三方配置
