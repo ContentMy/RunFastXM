@@ -9,6 +9,7 @@ import com.existmg.module_main.R
 import com.existmg.module_main.databinding.MainActivityMainBinding
 import com.existmg.module_main.ui.adapter.ViewPagerAdapter
 import com.existmg.module_main.viewmodel.MainViewModel
+import com.tencent.bugly.crashreport.CrashReport
 
 /**
  * @Author:ContentMy
@@ -19,6 +20,8 @@ class MainActivity : BaseMVVMActivity<MainViewModel, MainActivityMainBinding>() 
     private lateinit var adapter: ViewPagerAdapter
 //    private lateinit var vibrator: Vibrator
     override fun beforeContentView() {
+        //TODO:暂时放在MainActivity中初始化bugly
+        CrashReport.initCrashReport(applicationContext, "a2cd585ea9", true);//boolean表示是否调试
     }
     override fun getLayoutId(): Int {
         return R.layout.main_activity_main
