@@ -20,10 +20,27 @@ class RemindDetailViewModel(private val repository: RemindRepository): BaseViewM
         viewModelScope.launch {
             try {
                 val remindEntity = repository.getRemindById(dataId)
+                initData(remindEntity)//去调用Time相关的逻辑，判断并设置对应的ui
                 _remindById.value = remindEntity
             } catch (e: Exception) {
                 e.printStackTrace()
             }
         }
+    }
+
+    /**
+     * @Author: ContentMy
+     * @params: remindData 传入的提醒实体类
+     * @Description:
+     * 这个方法主要是对初始化时传入实体类的数据进行逻辑判断，根据对应的数据进行展示
+     * 从这个方法传入的数据中的结束时间是一定要比当前时间晚的，因为是从列表中点击对应item进入的页面
+     * 如果提醒时间到达，那么会认为提醒已经完成，不会在当前页面列表中展示
+     */
+    private var _remindShowTime = MutableLiveData<Long>()
+    val remindShowTime:LiveData<Long> get() = _remindShowTime
+    fun initData(remindData: RemindEntity) {
+        val endTime = remindData.remindEndTime
+        val showTime = endTime - System.currentTimeMillis()
+        _remindShowTime.value = showTime
     }
 }

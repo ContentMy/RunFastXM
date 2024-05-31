@@ -61,8 +61,7 @@ class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel,RemindActivi
             intent.getParcelableExtra<RemindEntity>("remindEntity")
         }
         if (remindData != null){//如果不为空，是从提醒列表item点击进入的页面
-            mCountDownTime = remindData.remindTime
-            mBinding.remindDetailCdc.startCountDown(mCountDownTime)
+           mViewModel.initData(remindData)
             mBinding.remindDetailTb.uiToolbarTvTitle.text = remindData.remindTitle
         }else{//如果为空，是从通知点击进入的页面
             val dataId = intent.getIntExtra("dataId",0)
@@ -81,7 +80,8 @@ class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel,RemindActivi
                 Toast.makeText(this@RemindDetailActivity, "Finished", Toast.LENGTH_SHORT).show()
                 mBinding.remindDetailCdc.resetCountdownTimer()
                 isRunning = false
-//                btnPause.isEnabled = false
+                mBinding.remindDetailCdc.visibility = View.GONE
+                mBinding.remindDetailCompletedContent.visibility = View.VISIBLE
             }
         })
 
@@ -92,14 +92,22 @@ class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel,RemindActivi
     override fun initObserver() {
         mViewModel.remindById.observe(this){
             if (it != null){
-                mCountDownTime = it.remindTime
-                mBinding.remindDetailCdc.startCountDown(mCountDownTime)
                 mBinding.remindDetailTb.uiToolbarTvTitle.text = it.remindTitle
             }else{
                 //这里处理的逻辑原因场景为：通知栏已经弹出了通知，但是用户删除了对应的提醒
                 //此时从通知点击进入时，id是携带者删除之前的那个id，但是用这个id去查询时，就会返回空
                 //这个页面也就没有展示必要了，所以结束这个页面 TODO：考虑跳转到Main模块的MainActivity同时结束这个activity
                 finishActivity()
+            }
+        }
+
+        mViewModel.remindShowTime.observe(this){
+            if (it > 0){
+                mCountDownTime = it
+                mBinding.remindDetailCdc.startCountDown(mCountDownTime)
+            }else{
+                mBinding.remindDetailCdc.visibility = View.GONE
+                mBinding.remindDetailCompletedContent.visibility = View.VISIBLE
             }
         }
     }

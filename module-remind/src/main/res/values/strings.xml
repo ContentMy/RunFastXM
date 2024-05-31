@@ -21,4 +21,7 @@
     <string name="remind_guide_tv_step_one_string">点击“+”添加提醒</string>
     <string name="remind_guide_btn_step_two_string">结束引导</string>
     <string name="remind_guide_tv_step_two_string">点击这里可以跳转查看结束的提醒喔！</string>
+
+
+    <string name="remind_detail_completed_string">已经到达预计的提醒时间了哦！\n赶快完成你的事情吧！</string>
 </resources>
