@@ -7,6 +7,7 @@ import com.existmg.library_data.db.entity.TargetEntity
 import com.existmg.library_data.db.entity.TargetWithCheckInList
 import com.existmg.library_data.db.entity.TargetWithTodayCheckIn
 import com.existmg.module_target.databinding.TargetRecycleItemViewBinding
+import com.existmg.module_target.utils.logs.TargetLoggerManager
 
 /**
  * @Author ContentMy
@@ -15,17 +16,18 @@ import com.existmg.module_target.databinding.TargetRecycleItemViewBinding
  */
 class TargetRecycleViewAdapter(list:MutableList<TargetWithTodayCheckIn>?):
     BaseQuickAdapter<TargetWithTodayCheckIn,BaseDataBindingHolder<TargetRecycleItemViewBinding>>(R.layout.target_recycle_item_view,list) {
+    private val mLog = TargetLoggerManager.getLogger<TargetRecycleViewAdapter>()
     override fun convert(holder: BaseDataBindingHolder<TargetRecycleItemViewBinding>, item: TargetWithTodayCheckIn) {
         val targetEntity = item.targetEntity
         val targetCheckInEntity = item.targetCheckInEntity
         holder.dataBinding?.item = targetEntity
         holder.dataBinding?.targetRecycleItemIvIcon?.setImageResource(context.resources.getIdentifier(targetEntity?.targetImg, "drawable", context.packageName))
         if (targetCheckInEntity!=null){
-            println("在adapter中展示时，打卡的状态${targetCheckInEntity.targetCheckIn}")
+            mLog.debug("在adapter中展示时，打卡的状态${targetCheckInEntity.targetCheckIn}")
             holder.dataBinding?.targetRecycleItemTvCheckIn?.text = if (targetCheckInEntity.targetCheckIn)
                 context.resources.getString(R.string.target_item_check_in_completed_string) else context.resources.getString(R.string.target_item_check_in_string)
         }else{
-            println("在adapter中展示时,没有targetCheckInEntity")
+            mLog.debug("在adapter中展示时,没有targetCheckInEntity")
             holder.dataBinding?.targetRecycleItemTvCheckIn?.text = context.resources.getString(R.string.target_item_check_in_string)
         }
         holder.dataBinding?.targetRecycleItemTvDelete?.setOnClickListener {

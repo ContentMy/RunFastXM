@@ -12,6 +12,7 @@ import com.existmg.library_ui.notification.NotificationRepository
 import com.existmg.module_remind.R
 import com.existmg.module_remind.databinding.RemindActivityRemindCompletedBinding
 import com.existmg.module_remind.ui.adapter.RemindCompleteRecycleAdapter
+import com.existmg.module_remind.utils.logs.RemindLoggerManager
 import com.existmg.module_remind.viewmodel.RemindCompletedViewmodel
 
 /**
@@ -20,6 +21,7 @@ import com.existmg.module_remind.viewmodel.RemindCompletedViewmodel
  * @Description
  */
 class RemindCompletedActivity : BaseMVVMActivity<RemindCompletedViewmodel,RemindActivityRemindCompletedBinding>() {
+    private val mLog = RemindLoggerManager.getLogger<RemindCompletedActivity>()
     private lateinit var mAdapter:RemindCompleteRecycleAdapter
     private val mList = mutableListOf<RemindEntity>()
     override fun getViewModelClass(): Class<RemindCompletedViewmodel> {
@@ -64,7 +66,7 @@ class RemindCompletedActivity : BaseMVVMActivity<RemindCompletedViewmodel,Remind
 
         //TODO：目前使用了BaseQuickAdapter,但自定义实现的RecycleView的左滑效果必须基于这个adapter的点击事件监听后，事件才能被处理，后续优化考虑统一使用memorandum模块的封装adapter
         mAdapter.setOnItemClickListener { adapter, view, position ->
-            println("点击了item哦")
+            mLog.debug("点击了item哦")
         }
         mAdapter.setOnItemDeleteClickCallback(object : RemindCompleteRecycleAdapter.OnItemDeleteClickCallback{
             override fun itemDeleteClick(

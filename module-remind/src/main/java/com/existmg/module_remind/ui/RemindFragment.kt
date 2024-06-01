@@ -22,6 +22,7 @@ import com.existmg.module_remind.databinding.RemindLayoutRemindFragmentBinding
 import com.existmg.module_remind.databinding.RemindRecycleItemViewBinding
 import com.existmg.module_remind.guide.RemindGuideActivity
 import com.existmg.module_remind.ui.adapter.RemindRecycleAdapter
+import com.existmg.module_remind.utils.logs.RemindLoggerManager
 import com.existmg.module_remind.viewmodel.RemindViewModel
 
 /**
@@ -39,6 +40,7 @@ import com.existmg.module_remind.viewmodel.RemindViewModel
 @Route(path = RouterFragmentPath.Remind.PAGER_REMIND)
 class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragmentBinding>(),DialogDatabaseDelegate,
     RemindRecycleAdapter.OnItemDeleteClickCallback {
+    private val mLog = RemindLoggerManager.getLogger<RemindFragment>()
     private lateinit var adapter: RemindRecycleAdapter
 
     override fun getViewModelClass(): Class<RemindViewModel> {
@@ -112,7 +114,7 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
     }
 
     override fun processBusinessLogic(data: Map<String, Any>) {
-        println("创建数据")
+        mLog.debug("创建数据")
 //        mViewModel.insertData(data)
 //        mViewModel.refreshData()//TODO:这里暂时调用了查询数据库的函数以更新数据来达到刷新ui列表的目的，后续考虑单个查询，或者不去考虑查询，直接在插入成功的回调中将数据返回进行ui更新
     }
@@ -133,7 +135,7 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
         position: Int,
         item: RemindEntity
     ) {
-        println("点击了删除按钮")
+        mLog.debug("点击了删除按钮")
         mViewModel.deleteRemind(item)
     }
 }

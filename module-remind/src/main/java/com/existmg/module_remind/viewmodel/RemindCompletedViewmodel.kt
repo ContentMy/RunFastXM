@@ -10,9 +10,9 @@ import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
 import com.existmg.library_ui.notification.NotificationRepository
 import com.existmg.module_remind.R
+import com.existmg.module_remind.utils.logs.RemindLoggerManager
 import com.existmg.module_remind.works.RemindStatusWork
 import kotlinx.coroutines.launch
-import java.net.IDN
 
 /**
  * @Author ContentMy
@@ -22,6 +22,7 @@ import java.net.IDN
 class RemindCompletedViewmodel(
     private var repository: RemindRepository,
     private var notificationRepository: NotificationRepository,) : BaseViewModel(){
+    private val mLog = RemindLoggerManager.getLogger<RemindCompletedViewmodel>()
     /*===================数据库的处理-开始=======================*/
     private val _remindCompleteData = MutableLiveData<List<RemindEntity>>()
     val remindCompleteData: LiveData<List<RemindEntity>> = _remindCompleteData
@@ -32,6 +33,7 @@ class RemindCompletedViewmodel(
                     _remindCompleteData.value = it
                 }
             } catch (e: Throwable) {
+                mLog.error("数据库获取已完成目标列表出现异常：",e)
                 e.printStackTrace()
             }
         }
@@ -42,6 +44,7 @@ class RemindCompletedViewmodel(
             try {
                 repository.deleteRemind(remindEntity)
             } catch (e: Throwable) {
+                mLog.error("数据库删除单个提醒时出现异常：",e)
                 e.printStackTrace()
             }
         }
@@ -53,6 +56,7 @@ class RemindCompletedViewmodel(
                 repository.deleteAllCompletedReminds()
                 _remindCompleteData.value = mutableListOf()
             } catch (e: Throwable) {
+                mLog.error("数据库删除所有提醒出现异常：",e)
                 e.printStackTrace()
             }
         }
@@ -87,6 +91,7 @@ class RemindCompletedViewmodel(
                 repository.updateRemind(updateEntity)
                 _remindResetData.value = updateEntity//TODO：这里后续优化需要考虑数据库更新成功后再去更新livedata
             } catch (e: Throwable) {
+                mLog.error("数据库更新单个提醒时出现异常：",e)
                 e.printStackTrace()
             }
         }
@@ -99,7 +104,7 @@ class RemindCompletedViewmodel(
         val title = remindEntity.remindTitle!!
         val content = "提醒时间到了哦！"//TODO:remindContent后续开放功能时，这里需要进行动态获取，目前没有开放，所以给了一个默认的值
         val duration = remindEntity.remindTime
-        println("在创建提醒时，id为：$dataId")
+        mLog.debug("在创建提醒时，id为：$dataId")
         notificationRepository.postNotification(application, dataId!!,iconResId, title, content, duration)
     }
 
@@ -107,7 +112,7 @@ class RemindCompletedViewmodel(
         val id = if (remindEntity.id == null) 0 else remindEntity.id
         val time = remindEntity.remindTime
         val endTime = remindEntity.remindEndTime
-        println("处理状态时的布尔值：${remindEntity.remindCompleteStatus}")
+        mLog.debug("处理状态时的布尔值：${remindEntity.remindCompleteStatus}")
         //后启动后台定时任务去计算时间，在满足逻辑的情况下进行已完成提醒的状态修改
         val workRequest = RemindStatusWork.buildWorkRequest(id!!,time, endTime)
         WorkManager.getInstance(application).enqueue(workRequest)

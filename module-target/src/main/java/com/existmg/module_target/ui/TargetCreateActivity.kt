@@ -34,6 +34,7 @@ import com.existmg.module_target.ui.adapter.TargetIconsRecycleViewAdapter
 import com.existmg.module_target.ui.adapter.TargetStatusRecycleViewAdapter
 import com.existmg.library_common.utils.calenderToDateString
 import com.existmg.library_data.repository.TargetRepository
+import com.existmg.module_target.utils.logs.TargetLoggerManager
 import com.existmg.module_target.viewmodel.TargetCreateViewModel
 import java.util.Calendar
 
@@ -46,6 +47,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
     View.OnClickListener,
     TargetStatusRecycleViewAdapter.OnItemSelectedCallback,
     TargetIconsRecycleViewAdapter.OnIconsItemSelectedCallback {
+    private val mLog = TargetLoggerManager.getLogger<TargetCreateActivity>()
     private val notificationReceiver = NotificationReceiver()
     private var isNewTarget = true
     private lateinit var statusAdapter: TargetStatusRecycleViewAdapter
@@ -102,7 +104,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
             val target = intent.getParcelableExtra<TargetEntity>("targetEntity")
             if (target != null){
                 mViewModel.initExistTarget(target)
-                println("目标状态为：${target.targetStatus}")
+                mLog.debug("目标状态为：${target.targetStatus}")
                 currentStatusPosition = target.targetStatus
                 currentIconsPosition = IconsManager().getIconPosition(target.targetImg!!)//因为目前是固定的资源，所以直接去根据icon的name去获取了固定列表中的下标来平替上次选择的对应下标
             }
@@ -159,7 +161,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
         mViewModel.showDialog.observe(this){
             MyDataPickerDialog.Builder(this).setListener(object: DataPickerGetCalendarListener {
                 override fun getCalendar(calendar: Calendar) {
-                    println("回调到activity，日期为：${calenderToDateString(calendar)},来源为：${it.source}")
+                    mLog.debug("回调到activity，日期为：${calenderToDateString(calendar)},来源为：${it.source}")
                     mViewModel.getCalendar(it.source,calendar)
                 }
             }).build().show(it.timestamp)
@@ -209,7 +211,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
         if (position == currentStatusPosition){
             holder.dataBinding?.targetStatusRecycleTvName?.setTextColor(Color.WHITE)
             holder.dataBinding?.targetStatusRecycleCl?.setBackgroundResource(R.drawable.ui_shape_rounded_rectangle_background_black)
-            println("名称：$displayName,位置：$position")
+            mLog.debug("名称：$displayName,位置：$position")
             mViewModel.chooseStatus(displayName)
         }else{
             holder.dataBinding?.targetStatusRecycleTvName?.setTextColor(Color.BLACK)

@@ -6,6 +6,7 @@ import androidx.lifecycle.viewModelScope
 import com.existmg.library_base.viewmodel.BaseViewModel
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
+import com.existmg.module_remind.utils.logs.RemindLoggerManager
 import kotlinx.coroutines.launch
 
 /**
@@ -14,6 +15,7 @@ import kotlinx.coroutines.launch
  * @Description 这里是提醒倒计时详情页面的对应viewmodel
  */
 class RemindDetailViewModel(private val repository: RemindRepository): BaseViewModel() {
+    private val mLog = RemindLoggerManager.getLogger<RemindDetailViewModel>()
     private var _remindById = MutableLiveData<RemindEntity>()
     val remindById:LiveData<RemindEntity> get() = _remindById
     fun queryRemindEntity(dataId:Int){
@@ -23,6 +25,7 @@ class RemindDetailViewModel(private val repository: RemindRepository): BaseViewM
                 initData(remindEntity)//去调用Time相关的逻辑，判断并设置对应的ui
                 _remindById.value = remindEntity
             } catch (e: Exception) {
+                mLog.error("数据库查询单个提醒时出现异常：",e)
                 e.printStackTrace()
             }
         }

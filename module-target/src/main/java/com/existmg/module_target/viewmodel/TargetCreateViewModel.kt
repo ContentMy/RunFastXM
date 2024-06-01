@@ -18,6 +18,7 @@ import com.existmg.library_data.repository.TargetRepository
 import com.existmg.library_common.utils.calenderToDateString
 import com.existmg.library_common.utils.dateStringToLong
 import com.existmg.library_ui.utils.getImageResourceId
+import com.existmg.module_target.utils.logs.TargetLoggerManager
 import kotlinx.coroutines.launch
 import java.util.Calendar
 
@@ -31,6 +32,7 @@ class TargetCreateViewModel(
     private val notificationRepository: NotificationRepository,
     application: Application
     ): BaseApplicationViewModel(application) {
+    private val mLog = TargetLoggerManager.getLogger<TargetCreateViewModel>()
     // 可变的 MutableLiveData 用于存储icon资源名称
     var targetImageString = MutableLiveData<String>()
     // 可变的 MutableLiveData 用于存储目标名称以及和布局中控件的双向绑定 TODO:要增加对于title的判断，如果为空的话，就不能进行保存。这里应该使用Toast实现，看是否要自定义实现或者直接使用系统的
@@ -71,9 +73,9 @@ class TargetCreateViewModel(
     fun initExistTarget(target: TargetEntity) {//TODO:这里的初始化逻辑还有一个方案是直接传递实体类的id，根据id在这个页面再开始去数据库中查询。可以作为逻辑优化方案之一
         updateTarget = target//这里传进来后续是有可能要更新数据库的，所以赋值一个成员变量给数据库操作时使用
         val calendar = Calendar.getInstance()
-        targetImageString.value = target.targetImg//TODO:有维护一个图标列表，获取这里暂时没有用到，但是图标的逻辑没有处理，所以这里也暂时注释掉
-        targetTitleString.value = target.targetTitle
-        targetContentString.value = target.targetContent
+        targetImageString.value = if (target.targetImg.isNullOrEmpty()) "" else target.targetImg//TODO:有维护一个图标列表，获取这里暂时没有用到，但是图标的逻辑没有处理，所以这里也暂时注释掉
+        targetTitleString.value = if (target.targetTitle.isNullOrEmpty()) "" else target.targetTitle
+        targetContentString.value = if (target.targetContent.isNullOrEmpty()) "" else target.targetContent
         calendar.timeInMillis = target.targetStartTime
         targetStartTimeString.set(calenderToDateString(calendar))
         if (target.targetEndTime == 0L){
@@ -164,14 +166,15 @@ class TargetCreateViewModel(
             )
             try {
                 if (isNewTarget){
-                    println("插入数据${target.toString()}")
+                    mLog.debug("插入数据$target")
                     targetRepository.insertTarget(target)
                 }else{
-                    println("更新数据${target.toString()}")
+                    mLog.debug("更新数据$target")
                     targetRepository.updateTarget(target)
                 }
                 _target.value = target//通知UI进行操作
             } catch (t:Throwable){
+                mLog.error("数据库异常：",t)
                 t.printStackTrace()
             }
         }
@@ -183,17 +186,12 @@ class TargetCreateViewModel(
     /*================通知操作 - 开始===================*/
 
     fun startNotification(targetEntity: TargetEntity, application: Application){
-//        notificationRepository.startNotification(1, application)
         val dataId = targetEntity.id
         val iconResId = getImageResourceId(targetEntity.targetImg!!)
         val title = targetEntity.targetTitle!!
         val content = targetEntity.targetContent!!
         val duration = 5*1000L //TODO:这里的写死数据是为了方便测试
         notificationRepository.postNotification(application,dataId!!,iconResId,title,content,duration)
-    }
-
-    fun cancelNotification(application:Application){
-//        notificationRepository.cancelNotification(application)
     }
 
     /*================通知操作 - 结束===================*/
@@ -209,18 +207,5 @@ class TargetCreateViewModel(
                 targetEndTimeString.set(calenderToDateString(calendar))
             }
         }
-    }
-}
-
-class TargetCreateViewModelFactory(
-    private val repository: TargetRepository,
-    private val notificationRepository: NotificationRepository,
-    private val application: Application) : ViewModelProvider.Factory {
-    override fun <T : ViewModel> create(modelClass: Class<T>): T {
-        if (modelClass.isAssignableFrom(TargetCreateViewModel::class.java)) {
-            @Suppress("UNCHECKED_CAST")
-            return TargetCreateViewModel(repository,notificationRepository,application) as T
-        }
-        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

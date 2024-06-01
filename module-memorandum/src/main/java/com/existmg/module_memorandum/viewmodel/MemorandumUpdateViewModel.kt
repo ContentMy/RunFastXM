@@ -14,6 +14,7 @@ import com.existmg.library_data.db.entity.MemorandumEntity
 import com.existmg.library_data.db.entity.MemorandumImgEntity
 import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 import com.existmg.library_data.repository.MemorandumRepository
+import com.existmg.module_memorandum.utils.logs.MemorandumLoggerManager
 import kotlinx.coroutines.launch
 
 /**
@@ -24,7 +25,7 @@ import kotlinx.coroutines.launch
 class MemorandumUpdateViewModel(
     private var repository:MemorandumRepository,
     application: Application):BaseApplicationViewModel(application) {
-
+    private val mLog = MemorandumLoggerManager.getLogger<MemorandumUpdateViewModel>()
     var memorandumTitleString = MutableLiveData<String>()
 
     var memorandumContentString = MutableLiveData<String>()
@@ -67,6 +68,7 @@ class MemorandumUpdateViewModel(
                 repository.updateMemorandum(memorandumEntity)
                 timeShowInString(memorandumEntity.memorandumCreateTime,memorandumEntity.memorandumUpdateTime)
             } catch (e: Exception) {
+                mLog.error("数据库更新单个日记数据时出现异常：",e)
                 e.printStackTrace()
             }
         }

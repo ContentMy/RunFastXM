@@ -4,11 +4,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.existmg.library_base.viewmodel.BaseViewModel
-import com.existmg.library_data.db.entity.MemorandumEntity
-import com.existmg.library_data.db.entity.MemorandumImgEntity
 import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
-import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.MemorandumRepository
+import com.existmg.module_memorandum.utils.logs.MemorandumLoggerManager
 import kotlinx.coroutines.flow.distinctUntilChanged
 import kotlinx.coroutines.launch
 
@@ -18,6 +16,7 @@ import kotlinx.coroutines.launch
  * @Description 记录生活入口页面对应的viewmodel，主要是做了数据展示的相关操作
  */
 class MemorandumViewModel(private var repository: MemorandumRepository):BaseViewModel() {
+    private val mLog = MemorandumLoggerManager.getLogger<MemorandumViewModel>()
     /*========================页面跳转管理============================*/
     //核心思想通过标志位来完成是否跳转的响应处理
     private val _navigateToCreateMemorandumActivity = MutableLiveData<Boolean>()
@@ -52,21 +51,21 @@ class MemorandumViewModel(private var repository: MemorandumRepository):BaseView
         if (hasCollectedData){
             return
         }
-        println("try to query data")
+        mLog.debug("try to query data")
         viewModelScope.launch {
             try {
                 repository.getAllMemorandumWithImg()
                     .distinctUntilChanged() // 确保仅在数据实际变动时才触发
                     .collect{
-                    println("获取到了数据${it.size}")
-                    it.forEach {
-                        println(it)
+                        mLog.debug("获取到了数据${it.size}")
+                        it.forEach {
+                            mLog.debug(it.toString())
+                        }
+                        _memorandumData.value = it
                     }
-                    _memorandumData.value = it
-                }
                 hasCollectedData = true
             }catch (e:Throwable){
-                println("从数据库中获取数据列表时发生了异常" + e.message)
+                mLog.error("从数据库中获取数据列表时发生了异常：", e)
                 e.printStackTrace()
             }
         }
@@ -77,7 +76,7 @@ class MemorandumViewModel(private var repository: MemorandumRepository):BaseView
             try {
 //                repository.deleteMemorandum(entity)
             }catch (e:Throwable){
-                println("从数据库中删除数据时发生了异常" + e.message)
+                mLog.error("从数据库中删除数据时发生了异常：", e)
                 e.printStackTrace()
             }
         }

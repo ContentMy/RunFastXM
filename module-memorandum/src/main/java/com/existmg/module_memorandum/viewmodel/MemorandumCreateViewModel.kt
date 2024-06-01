@@ -10,6 +10,7 @@ import com.existmg.library_data.db.entity.MemorandumEntity
 import com.existmg.library_data.db.entity.MemorandumImgEntity
 import com.existmg.library_data.repository.MemorandumRepository
 import com.existmg.module_memorandum.model.MemorandumImageItem
+import com.existmg.module_memorandum.utils.logs.MemorandumLoggerManager
 import kotlinx.coroutines.launch
 
 /**
@@ -20,7 +21,7 @@ import kotlinx.coroutines.launch
 class MemorandumCreateViewModel(
     private var repository:MemorandumRepository,
     application: Application):BaseApplicationViewModel(application) {
-
+    private val mLog = MemorandumLoggerManager.getLogger<MemorandumCreateViewModel>()
     var memorandumTitleString = MutableLiveData<String>()
 
     var memorandumContentString = MutableLiveData<String>()
@@ -47,6 +48,7 @@ class MemorandumCreateViewModel(
                 repository.insertMemorandumWithImg(memorandumEntity,imgEntities)
                 _finishActivity.value = true
             } catch (e: Exception) {
+                mLog.error("数据库插入单个日记数据时发生异常：",e)
                 e.printStackTrace()
             }
         }

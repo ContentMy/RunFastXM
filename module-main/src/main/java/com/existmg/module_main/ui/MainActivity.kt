@@ -8,6 +8,7 @@ import com.existmg.library_base.manager.viewModelFactory
 import com.existmg.module_main.R
 import com.existmg.module_main.databinding.MainActivityMainBinding
 import com.existmg.module_main.ui.adapter.ViewPagerAdapter
+import com.existmg.module_main.utils.logs.MainLoggerManager
 import com.existmg.module_main.viewmodel.MainViewModel
 import com.tencent.bugly.crashreport.CrashReport
 
@@ -19,6 +20,7 @@ import com.tencent.bugly.crashreport.CrashReport
 class MainActivity : BaseMVVMActivity<MainViewModel, MainActivityMainBinding>() {
     private lateinit var adapter: ViewPagerAdapter
 //    private lateinit var vibrator: Vibrator
+    private val mLog = MainLoggerManager.getLogger<MainActivity>()
     override fun beforeContentView() {
         //TODO:暂时放在MainActivity中初始化bugly
         CrashReport.initCrashReport(applicationContext, "a2cd585ea9", true);//boolean表示是否调试
@@ -65,8 +67,8 @@ class MainActivity : BaseMVVMActivity<MainViewModel, MainActivityMainBinding>() 
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
 //                vibrator.vibrate(50)//添加点击震动
-                println("页面选择$position")
-                println("值为：" + mViewModel.selectedItem.value)
+                mLog.debug("页面选择$position")
+                mLog.debug("值为：" + mViewModel.selectedItem.value)
                 mViewModel.selectedItem.value = position
                 when (position) {
                     0 -> mBinding.mainBotNav.selectedItemId = R.id.navigation_remind

@@ -7,6 +7,7 @@ import androidx.work.Worker
 import androidx.work.WorkerParameters
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.db.entity.RemindEntity
+import com.existmg.module_remind.utils.logs.RemindLoggerManager
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -21,6 +22,7 @@ class RemindStatusWork(
     context: Context,
     workerParams: WorkerParameters
     ) : Worker(context, workerParams) {
+    private val mLog = RemindLoggerManager.getLogger<RemindStatusWork>()
     companion object {
         fun buildWorkRequest(dataId:Int,duration:Long,endTime:Long): OneTimeWorkRequest {
             val inputData = Data.Builder()
@@ -38,7 +40,7 @@ class RemindStatusWork(
     override fun doWork(): Result {
         val dataId = inputData.getInt("dataId",0)
         val endTime = inputData.getLong("endTime",0)
-        println("执行到dowork ${System.currentTimeMillis() - endTime}  \n $dataId \n $endTime")
+        mLog.debug("执行到dowork ${System.currentTimeMillis() - endTime}  \n $dataId \n $endTime")
         if (System.currentTimeMillis() - endTime>= 0){
             updateRemind(dataId)
         }
@@ -47,7 +49,7 @@ class RemindStatusWork(
     }
 
     private fun updateRemind(dataId: Int) {
-        println("执行替换数据")
+        mLog.debug("执行替换数据")
         val repository = RemindModuleRoomAccessor.getRemindRepository()
         CoroutineScope(Dispatchers.IO).launch {
             val entity = repository.getRemindById(dataId)

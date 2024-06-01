@@ -15,6 +15,7 @@ import com.existmg.library_data.repository.RemindRepository
 import com.existmg.library_ui.views.countdown.CountDownClock
 import com.existmg.module_remind.R
 import com.existmg.module_remind.databinding.RemindActivityDetailBinding
+import com.existmg.module_remind.utils.logs.RemindLoggerManager
 import com.existmg.module_remind.viewmodel.RemindDetailViewModel
 
 /**
@@ -28,6 +29,7 @@ import com.existmg.module_remind.viewmodel.RemindDetailViewModel
  */
 class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel,RemindActivityDetailBinding>(),
     View.OnClickListener {
+    private val mLog = RemindLoggerManager.getLogger<RemindDetailActivity>()
     private var isRunning: Boolean = true
     private var mCountDownTime = 0L
 
@@ -65,7 +67,7 @@ class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel,RemindActivi
             mBinding.remindDetailTb.uiToolbarTvTitle.text = remindData.remindTitle
         }else{//如果为空，是从通知点击进入的页面
             val dataId = intent.getIntExtra("dataId",0)
-            println("通知进入 id为：$dataId")
+            mLog.debug("通知进入 id为：$dataId")
             mViewModel.queryRemindEntity(dataId)
         }
 //        mBinding.remindDetailTb.uiToolbarTvRight.text = resources.getString(R.string.remind_string_exchanged)

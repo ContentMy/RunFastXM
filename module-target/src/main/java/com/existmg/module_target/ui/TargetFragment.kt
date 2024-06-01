@@ -19,6 +19,7 @@ import com.existmg.library_data.db.entity.TargetWithTodayCheckIn
 import com.existmg.library_data.repository.TargetRepository
 import com.existmg.module_target.databinding.TargetLayoutFragmentBinding
 import com.existmg.module_target.databinding.TargetRecycleItemViewBinding
+import com.existmg.module_target.utils.logs.TargetLoggerManager
 
 /**
  * @Author ContentMy
@@ -28,7 +29,7 @@ import com.existmg.module_target.databinding.TargetRecycleItemViewBinding
 @Route(path = RouterFragmentPath.Target.PAGER_TARGET)
 class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBinding>(),TargetRecycleViewAdapter.OnItemDeleteClickCallback,
     TargetRecycleViewAdapter.OnItemCheckInCallback {
-
+    private val mLog = TargetLoggerManager.getLogger<TargetFragment>()
     private lateinit var adapter: TargetRecycleViewAdapter
     private var list: MutableList<TargetWithTodayCheckIn> = ArrayList()
 
@@ -99,7 +100,7 @@ class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBindin
     }
 
     override fun itemCheckIn(item: TargetWithTodayCheckIn, targetCheckIn: Boolean) {
-        println("点击了打卡按钮$targetCheckIn")
+        mLog.debug("点击了打卡按钮$targetCheckIn")
         val targetEntity = item.targetEntity
         val targetCheckInEntity = item.targetCheckInEntity
         if (targetCheckIn){

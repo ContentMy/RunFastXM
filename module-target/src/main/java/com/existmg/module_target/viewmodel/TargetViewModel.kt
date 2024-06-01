@@ -10,6 +10,7 @@ import com.existmg.library_data.db.entity.TargetCheckInEntity
 import com.existmg.library_data.db.entity.TargetEntity
 import com.existmg.library_data.db.entity.TargetWithTodayCheckIn
 import com.existmg.library_data.repository.TargetRepository
+import com.existmg.module_target.utils.logs.TargetLoggerManager
 import kotlinx.coroutines.launch
 
 /**
@@ -18,6 +19,7 @@ import kotlinx.coroutines.launch
  * @Description 这里是目标列表页面的对应viewmodel，主要是做了数据展示以及跳转的逻辑处理
  */
 class TargetViewModel(private val repository: TargetRepository): BaseViewModel() {
+    private val mLog = TargetLoggerManager.getLogger<TargetViewModel>()
     /*===================页面跳转的处理-开始=======================*/
     //核心思想通过标志位来完成是否跳转的响应处理
     private val _navigateToCreateTargetActivity = MutableLiveData<Boolean>()
@@ -59,18 +61,18 @@ class TargetViewModel(private val repository: TargetRepository): BaseViewModel()
      * 然后根据返回的数据更新到livedata中，交由观察数据view去展示
      */
     fun refreshData(){
-        println("try to query data")
+        mLog.debug("try to query data")
         viewModelScope.launch {
             try {
-                println("读取数据库时的开始时间${getStartTimeOfDay()}\n结束时间${getEndTimeOfDay()}")
+                mLog.debug("读取数据库时的开始时间${getStartTimeOfDay()}\n结束时间${getEndTimeOfDay()}")
                 repository.getAllTargetsWithTodayCheckIn(getStartTimeOfDay(), getEndTimeOfDay()).collect{
                     it.forEach {
-                        println("这里是每日数据的记录$it")
+                        mLog.debug("这里是每日数据的记录$it")
                     }
                     _targetData.value = it
                 }
             }catch (e:Throwable){
-                println("从数据库中获取数据列表时发生了异常" + e.message)
+                mLog.error("从数据库中获取数据列表时发生了异常",e)
                 e.printStackTrace()
             }
         }
@@ -88,7 +90,7 @@ class TargetViewModel(private val repository: TargetRepository): BaseViewModel()
             try {
                 repository.deleteTarget(targetEntity)
             } catch (e: Exception) {
-                println("从数据库中删除数据时发生了异常" + e.message)
+                mLog.error("从数据库中删除数据时发生了异常",e)
                 e.printStackTrace()
             }
         }
@@ -102,7 +104,7 @@ class TargetViewModel(private val repository: TargetRepository): BaseViewModel()
      * 根据点击时的id，组合封装一个目标打卡实体类，用来插入到目标打卡的数据表中
      */
     fun checkInTarget(targetId:Int){//TODO:id字段在release上线前需要确认是否修改为long
-        println("插入打卡数据时的id为：$targetId")
+        mLog.debug("插入打卡数据时的id为：$targetId")
         viewModelScope.launch {
             try {
                 val targetCheckInEntity = TargetCheckInEntity(
@@ -112,7 +114,7 @@ class TargetViewModel(private val repository: TargetRepository): BaseViewModel()
                 )
                 repository.insertTargetCheckInEntity(targetCheckInEntity)
             } catch (e: Exception) {
-                println("从数据库中添加打卡数据时发生了异常" + e.message)
+                mLog.error("从数据库中添加打卡数据时发生了异常",e)
                 e.printStackTrace()
             }
         }
@@ -131,7 +133,7 @@ class TargetViewModel(private val repository: TargetRepository): BaseViewModel()
             try {
                 repository.deleteTargetCheckInEntity(targetCheckInEntity)
             } catch (e: Exception) {
-                println("从数据库中删除打卡数据时发生了异常" + e.message)
+                mLog.error("从数据库中删除打卡数据时发生了异常",e)
                 e.printStackTrace()
             }
         }
@@ -155,7 +157,7 @@ class TargetViewModel(private val repository: TargetRepository): BaseViewModel()
                 )
                 repository.updateTargetCheckInEntity(targetCancelCheckInEntity)
             } catch (e: Exception) {
-                println("从数据库中删除打卡数据时发生了异常" + e.message)
+                mLog.error("从数据库中删除打卡数据时发生了异常",e)
                 e.printStackTrace()
             }
         }
@@ -164,15 +166,15 @@ class TargetViewModel(private val repository: TargetRepository): BaseViewModel()
 
     fun deleteTargetCheckInWithTargetId(id: Int?) {
         if (id == null){
-            println("删除所有和目标相关的打卡记录时，目标的id为null")
+            mLog.error("删除所有和目标相关的打卡记录时，目标的id为null")
             return
         }
         viewModelScope.launch {
             try {
-                println("删除打卡数据，他的id为：$id")
+                mLog.debug("删除打卡数据，他的id为：$id")
                 repository.deleteTargetCheckInWithTargetId(id)
             } catch (e: Exception) {
-                println("从数据库中删除打卡数据时发生了异常" + e.message)
+                mLog.error("从数据库中删除打卡数据时发生了异常",e)
                 e.printStackTrace()
             }
         }

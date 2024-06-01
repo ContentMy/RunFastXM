@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.existmg.library_base.viewmodel.BaseApplicationViewModel
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
+import com.existmg.module_remind.utils.logs.RemindLoggerManager
 import kotlinx.coroutines.launch
 
 /**
@@ -16,6 +17,7 @@ import kotlinx.coroutines.launch
  * @Description 这里是提醒列表页面对应的viewmodel，主要是用于数据展示以及跳转的相关处理
  */
 class RemindViewModel(private var repository: RemindRepository,application: Application) : BaseApplicationViewModel(application){
+    private val mLog = RemindLoggerManager.getLogger<RemindViewModel>()
     /*===================页面跳转的处理-开始=======================*/
     //核心思想通过标志位来完成是否跳转的响应处理
     private val _navigateToCreateTargetActivity = MutableLiveData<Boolean>()
@@ -58,6 +60,7 @@ class RemindViewModel(private var repository: RemindRepository,application: Appl
                     _remindData.value = it
                 }
             } catch (e: Throwable) {
+                mLog.error("数据库查询所有未完成提醒列表时出现异常：",e)
                 e.printStackTrace()
             }
         }
@@ -68,6 +71,7 @@ class RemindViewModel(private var repository: RemindRepository,application: Appl
             try {
                 repository.deleteRemind(remindEntity)
             } catch (e: Throwable) {
+                mLog.error("数据库删除单个提醒时出现异常：",e)
                 e.printStackTrace()
             }
         }

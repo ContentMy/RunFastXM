@@ -12,6 +12,7 @@ import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
 import com.existmg.library_ui.notification.NotificationRepository
 import com.existmg.module_remind.R
+import com.existmg.module_remind.utils.logs.RemindLoggerManager
 import com.existmg.module_remind.works.RemindStatusWork
 import kotlinx.coroutines.launch
 
@@ -24,6 +25,7 @@ class RemindCreateViewModel(
     private var remindRepository: RemindRepository,
     private var notificationRepository: NotificationRepository,
     application: Application) : BaseApplicationViewModel(application) {
+    private val mLog = RemindLoggerManager.getLogger<RemindCompletedViewmodel>()
     val editTextContent = MutableLiveData<String>()
     var mTime = ObservableField<String>()
 
@@ -57,14 +59,15 @@ class RemindCreateViewModel(
                         remindStartTime =  System.currentTimeMillis(),
                         remindEndTime = remindStartTime + remindTime
                     )
-                    println("入库前：${remindEntity.remindCompleteStatus}")
+                    mLog.debug("入库前：${remindEntity.remindCompleteStatus}")
                     //这里得到的id是long，原因是因为insert注解返回long类型是id，int类型是表的行号，
                     // 并且自增长的主键定义是int型的，所以在查询是将long转为int也不会丢失精度导致数据错误
                     val remindLongId = remindRepository.insertRemind(remindEntity)//已解决
                     val remindUpdateEntity = remindRepository.getRemindById(remindLongId.toInt())
-                    println("${remindUpdateEntity.remindCompleteStatus}")
+                    mLog.debug("${remindUpdateEntity.remindCompleteStatus}")
                     _remind.value = remindUpdateEntity //TODO:这里是问题所在，id在传递的一开始就为null，方案是去dao中返回id，但是是异步的，需要考虑怎么进行优化。已解决，后续Beta版本结束统一收集问题时清除
                 } catch (e: Exception) {
+                    mLog.error("数据库插入单个提醒时出现异常：",e)
                     e.printStackTrace()
                 }
             }
@@ -93,7 +96,7 @@ class RemindCreateViewModel(
         val title = remindEntity.remindTitle!!
         val content = "提醒时间到了哦！"
         val duration = remindEntity.remindTime
-        println("在创建提醒时，id为：$dataId")
+        mLog.debug("在创建提醒时，id为：$dataId")
         notificationRepository.postNotification(application, dataId!!,iconResId, title, content, duration)
     }
 
@@ -109,7 +112,7 @@ class RemindCreateViewModel(
         val id = if (remindEntity.id == null) 0 else remindEntity.id
         val time = remindEntity.remindTime
         val endTime = remindEntity.remindEndTime
-        println("处理状态时的布尔值：${remindEntity.remindCompleteStatus}")
+        mLog.debug("处理状态时的布尔值：${remindEntity.remindCompleteStatus}")
         //后启动后台定时任务去计算时间，在满足逻辑的情况下进行已完成提醒的状态修改
         val workRequest = RemindStatusWork.buildWorkRequest(id!!,time, endTime)
         WorkManager.getInstance(application).enqueue(workRequest)

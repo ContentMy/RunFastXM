@@ -169,7 +169,6 @@ class TargetRepository(
         //TODO：bug.并联表查询当天目标的打卡记录时，会在未打卡的时间里显示已打卡，具体如下，
         // 创建新目标->进行打卡（显示已打卡）-> 杀死应用，更改系统时间一天后 -> 重新进入应用，查询目标显示已打卡（正常应该是未打卡）
         // 增加日志想排查问题，结果加入以下堆栈数据时，数据正常展示了显示未打卡。目前怀疑是room的缓存问题，后续需求完成后，需要进行复现以及查找问题
-        println("开始时间：\n$startOfDay,\n结束时间：\n$endOfDay")
         return targetDao.getAllTargetsWithTodayCheckIn(startOfDay, endOfDay)
     }
 
