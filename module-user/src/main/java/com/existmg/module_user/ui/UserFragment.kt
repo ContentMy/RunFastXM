@@ -12,6 +12,7 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.existmg.library_base.fragment.BaseMvvmFragment
 import com.existmg.library_base.manager.viewModelFactory
 import com.existmg.library_common.router.RouterFragmentPath
+import com.existmg.library_common.utils.ToastUtil
 import com.existmg.module_user.R
 import com.existmg.module_user.databinding.UserLayoutFragmentBinding
 import com.existmg.module_user.ui.activity.UserAboutAppActivity
@@ -64,10 +65,10 @@ class UserFragment:BaseMvvmFragment<UserViewModel,UserLayoutFragmentBinding>(),
                 startActivity(Intent(requireContext(),UserAboutAppActivity::class.java))
             }
             mBinding.userLlPrivacy->{
-                Toast.makeText(requireContext(), "下版本完成", Toast.LENGTH_SHORT).show()
+                ToastUtil.showShort(requireContext(), "下版本完成")
             }
             mBinding.userLlInstructions->{
-                Toast.makeText(requireContext(), "下版本完成", Toast.LENGTH_SHORT).show()
+                ToastUtil.showShort(requireContext(), "下版本完成")
             }
         }
     }

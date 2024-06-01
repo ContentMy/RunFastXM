@@ -9,6 +9,7 @@ import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import com.existmg.library_base.activity.BaseMVVMActivity
 import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
@@ -79,7 +80,7 @@ class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel,RemindActivi
             }
 
             override fun countdownFinished() {
-                Toast.makeText(this@RemindDetailActivity, "Finished", Toast.LENGTH_SHORT).show()
+                ToastUtil.showShort(this@RemindDetailActivity, "Finished")
                 mBinding.remindDetailCdc.resetCountdownTimer()
                 isRunning = false
                 mBinding.remindDetailCdc.visibility = View.GONE

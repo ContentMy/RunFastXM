@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.existmg.library_base.activity.BaseMVVMActivity
 import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.repository.RemindRepository
 import com.existmg.library_ui.databinding.UiLayoutHorizontalTimeSelectItemBinding
@@ -132,7 +133,7 @@ class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel,RemindActivi
                     hideSoftInput(mBinding.remindCreateIvSave)
                     finish()
                 }else{
-                    Toast.makeText(this, resources.getString(R.string.remind_toast_create_name_content), Toast.LENGTH_SHORT).show()
+                    ToastUtil.showShort(this, resources.getString(R.string.remind_toast_create_name_content))
                 }
             }
 

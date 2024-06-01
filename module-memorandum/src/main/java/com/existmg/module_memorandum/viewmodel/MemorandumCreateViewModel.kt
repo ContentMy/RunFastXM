@@ -6,6 +6,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import com.existmg.library_base.viewmodel.BaseApplicationViewModel
+import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_data.db.entity.MemorandumEntity
 import com.existmg.library_data.db.entity.MemorandumImgEntity
 import com.existmg.library_data.repository.MemorandumRepository
@@ -30,7 +31,7 @@ class MemorandumCreateViewModel(
     val finishActivity:LiveData<Boolean> get() = _finishActivity
     fun insertMemorandum(imgList: List<MemorandumImageItem>) {
         if (memorandumTitleString.value.isNullOrEmpty()){
-            Toast.makeText(getApplication(), "记录下心情才能保存哦", Toast.LENGTH_SHORT).show()
+            ToastUtil.showShort(getApplication(), "记录下心情才能保存哦")
             return
         }
         viewModelScope.launch {

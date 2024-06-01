@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.existmg.library_base.activity.BaseMVVMActivity
 import com.existmg.library_base.manager.viewModelFactory
 import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.utils.ToastUtil
 import com.existmg.module_remind.R
 import com.existmg.module_remind.databinding.RemindActivityGuideBinding
 
@@ -68,11 +69,11 @@ class RemindGuideActivity:BaseMVVMActivity<RemindGuideViewModel,RemindActivityGu
         }
 
         mBinding.remindGuideFab.setOnClickListener{
-            Toast.makeText(this, "结束引导后可以创建喔~", Toast.LENGTH_SHORT).show()
+            ToastUtil.showShort(this, "结束引导后可以创建喔~")
         }
 
         mBinding.remindGuideTitleToolbar.uiTitleToolbarIvRight.setOnClickListener{
-            Toast.makeText(this, "结束引导后可以查看喔~", Toast.LENGTH_SHORT).show()
+            ToastUtil.showShort(this, "结束引导后可以查看喔~")
         }
     }
 

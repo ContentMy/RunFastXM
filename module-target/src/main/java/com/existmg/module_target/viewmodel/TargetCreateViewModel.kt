@@ -9,6 +9,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.existmg.library_base.viewmodel.BaseApplicationViewModel
+import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_data.local.IconsManager
 import com.existmg.library_ui.notification.NotificationRepository
 import com.existmg.library_data.enums.DayStatus
@@ -144,12 +145,12 @@ class TargetCreateViewModel(
     fun saveTarget(isNewTarget:Boolean = true){
         if (targetTitleString.value.isNullOrEmpty()){
             //TODO: 后续封装log库，这里需要去给出log，目标名称不能为空，并且也要封装一个Toast去替换系统Toast，给出对应的提示给用户。并且现在小米会弹出携带应用名称的Toast，需要封装处理
-            Toast.makeText(getApplication(),"目标名称不能为空",Toast.LENGTH_SHORT).show()
+            ToastUtil.showShort(getApplication(),"目标名称不能为空")
             return
         }
 
         if (endTimeLong != 0L && endTimeLong < startTimeLong){//0L代表永不结束
-            Toast.makeText(getApplication(),"目标结束时间不能比目标开始时间早哦",Toast.LENGTH_SHORT).show()
+            ToastUtil.showShort(getApplication(),"目标结束时间不能比目标开始时间早哦")
             return
         }
         viewModelScope.launch {
