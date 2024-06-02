@@ -1,12 +1,7 @@
 package com.existmg.module_user.ui
 
 import android.content.Intent
-import android.os.Bundle
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
-import android.widget.Toast
-import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.existmg.library_base.fragment.BaseMvvmFragment
@@ -16,6 +11,7 @@ import com.existmg.library_common.utils.ToastUtil
 import com.existmg.module_user.R
 import com.existmg.module_user.databinding.UserLayoutFragmentBinding
 import com.existmg.module_user.ui.activity.UserAboutAppActivity
+import com.existmg.module_user.ui.activity.UserPrivacyActivity
 import com.existmg.module_user.viewmodel.UserViewModel
 
 /**
@@ -65,7 +61,8 @@ class UserFragment:BaseMvvmFragment<UserViewModel,UserLayoutFragmentBinding>(),
                 startActivity(Intent(requireContext(),UserAboutAppActivity::class.java))
             }
             mBinding.userLlPrivacy->{
-                ToastUtil.showShort(requireContext(), "下版本完成")
+                //跳转到隐私页面
+                startActivity(Intent(requireContext(),UserPrivacyActivity::class.java))
             }
             mBinding.userLlInstructions->{
                 ToastUtil.showShort(requireContext(), "下版本完成")

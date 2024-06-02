@@ -4,4 +4,6 @@
     <string name="user_setting_string_privacy">隐私政策与用户协议</string>
     <string name="user_setting_string_about_us">关于小马快跑</string>
     <string name="user_setting_string_instructions">使用说明</string>
+
+    <string name="user_privacy_content_string">暂无</string>
 </resources>
