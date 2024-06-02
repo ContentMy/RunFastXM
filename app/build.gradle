@@ -90,8 +90,7 @@ dependencies {
 //    kapt rootProject.ext.dependencies.hiltCompiler
     implementation rootProject.ext.androidx.room
     kapt rootProject.ext.androidx.roomCompiler
-    //查看数据库
-    debugImplementation 'com.facebook.stetho:stetho:1.5.0'
-//    debugImplementation 'com.facebook.stetho:stetho-okhttp3:1.5.0' // 如果你使用OkHttp
+    //leakcanary
+    debugImplementation rootProject.ext.dependencies.leakcanary
 
 }
