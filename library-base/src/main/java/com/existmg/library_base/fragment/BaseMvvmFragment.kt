@@ -21,7 +21,7 @@ import com.existmg.library_base.viewmodel.BaseViewModel
  * @Date 2024/3/28 11:37 PM
  * @Description 这里是基于MVVM的基类Fragment，继承了最基本的封装的基类，然后加入了mvvm相关的封装内容
  */
-abstract class BaseMvvmFragment<VM : ViewModel, VB : ViewDataBinding> : BaseFragment() {
+abstract class BaseMvvmFragment<VM : BaseViewModel, VB : ViewDataBinding> : BaseFragment() {
     protected lateinit var mViewModel: VM
     protected lateinit var mBinding: VB
 
@@ -41,6 +41,7 @@ abstract class BaseMvvmFragment<VM : ViewModel, VB : ViewDataBinding> : BaseFrag
      */
     override fun beforeInit() {
         mViewModel = createViewModel()
+        lifecycle.addObserver(mViewModel)
         bindViewModel()
     }
 

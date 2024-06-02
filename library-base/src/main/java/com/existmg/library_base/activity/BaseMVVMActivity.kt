@@ -15,13 +15,14 @@ import com.existmg.library_base.viewmodel.BaseViewModel
  * @Date: 2024/4/6 10:46 AM
  * @Description: 这里是基于MVVM的基类Activity，继承了最基本的封装的基类，然后加入了mvvm相关的封装内容
  */
-abstract class BaseMVVMActivity<VM : ViewModel, VB : ViewDataBinding> : BaseActivity() {
+abstract class BaseMVVMActivity<VM : BaseViewModel, VB : ViewDataBinding> : BaseActivity() {
     protected lateinit var mViewModel: VM
     protected lateinit var mBinding: VB
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         initObserver()
+        lifecycle.addObserver(mViewModel)
     }
 
     /**
@@ -72,5 +73,4 @@ abstract class BaseMVVMActivity<VM : ViewModel, VB : ViewDataBinding> : BaseActi
     private fun createViewModel(): VM {
         return ViewModelProvider(this, provideViewModelFactory())[getViewModelClass()]
     }
-
 }

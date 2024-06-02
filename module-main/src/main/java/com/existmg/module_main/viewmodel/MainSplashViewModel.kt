@@ -5,7 +5,6 @@ import android.content.Context
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import com.existmg.library_base.viewmodel.BaseApplicationViewModel
-import com.existmg.library_base.viewmodel.BaseViewModel
 
 /**
  * @Author ContentMy
