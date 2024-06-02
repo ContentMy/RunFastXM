@@ -8,5 +8,9 @@
             android:exported="false"/>
         <activity android:name=".ui.activity.UserPrivacyActivity"
             android:exported="false"/>
+        <activity android:name=".ui.activity.UserInstructionActivity"
+            android:exported="false"/>
+        <activity android:name=".ui.activity.UserInstructionDetailActivity"
+            android:exported="false"/>
     </application>
 </manifest>

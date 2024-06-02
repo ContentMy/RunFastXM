@@ -11,6 +11,7 @@ import com.existmg.library_common.utils.ToastUtil
 import com.existmg.module_user.R
 import com.existmg.module_user.databinding.UserLayoutFragmentBinding
 import com.existmg.module_user.ui.activity.UserAboutAppActivity
+import com.existmg.module_user.ui.activity.UserInstructionActivity
 import com.existmg.module_user.ui.activity.UserPrivacyActivity
 import com.existmg.module_user.viewmodel.UserViewModel
 
@@ -65,7 +66,8 @@ class UserFragment:BaseMvvmFragment<UserViewModel,UserLayoutFragmentBinding>(),
                 startActivity(Intent(requireContext(),UserPrivacyActivity::class.java))
             }
             mBinding.userLlInstructions->{
-                ToastUtil.showShort(requireContext(), "下版本完成")
+                //跳转到说明页面
+                startActivity(Intent(requireContext(), UserInstructionActivity::class.java))
             }
         }
     }

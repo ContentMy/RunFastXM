@@ -6,4 +6,8 @@
     <string name="user_setting_string_instructions">使用说明</string>
 
     <string name="user_privacy_content_string">暂无</string>
+
+    <string name="user_instruction_remind_string">提醒功能使用说明</string>
+    <string name="user_instruction_target_string">目标功能使用说明</string>
+    <string name="user_instruction_memorandum_string">记录生活功能使用说明</string>
 </resources>
