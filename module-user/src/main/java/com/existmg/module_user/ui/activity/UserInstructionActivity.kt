@@ -42,6 +42,7 @@ class UserInstructionActivity:BaseMVVMActivity<UserInstructionViewModel,UserLayo
         mBinding.userInstructionBtnRemind.setOnClickListener(this)
         mBinding.userInstructionBtnTarget.setOnClickListener(this)
         mBinding.userInstructionBtnMemorandum.setOnClickListener(this)
+        mBinding.userInstructionToolbar.uiToolbarIvBack.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -62,6 +63,10 @@ class UserInstructionActivity:BaseMVVMActivity<UserInstructionViewModel,UserLayo
                 val intent = Intent(this, UserInstructionDetailActivity::class.java)
                 intent.putExtra("instructionType","memorandum")
                 startActivity(intent)
+            }
+
+            mBinding.userInstructionToolbar.uiToolbarIvBack->{
+                finish()
             }
         }
     }

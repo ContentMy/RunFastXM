@@ -93,4 +93,28 @@ class RemindViewModel(private var repository: RemindRepository,application: Appl
         _showGuide.value = isFirstTime
     }
     /*===================引导功能处理-开始=======================*/
+
+
+    /*===================优化引导的处理-开始=======================*/
+    private val _optimizationShow = MutableLiveData<Boolean>()
+    val optimizationShow : LiveData<Boolean> get() = _optimizationShow
+    fun onOptimizationShow(){
+        val isFirstTime = sharedPreferences.getBoolean("remindOptimization", true)
+        _optimizationShow.value = isFirstTime
+    }
+
+    private val _optimizationClose = MutableLiveData<Boolean>()
+    val optimizationClose : LiveData<Boolean> get() = _optimizationClose
+    fun onOptimizationClose(){
+        sharedPreferences.edit().putBoolean("remindOptimization", false).apply()
+        _optimizationClose.value = true
+    }
+
+    private val _navigateToOptimizationActivity = MutableLiveData<Boolean>()
+    val navigateToOptimizationActivity : LiveData<Boolean> get() = _navigateToOptimizationActivity
+
+    fun onOptimizationJump(){
+        _navigateToOptimizationActivity.value = true
+    }
+    /*===================优化引导的处理-结束=======================*/
 }

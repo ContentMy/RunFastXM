@@ -43,6 +43,7 @@ class RouterFragmentPath {
 
         /** 个人设置页面  */
         const val PAGER_USER = "$USER/User"
+        const val OPTIMIZATION_USER = "$USER/User/Optimization"
     }
 
 }

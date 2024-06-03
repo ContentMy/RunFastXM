@@ -12,5 +12,7 @@
             android:exported="false"/>
         <activity android:name=".ui.activity.UserInstructionDetailActivity"
             android:exported="false"/>
+        <activity android:name=".ui.activity.UserRemindOptimizationActivity"
+            android:exported="false"/>
     </application>
 </manifest>

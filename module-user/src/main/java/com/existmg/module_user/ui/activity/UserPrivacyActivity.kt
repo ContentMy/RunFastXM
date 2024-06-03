@@ -34,4 +34,10 @@ class UserPrivacyActivity :BaseMVVMActivity<UserPrivacyViewModel,UserLayoutPriva
     override fun initData() {
         mBinding.userPrivacyToolbar.uiToolbarTvTitle.text = resources.getText(R.string.user_setting_string_privacy)
     }
+
+    override fun initListener() {
+        mBinding.userPrivacyToolbar.uiToolbarIvBack.setOnClickListener {
+            finish()
+        }
+    }
 }

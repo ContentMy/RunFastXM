@@ -9,10 +9,12 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
+import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.existmg.library_base.fragment.BaseMvvmFragment
 import com.existmg.library_base.manager.viewModelFactoryWithParams
 import com.existmg.library_common.router.RouterFragmentPath
+import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
@@ -69,6 +71,7 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
         mBinding.remindIncludeTitleToolbar.uiTitleToolbarIvRight.visibility = View.VISIBLE
         // 检查是否首次进入
         mViewModel.checkIfFirstTime("RemindGuideActivity")
+        mViewModel.onOptimizationShow()
     }
 
     override fun initData() {
@@ -109,6 +112,27 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragme
         mViewModel.showGuide.observe(viewLifecycleOwner){
             if (it) {
                 startActivity(Intent(requireContext(),RemindGuideActivity::class.java))
+            }
+        }
+
+        mViewModel.optimizationShow.observe(viewLifecycleOwner){
+            if (it){
+                mBinding.remindOptimizationLl.visibility = View.VISIBLE
+                mBinding.remindOptimizationIvClose.visibility = View.VISIBLE
+            }
+        }
+
+        mViewModel.optimizationClose.observe(viewLifecycleOwner){
+            if (it){
+                mBinding.remindOptimizationLl.visibility = View.GONE
+                mBinding.remindOptimizationIvClose.visibility = View.GONE
+            }
+        }
+
+        mViewModel.navigateToOptimizationActivity.observe(viewLifecycleOwner){
+            if (it){
+                //使用路由跳转至user模块的UserRemindOptimizationActivity
+                ARouter.getInstance().build(RouterFragmentPath.User.OPTIMIZATION_USER).navigation()
             }
         }
     }

@@ -4,10 +4,18 @@
     <string name="user_setting_string_privacy">隐私政策与用户协议</string>
     <string name="user_setting_string_about_us">关于小马快跑</string>
     <string name="user_setting_string_instructions">使用说明</string>
+    <string name="user_setting_string_optimization">提醒设置</string>
 
     <string name="user_privacy_content_string">暂无</string>
 
     <string name="user_instruction_remind_string">提醒功能使用说明</string>
     <string name="user_instruction_target_string">目标功能使用说明</string>
     <string name="user_instruction_memorandum_string">记录生活功能使用说明</string>
+
+    <string name="user_optimization_notification_content_string">开启通知权限</string>
+    <string name="user_optimization_notification_switch_open_string">已开启</string>
+    <string name="user_optimization_notification_switch_close_string">未开启</string>
+    <string name="user_optimization_self_start_content_string">允许应用自启动</string>
+    <string name="user_optimization_self_start_switch_open_string">已允许</string>
+    <string name="user_optimization_self_start_switch_close_string">未允许</string>
 </resources>

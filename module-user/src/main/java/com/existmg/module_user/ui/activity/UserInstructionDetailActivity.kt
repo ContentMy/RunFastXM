@@ -38,6 +38,11 @@ class UserInstructionDetailActivity:
         mBinding.userInstructionDetailToolbar.uiToolbarTvTitle.text = resources.getText(R.string.user_setting_string_instructions)
     }
 
+    override fun initListener() {
+        mBinding.userInstructionDetailToolbar.uiToolbarIvBack.setOnClickListener {
+            finish()
+        }
+    }
     override fun initObserver() {
         mViewModel.instructionType.observe(this){type->
             when(type){

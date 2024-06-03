@@ -24,4 +24,8 @@
 
 
     <string name="remind_detail_completed_string">已经到达预计的提醒时间了哦！\n赶快完成你的事情吧！</string>
+
+    <string name="remind_optimization_title_string">提醒优化小Tips</string>
+    <string name="remind_optimization_content_string">为了让提醒更加及时，点击立即优化吧！</string>
+    <string name="remind_optimization_jump_string">立即优化</string>
 </resources>

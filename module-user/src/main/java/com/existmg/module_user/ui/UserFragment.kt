@@ -7,12 +7,12 @@ import com.alibaba.android.arouter.facade.annotation.Route
 import com.existmg.library_base.fragment.BaseMvvmFragment
 import com.existmg.library_base.manager.viewModelFactory
 import com.existmg.library_common.router.RouterFragmentPath
-import com.existmg.library_common.utils.ToastUtil
 import com.existmg.module_user.R
 import com.existmg.module_user.databinding.UserLayoutFragmentBinding
 import com.existmg.module_user.ui.activity.UserAboutAppActivity
 import com.existmg.module_user.ui.activity.UserInstructionActivity
 import com.existmg.module_user.ui.activity.UserPrivacyActivity
+import com.existmg.module_user.ui.activity.UserRemindOptimizationActivity
 import com.existmg.module_user.viewmodel.UserViewModel
 
 /**
@@ -53,6 +53,7 @@ class UserFragment:BaseMvvmFragment<UserViewModel,UserLayoutFragmentBinding>(),
         mBinding.userLlAbout.setOnClickListener(this)
         mBinding.userLlPrivacy.setOnClickListener(this)
         mBinding.userLlInstructions.setOnClickListener(this)
+        mBinding.userLlOptimization.setOnClickListener(this)
     }
 
     override fun onClick(v: View?) {
@@ -68,6 +69,10 @@ class UserFragment:BaseMvvmFragment<UserViewModel,UserLayoutFragmentBinding>(),
             mBinding.userLlInstructions->{
                 //跳转到说明页面
                 startActivity(Intent(requireContext(), UserInstructionActivity::class.java))
+            }
+            mBinding.userLlOptimization->{
+                //跳转到提醒优化页面
+                startActivity(Intent(requireContext(), UserRemindOptimizationActivity::class.java))
             }
         }
     }

@@ -17,6 +17,100 @@
             layout="@layout/ui_layout_base_title_toolbar"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
+        <!--这里是提醒优化的布局，用户设置完毕或者关闭此布局后不再显示-->
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:visibility="gone"
+            android:id="@+id/remind_optimization_ll"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="@dimen/ui_dp_20"
+            android:layout_marginEnd="@dimen/ui_dp_20"
+            android:layout_marginTop="@dimen/ui_dp_10"
+            android:layout_marginBottom="@dimen/ui_dp_10"
+            android:background="@drawable/ui_shape_rounded_rectangle_background_green_light"
+            app:layout_constraintTop_toBottomOf="@id/remind_include_title_toolbar">
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/remind_optimization_gl_vertical_start"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_begin="@dimen/ui_dp_40" />
+
+            <androidx.constraintlayout.widget.Guideline
+                android:id="@+id/remind_optimization_gl_vertical_end"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                app:layout_constraintGuide_end="@dimen/ui_dp_100" />
+
+            <ImageView
+                android:id="@+id/remind_optimization_iv_icon"
+                android:layout_width="@dimen/ui_dp_20"
+                android:layout_height="@dimen/ui_dp_20"
+                android:src="@drawable/ui_remind"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/remind_optimization_gl_vertical_start"/>
+
+            <TextView
+                android:id="@+id/remind_optimization_tv_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remind_optimization_title_string"
+                android:textColor="@color/ui_green"
+                android:textStyle="bold"
+                android:textSize="@dimen/ui_sp_12"
+                android:layout_marginTop="@dimen/ui_dp_10"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/remind_optimization_gl_vertical_start" />
+
+            <TextView
+                android:id="@+id/remind_optimization_tv_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/remind_optimization_content_string"
+                android:textColor="@color/ui_gray"
+                android:textSize="@dimen/ui_sp_10"
+                android:layout_marginTop="@dimen/ui_dp_6"
+                android:layout_marginBottom="@dimen/ui_dp_10"
+                app:layout_constraintTop_toBottomOf="@id/remind_optimization_tv_title"
+                app:layout_constraintStart_toEndOf="@id/remind_optimization_gl_vertical_start"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+            <TextView
+                android:id="@+id/remind_optimization_tv_jump"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/ui_shape_rounded_rectangle_background_green"
+                android:text="@string/remind_optimization_jump_string"
+                android:textColor="@color/ui_white"
+                android:textSize="@dimen/ui_sp_12"
+                android:paddingTop="@dimen/ui_dp_4"
+                android:paddingBottom="@dimen/ui_dp_4"
+                android:paddingStart="@dimen/ui_dp_8"
+                android:paddingEnd="@dimen/ui_dp_8"
+                android:onClick="@{() -> viewModel.onOptimizationJump()}"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="@id/remind_optimization_gl_vertical_end"
+                app:layout_constraintBottom_toBottomOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <ImageView
+            android:visibility="gone"
+            android:id="@+id/remind_optimization_iv_close"
+            android:layout_width="@dimen/ui_dp_20"
+            android:layout_height="@dimen/ui_dp_20"
+            android:src="@drawable/ui_close"
+            android:layout_marginTop="-10dp"
+            android:layout_marginEnd="-10dp"
+            android:onClick="@{() -> viewModel.onOptimizationClose()}"
+            app:layout_constraintTop_toTopOf="@id/remind_optimization_ll"
+            app:layout_constraintEnd_toEndOf="@id/remind_optimization_ll"/>
+
         <com.existmg.library_ui.views.SlideRecycleView
             android:id="@+id/remind_rv"
             android:layout_width="match_parent"
@@ -24,7 +118,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/remind_include_title_toolbar" />
+            app:layout_constraintTop_toBottomOf="@id/remind_optimization_ll" />
         <!--注意事项：使用wrap_content，如果固定大小的情况下，图片会偏移-->
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/remind_fab"

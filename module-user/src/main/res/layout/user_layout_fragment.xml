@@ -37,8 +37,8 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginStart="@dimen/ui_dp_10"
-            android:layout_marginEnd="@dimen/ui_dp_10"
+            android:layout_marginStart="@dimen/ui_dp_20"
+            android:layout_marginEnd="@dimen/ui_dp_20"
             android:layout_marginTop="@dimen/ui_dp_50"
             android:layout_height="@dimen/ui_dp_50">
 
@@ -60,8 +60,8 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginStart="@dimen/ui_dp_10"
-            android:layout_marginEnd="@dimen/ui_dp_10"
+            android:layout_marginStart="@dimen/ui_dp_20"
+            android:layout_marginEnd="@dimen/ui_dp_20"
             android:layout_height="@dimen/ui_dp_50">
 
             <ImageView
@@ -82,8 +82,8 @@
             android:gravity="center_vertical"
             android:orientation="horizontal"
             android:layout_width="match_parent"
-            android:layout_marginStart="@dimen/ui_dp_10"
-            android:layout_marginEnd="@dimen/ui_dp_10"
+            android:layout_marginStart="@dimen/ui_dp_20"
+            android:layout_marginEnd="@dimen/ui_dp_20"
             android:layout_height="@dimen/ui_dp_50">
 
             <ImageView
@@ -97,6 +97,28 @@
                 android:layout_marginStart="@dimen/ui_dp_10"
                 android:textColor="@color/ui_black"
                 android:text="@string/user_setting_string_instructions" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/user_ll_optimization"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:layout_width="match_parent"
+            android:layout_marginStart="@dimen/ui_dp_20"
+            android:layout_marginEnd="@dimen/ui_dp_20"
+            android:layout_height="@dimen/ui_dp_50">
+
+            <ImageView
+                android:layout_width="@dimen/ui_dp_20"
+                android:layout_height="@dimen/ui_dp_20"
+                android:src="@drawable/ui_small_icon_remind" />
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:textColor="@color/ui_black"
+                android:text="@string/user_setting_string_optimization" />
         </LinearLayout>
 
     </LinearLayout>
