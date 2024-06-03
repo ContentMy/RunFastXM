@@ -1,11 +1,11 @@
 <resources>
     <string name="ui_app_name">小马快跑</string>
     <!--时间String-->
-    <string name="ui_Days">Days</string>
-    <string name="ui_Hours">Hours</string>
-    <string name="ui_Mins">Mins</string>
-    <string name="ui_Secs">Secs</string>
-    <string name="ui_8">8</string>
+    <string name="ui_Days">天</string>
+    <string name="ui_Hours">时</string>
+    <string name="ui_Mins">分</string>
+    <string name="ui_Secs">秒</string>
+    <string name="ui_8">0</string>
 
     <!--底部按钮-->
     <string name="ui_bottom_nav_menu_remind">提醒</string>
