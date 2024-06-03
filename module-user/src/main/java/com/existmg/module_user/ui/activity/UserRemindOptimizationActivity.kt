@@ -1,16 +1,20 @@
 package com.existmg.module_user.ui.activity
 
+import android.Manifest
 import android.content.Intent
 import android.net.Uri
 import android.os.Build
 import android.provider.Settings
 import android.view.View
+import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.existmg.library_base.activity.BaseMVVMActivity
 import com.existmg.library_base.manager.viewModelFactory
 import com.existmg.library_common.router.RouterFragmentPath
+import com.existmg.library_common.utils.PermissionUtils
+import com.existmg.library_common.utils.ToastUtil
 import com.existmg.module_user.R
 import com.existmg.module_user.databinding.UserLayoutRemindOptimizationActivityBinding
 import com.existmg.module_user.viewmodel.UserRemindOptimizationViewModel
@@ -43,6 +47,9 @@ class UserRemindOptimizationActivity:
         return R.layout.user_layout_remind_optimization_activity
     }
 
+    override fun initView() {
+        checkAndRequestPermissions()
+    }
     override fun initData() {
         mBinding.userOptimizationToolbar.uiToolbarTvTitle.text = resources.getText(R.string.user_setting_string_optimization)
         mBinding.userOptimizationTvNotificationSwitch.text = if (NotificationManagerCompat.from(this).areNotificationsEnabled()){
@@ -83,6 +90,51 @@ class UserRemindOptimizationActivity:
 
             mBinding.userOptimizationToolbar.uiToolbarIvBack->{
                 finish()
+            }
+        }
+    }
+
+    /*============================针对Android13以及以上版本的通知权限处理逻辑================================*/
+    private fun checkAndRequestPermissions() {
+        if(NotificationManagerCompat.from(this).areNotificationsEnabled()){//如果通知开启的情况下，那么不需要在进行动态请求
+            return
+        }
+        val permissions = mutableListOf<String>()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissions.add(Manifest.permission.POST_NOTIFICATIONS)
+        }
+
+        if (!PermissionUtils.hasPermissions(this, permissions.toTypedArray())) {
+            PermissionUtils.requestPermissions(this, permissions.toTypedArray(), requestPermissionsLauncher)
+        } else {
+            // 所有权限已被授予
+            // 执行与权限相关的操作
+            if (NotificationManagerCompat.from(this).areNotificationsEnabled()){
+                ToastUtil.showShort(this,"已经拥有通知权限，可以创建你的提醒了哦！")
+            }else{
+                ToastUtil.showShort(this,"没有获取到通知权限，会影响到你的使用体验哦！")
+            }
+        }
+    }
+
+    private val requestPermissionsLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        permissions.entries.forEach {
+            val isGranted = it.value
+            if (isGranted) {
+                // 权限被授予
+                // 执行与权限相关的操作
+                if (NotificationManagerCompat.from(this).areNotificationsEnabled()){
+                    ToastUtil.showShort(this,"已经拥有通知权限，可以创建你的提醒了哦！")
+                }else{
+                    ToastUtil.showShort(this,"没有获取到通知权限，会影响到你的使用体验哦！")
+                }
+
+            } else {
+                // 权限被拒绝
+                // 处理权限被拒绝的情况
+                ToastUtil.showShort(this,"没有获取到通知权限，会影响到你的使用体验哦！")
             }
         }
     }

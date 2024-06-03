@@ -1,16 +1,21 @@
 package com.existmg.module_remind.ui
 
+import android.Manifest
 import android.app.Application
 import android.content.Context
 import android.graphics.Color
+import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import android.widget.Toast
+import androidx.activity.result.contract.ActivityResultContracts
+import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.existmg.library_base.activity.BaseMVVMActivity
 import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.utils.PermissionUtils
 import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.repository.RemindRepository
@@ -62,6 +67,7 @@ class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel,RemindActivi
         val layoutManager = LinearLayoutManager(this, LinearLayoutManager.HORIZONTAL,false)
         mBinding.remindCreateRv.layoutManager = layoutManager
         mBinding.remindCreateRv.adapter = mAdapter
+        checkAndRequestPermissions()//动态请求通知权限(android13以及以上)
     }
 
     override fun initData() {
@@ -159,5 +165,49 @@ class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel,RemindActivi
 
     private fun hideSoftInput(v: View){//TODO:后续增加判断，如果软键盘显示的情况下再调用
         inputMethodManager?.hideSoftInputFromWindow(v.windowToken, 0)
+    }
+
+    /*============================针对Android13以及以上版本的通知权限处理逻辑================================*/
+    private fun checkAndRequestPermissions() {
+        if(NotificationManagerCompat.from(this).areNotificationsEnabled()){//如果通知开启的情况下，那么不需要在进行动态请求
+            return
+        }
+        val permissions = mutableListOf<String>()
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.TIRAMISU) {
+            permissions.add(Manifest.permission.POST_NOTIFICATIONS)
+        }
+
+        if (!PermissionUtils.hasPermissions(this, permissions.toTypedArray())) {
+            PermissionUtils.requestPermissions(this, permissions.toTypedArray(), requestPermissionsLauncher)
+        } else {
+            // 所有权限已被授予
+            // 执行与权限相关的操作
+            if (NotificationManagerCompat.from(this).areNotificationsEnabled()){//每次都提醒是否会影响用户体验？这里的逻辑是针对比如低于13的设备，但是把通知开关关掉了的处理
+                ToastUtil.showShort(this,"已经拥有通知权限，可以创建你的提醒了哦！")
+            }else{
+                ToastUtil.showShort(this,"没有获取到通知权限，会影响到你的使用体验哦！")
+            }
+        }
+    }
+
+    private val requestPermissionsLauncher = registerForActivityResult(
+        ActivityResultContracts.RequestMultiplePermissions()
+    ) { permissions ->
+        permissions.entries.forEach {
+            val isGranted = it.value
+            if (isGranted) {
+                // 权限被授予
+                // 执行与权限相关的操作
+                if (NotificationManagerCompat.from(this).areNotificationsEnabled()){
+                    ToastUtil.showShort(this,"已经拥有通知权限，可以创建你的提醒了哦！")
+                }else{
+                    ToastUtil.showShort(this,"没有获取到通知权限，会影响到你的使用体验哦！")
+                }
+            } else {
+                // 权限被拒绝
+                // 处理权限被拒绝的情况
+                ToastUtil.showShort(this,"没有获取到通知权限，会影响到你的使用体验哦！")
+            }
+        }
     }
 }
