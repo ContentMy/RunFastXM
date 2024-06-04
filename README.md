@@ -8,25 +8,23 @@
 #### 分支
 Beta1：https://github.com/ContentMy/RunFastXM/tree/beta1
 
-Beta2:  https://github.com/ContentMy/RunFastXM/tree/beta2
-
 #### 应用快照
 
 * 事项提醒功能模块
 
-  <img src="screenshot/提醒列表-占位.jpeg" alt="提醒列表-占位" width="150"/><img src="screenshot/新建提醒.jpeg" alt="新建提醒" width="150"/><img src="screenshot/提醒列表.jpeg" alt="提醒列表" width="150"/><img src="screenshot/提醒倒计时.jpeg" alt="提醒倒计时" width="150" />
+  提醒功能说明：https://github.com/ContentMy/RunFastXM/blob/master/instructions/remindInstruction.md
 
 * 目标管理功能模块
 
-  <img src="screenshot/目标列表-占位.jpeg" alt="目标列表-占位" width="150"/><img src="screenshot/新建目标.jpeg" alt="新建目标" width="150"/><img src="screenshot/目标列表.jpeg" alt="目标列表" width="150"/>
+  目标功能说明：https://github.com/ContentMy/RunFastXM/blob/master/instructions/targetInstruction.md
 
 * 备忘记录功能模块
 
-  <img src="screenshot/记录生活-占位.jpeg" alt="记录生活-占位" width="150"/><img src="screenshot/新建记录.jpeg" alt="新建记录" width="150"/><img src="screenshot/记录生活列表.jpeg" alt="记录生活列表" width="150"/><img src="screenshot/记录详情.jpeg" alt="记录详情" width="150"/>
+  日记功能说明：https://github.com/ContentMy/RunFastXM/blob/master/instructions/memorandumInstruction.md
 
 * 个人设置功能模块
 
-  <img src="screenshot/个人设置.jpeg" alt="个人设置" width="150"/>
+  <img src="screenshot/个人设置.jpg" alt="个人设置" width="300"/>
 
 #### 代码架构
 
@@ -60,7 +58,7 @@ Beta2:  https://github.com/ContentMy/RunFastXM/tree/beta2
   * 不同状态事项列表的展示（待提醒的事项、已提醒的事项）
   * 提醒模块的引导功能
 * 待完成内容：
-  * 提醒模块页面的一些bug处理
+  * 暂无
 * 后续考虑增加的功能内容(Release版本更新后开始增加)：
   * 提醒事项与目标管理的联动
 
@@ -72,7 +70,7 @@ Beta2:  https://github.com/ContentMy/RunFastXM/tree/beta2
 
 * 已完成内容：
   * 目标的添加与修改
-  * 目标列表的展示 
+  * 目标列表的展示
   * 目标的删除（左滑删除）
   * 目标的打卡（增加在列表条目中）
 * 待完成内容：
@@ -109,7 +107,7 @@ Beta2:  https://github.com/ContentMy/RunFastXM/tree/beta2
   * ui的简单展示
   * 关于小马快跑的页面跳转与展示
 * 待完成内容：
-  * 完成item的点击跳转ui与逻辑内容
-  * 增加item设置内容（应用换肤、应用数据清除等）
+  * 暂无
 * 后续考虑增加的功能内容：
   * 联合后端的user表数据管理，并做设备唯一ID的处理。但时间不确定，因为学习后端有一定时间成本
+  * 应用换肤、应用数据清除等
