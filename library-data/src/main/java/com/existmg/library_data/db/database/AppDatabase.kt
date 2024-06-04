@@ -27,7 +27,7 @@ import com.existmg.library_data.db.migrations.DatabaseMigrations
         TargetEntity::class,TargetCheckInEntity::class,
         MemorandumEntity::class,MemorandumImgEntity::class
                ],
-    version = 3,
+    version = 1,
     exportSchema = false
 )
 abstract class AppDatabase: RoomDatabase() {// Room 需要使用工厂模式来创建数据库实例，所以必须声明一个抽象类，并且这个类不能被直接实例化
@@ -52,7 +52,6 @@ abstract fun memorandumImgDao(): MemorandumImgDao
                     context.applicationContext,
                     AppDatabase::class.java,
                     "run_fast_xm_database")
-                    .addMigrations(DatabaseMigrations.MIGRATION_1_2,DatabaseMigrations.MIGRATION_2_3)
                     .build()
                 INSTANCE = instance
                 // return instance

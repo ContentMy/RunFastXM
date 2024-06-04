@@ -10,8 +10,8 @@ ext {
             minSdkVersion    : 21,
             targetSdkVersion : 34,
             applicationId    : "com.existmg.runfastxm",
-            versionCode      : 1,
-            versionName      : "0.0.1",
+            versionCode      : 100,
+            versionName      : "1.0.0",
     ]
     libsVersion = [
             butterknife_version = "10.0.0",
