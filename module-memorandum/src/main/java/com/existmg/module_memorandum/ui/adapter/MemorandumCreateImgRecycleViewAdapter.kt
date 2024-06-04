@@ -71,7 +71,7 @@ class MemorandumCreateImgRecycleViewAdapter(
     fun addImage(uri: Uri) {
         if (imageItems.size <= 9) {
             // 移除占位图
-            if (imageItems.size > 1 && isNeedPlaceholder){
+            if (imageItems.size > 0 && isNeedPlaceholder){
                 imageItems.removeAt(imageItems.size - 1)
             }
             imageItems.add(MemorandumImageItem(uri = uri))
