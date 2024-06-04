@@ -65,7 +65,7 @@ class NotificationWork(
 
         // 创建广播接收器的意图并添加操作到通知中
         val actionIntent = Intent(context, NotificationReceiver::class.java)
-        println("在worker中拿到的id为：$dataId")
+//        println("在worker中拿到的id为：$dataId")
         actionIntent.putExtra("dataId",dataId)
         val actionPendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
             PendingIntent.getBroadcast(context, dataId, actionIntent, PendingIntent.FLAG_IMMUTABLE)

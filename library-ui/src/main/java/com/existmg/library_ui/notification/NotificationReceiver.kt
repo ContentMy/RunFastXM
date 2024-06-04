@@ -11,12 +11,12 @@ import android.content.Intent
  */
 class NotificationReceiver:BroadcastReceiver() {
     override fun onReceive(context: Context?, intent: Intent?) {
-        println("接收到了广播，想办法启动activity")
+//        println("接收到了广播，想办法启动activity")
         val broadcastIntent = Intent("com.existmg.notification.ACTION_START_ACTIVITY")
         broadcastIntent.setPackage(context?.packageName) // 确保只有当前应用的组件可以接收广播
         //获取传过来的id
         val dataId = intent?.getIntExtra("dataId",0)
-        println("在UI模块中的传递id为：$dataId")
+//        println("在UI模块中的传递id为：$dataId")
         // 添加id到 Intent 中
         broadcastIntent.putExtra("dataId", dataId)
         context?.sendBroadcast(broadcastIntent)

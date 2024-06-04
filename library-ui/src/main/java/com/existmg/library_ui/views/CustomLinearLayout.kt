@@ -25,32 +25,32 @@ class CustomLinearLayout(context: Context, attrs: AttributeSet? = null) : Linear
     }
 
     override fun onTouchEvent(event: MotionEvent): Boolean {
-        println("测试回调${event.action}")
+//        println("测试回调${event.action}")
         when(event.action){
             MotionEvent.ACTION_DOWN->{
                 return true
             }
             MotionEvent.ACTION_UP->{
-                println("测试up")
+//                println("测试up")
                 // 获取点击位置的坐标
                 val x = event.x.toInt()
                 val y = event.y.toInt()
 
                 // 判断点击位置是否在 CustomLinearLayout 内部
                 if (x >= 0 && x <= width && y >= 0 && y <= height) {
-                    println("测试up条件1：$x,$y")
+//                    println("测试up条件1：$x,$y")
                     // 获取点击位置处的子视图
                     val targetView = getChildAt(getChildIndexAtPosition(x, y))
-                    println("测试up条件2：$x,$y")
+//                    println("测试up条件2：$x,$y")
                     // 判断点击的子视图是否是 CustomLinearLayout 本身
                     return if (targetView == null) {
-                        println("测试up条件3：$x,$y,这里是null")
+//                        println("测试up条件3：$x,$y,这里是null")
                         // 如果点击了 CustomLinearLayout 内部，并且点击的是 CustomLinearLayout 本身
                         // 执行回调，关闭 Activity
                         onOutsideClickListener?.onOutsideClick(this)
                         true // 返回 true，表示已处理触摸事件
                     }else{
-                        println("测试up条件4：$x,$y,${targetView.javaClass}")
+//                        println("测试up条件4：$x,$y,${targetView.javaClass}")
                         false
                     }
                 }

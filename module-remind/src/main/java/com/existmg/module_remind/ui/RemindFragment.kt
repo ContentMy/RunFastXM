@@ -148,7 +148,7 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel, RemindLayoutRemindFragm
         hideSoftInput(mBinding.remindFab)
     }
     private fun hideSoftInput(v:View){//TODO: 统一封装一下软键盘的显示与隐藏
-        if (v.windowToken != null)println("${v.javaClass}")
+        if (v.windowToken != null)mLog.debug("${v.javaClass}")
         val manager = requireContext().getSystemService(AppCompatActivity.INPUT_METHOD_SERVICE) as InputMethodManager
         manager.hideSoftInputFromWindow(v.windowToken, InputMethodManager.HIDE_NOT_ALWAYS)
     }
