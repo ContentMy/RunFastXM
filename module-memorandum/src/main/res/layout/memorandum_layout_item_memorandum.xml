@@ -61,7 +61,7 @@
                     android:id="@+id/memorandum_item_iv_icon"
                     android:layout_width="@dimen/ui_dp_50"
                     android:layout_height="@dimen/ui_dp_50"
-                    android:src="@drawable/ui_icon_sleep"
+                    android:src="@drawable/ui_emoji_smile"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintEnd_toStartOf="@id/memorandum_item_gl_vertical"/>

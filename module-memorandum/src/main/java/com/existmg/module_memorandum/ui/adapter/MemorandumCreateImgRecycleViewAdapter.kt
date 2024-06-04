@@ -20,13 +20,16 @@ import com.existmg.module_memorandum.model.MemorandumImageItem
  */
 class MemorandumCreateImgRecycleViewAdapter(
     private val context: Context,
+    private val isNeedPlaceholder: Boolean = true,
     private val onAddImageClick: () -> Unit,
     private val onDeleteImageClick: (Int) -> Unit
     ): RecyclerView.Adapter<MemorandumCreateImgRecycleViewAdapter.MemorandumDataBindingViewHolder>(){
     private val imageItems = mutableListOf<MemorandumImageItem>()
     init {
         // 添加默认的占位图
-        imageItems.add(MemorandumImageItem(isPlaceholder = true))
+        if (isNeedPlaceholder){
+            imageItems.add(MemorandumImageItem(isPlaceholder = true))
+        }
     }
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -68,11 +71,13 @@ class MemorandumCreateImgRecycleViewAdapter(
     fun addImage(uri: Uri) {
         if (imageItems.size <= 9) {
             // 移除占位图
-            imageItems.removeAt(imageItems.size - 1)
+            if (imageItems.size > 1 && isNeedPlaceholder){
+                imageItems.removeAt(imageItems.size - 1)
+            }
             imageItems.add(MemorandumImageItem(uri = uri))
 
             // 如果少于9张图片，重新添加占位图
-            if (imageItems.size < 9) {
+            if (imageItems.size < 9 && isNeedPlaceholder) {
                 imageItems.add(MemorandumImageItem(isPlaceholder = true))
             }
 
