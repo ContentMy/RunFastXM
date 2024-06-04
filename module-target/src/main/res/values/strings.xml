@@ -15,5 +15,8 @@
     <string name="target_create_remind_string">目标提醒：</string>
     <string name="target_create_btn_save_string">保存</string>
 
+    <string name="target_item_check_in_string">打卡</string>
+    <string name="target_item_check_in_completed_string">已打卡</string>
+
     <string name="target_default_content">种下一棵树最好的时间是十年前，其次是现在~\n所以赶快点击“+”添加你的目标吧！</string>
 </resources>

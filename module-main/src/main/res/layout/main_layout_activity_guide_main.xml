@@ -1,0 +1,172 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.existmg.module_main.viewmodel.MainGuideViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_guide_cl_step_one"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/main_guide_iv_step_one"
+                android:layout_width="@dimen/ui_dp_200"
+                android:layout_height="@dimen/ui_dp_200"
+                android:layout_marginTop="@dimen/ui_dp_100"
+                android:src="@drawable/ui_main_guide_remind"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/main_guide_tv_step_one_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_dp_80"
+                app:layout_constraintTop_toBottomOf="@id/main_guide_iv_step_one"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="@dimen/ui_sp_20"
+                android:letterSpacing="0.2"
+                android:textColor="@color/ui_green"
+                android:text="@string/main_guide_step_one_title_string" />
+
+            <TextView
+                android:id="@+id/main_guide_tv_step_one_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_dp_20"
+                app:layout_constraintTop_toBottomOf="@id/main_guide_tv_step_one_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/ui_dp_10"
+                android:text="@string/main_guide_step_one_content_string" />
+
+            <ImageView
+                android:id="@+id/main_guide_iv_step_one_next"
+                android:layout_width="@dimen/ui_dp_60"
+                android:layout_height="@dimen/ui_dp_60"
+                android:layout_marginBottom="@dimen/ui_dp_100"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ui_main_guide_turn_right" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_guide_cl_step_two"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/main_guide_iv_step_two"
+                android:layout_width="@dimen/ui_dp_200"
+                android:layout_height="@dimen/ui_dp_200"
+                android:layout_marginTop="@dimen/ui_dp_100"
+                android:src="@drawable/ui_main_guide_target"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/main_guide_tv_step_two_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_dp_80"
+                app:layout_constraintTop_toBottomOf="@id/main_guide_iv_step_two"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="@dimen/ui_sp_20"
+                android:letterSpacing="0.2"
+                android:textColor="@color/ui_green"
+                android:text="@string/main_guide_step_two_title_string" />
+
+            <TextView
+                android:id="@+id/main_guide_tv_step_two_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_dp_20"
+                app:layout_constraintTop_toBottomOf="@id/main_guide_tv_step_two_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/ui_dp_10"
+                android:text="@string/main_guide_step_two_content_string" />
+
+            <ImageView
+                android:id="@+id/main_guide_iv_step_two_next"
+                android:layout_width="@dimen/ui_dp_60"
+                android:layout_height="@dimen/ui_dp_60"
+                android:layout_marginBottom="@dimen/ui_dp_100"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:src="@drawable/ui_main_guide_turn_right" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/main_guide_cl_step_three"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:visibility="gone">
+
+            <ImageView
+                android:id="@+id/main_guide_iv_step_three"
+                android:layout_width="@dimen/ui_dp_200"
+                android:layout_height="@dimen/ui_dp_200"
+                android:layout_marginTop="@dimen/ui_dp_100"
+                android:src="@drawable/ui_main_guide_memorandum"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+            <TextView
+                android:id="@+id/main_guide_tv_step_three_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_dp_80"
+                app:layout_constraintTop_toBottomOf="@id/main_guide_iv_step_three"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:textSize="@dimen/ui_sp_20"
+                android:letterSpacing="0.2"
+                android:textColor="@color/ui_green"
+                android:text="@string/main_guide_step_three_title_string" />
+
+            <TextView
+                android:id="@+id/main_guide_tv_step_three_content"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="@dimen/ui_dp_20"
+                app:layout_constraintTop_toBottomOf="@id/main_guide_tv_step_three_title"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center"
+                android:lineSpacingExtra="@dimen/ui_dp_10"
+                android:text="@string/main_guide_step_three_content_string" />
+
+            <Button
+                android:id="@+id/main_guide_btn_step_three_start"
+                android:layout_width="@dimen/ui_dp_100"
+                android:layout_height="@dimen/ui_dp_60"
+                android:layout_marginBottom="@dimen/ui_dp_100"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                android:textColor="@color/ui_white"
+                android:background="@drawable/ui_shape_rounded_rectangle_background_green"
+                android:text="@string/main_guide_step_three_btn_string" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

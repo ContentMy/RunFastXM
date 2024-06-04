@@ -6,13 +6,13 @@
     <data>
         <variable
             name="viewModel"
-            type="com.existmg.module_main.MainViewModel" />
+            type="com.existmg.module_main.viewmodel.MainViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".MainActivity"
+        tools:context=".ui.MainActivity"
         android:fitsSystemWindows="true">
 
         <androidx.viewpager2.widget.ViewPager2
@@ -44,6 +44,7 @@
             android:id="@+id/main_bot_nav"
             android:layout_width="0dp"
             android:layout_height="50dp"
+            android:background="@color/ui_white"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"

@@ -1,11 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.existmg.module_user">
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
 
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
         <activity android:name=".ui.activity.UserAboutAppActivity"
+            android:exported="false"/>
+        <activity android:name=".ui.activity.UserPrivacyActivity"
+            android:exported="false"/>
+        <activity android:name=".ui.activity.UserInstructionActivity"
+            android:exported="false"/>
+        <activity android:name=".ui.activity.UserInstructionDetailActivity"
+            android:exported="false"/>
+        <activity android:name=".ui.activity.UserRemindOptimizationActivity"
             android:exported="false"/>
     </application>
 </manifest>

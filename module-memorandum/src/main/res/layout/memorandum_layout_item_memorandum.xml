@@ -17,14 +17,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/ui_dp_10"
-            android:text="测试 日期"
             android:textSize="@dimen/ui_sp_16"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintStart_toStartOf="parent"/>
         <View
             android:id="@+id/memorandum_item_view_bg"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/ui_dp_100"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/ui_dp_14"
             android:layout_marginEnd="@dimen/ui_dp_16"
             android:layout_marginTop="@dimen/ui_dp_14"
@@ -35,10 +34,11 @@
             android:background="@drawable/ui_shape_rounded_rectangle_background_green"
             app:layout_constraintTop_toBottomOf="@id/memorandum_item_tv_date"
             app:layout_constraintStart_toStartOf="parent"/>
+
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/memorandum_item_cl"
             android:layout_width="match_parent"
-            android:layout_height="@dimen/ui_dp_100"
+            android:layout_height="wrap_content"
             android:layout_marginStart="@dimen/ui_dp_10"
             android:layout_marginEnd="@dimen/ui_dp_20"
             android:layout_marginTop="10dp"
@@ -61,36 +61,41 @@
                     android:id="@+id/memorandum_item_iv_icon"
                     android:layout_width="@dimen/ui_dp_50"
                     android:layout_height="@dimen/ui_dp_50"
-                    android:src="@drawable/ui_icon_sleep"
+                    android:src="@drawable/ui_emoji_smile"
                     app:layout_constraintTop_toTopOf="parent"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toStartOf="@id/memorandum_item_gl_vertical"
-                    app:layout_constraintBottom_toBottomOf="parent"/>
+                    app:layout_constraintEnd_toStartOf="@id/memorandum_item_gl_vertical"/>
 
             <TextView
                 android:id="@+id/memorandum_item_tv_title"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textColor="@color/ui_black"
                 android:textSize="@dimen/ui_sp_16"
                 android:gravity="center_vertical"
                 app:layout_constraintTop_toTopOf="parent"
                 app:layout_constraintStart_toEndOf="@id/memorandum_item_gl_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintBottom_toTopOf="@id/memorandum_item_tv_content"/>
 
             <TextView
                 android:id="@+id/memorandum_item_tv_content"
-                android:layout_width="0dp"
-                android:layout_height="0dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:textColor="@color/ui_gray"
                 android:textSize="@dimen/ui_sp_12"
                 android:maxLines="1"
                 android:ellipsize="end"
                 app:layout_constraintTop_toBottomOf="@id/memorandum_item_tv_title"
                 app:layout_constraintStart_toEndOf="@id/memorandum_item_gl_vertical"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
+                app:layout_constraintBottom_toBottomOf="@id/memorandum_item_rv_img"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:id="@+id/memorandum_item_rv_img"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintStart_toStartOf="@id/memorandum_item_gl_vertical"
+                app:layout_constraintTop_toBottomOf="@id/memorandum_item_tv_content"
+                />
         </androidx.constraintlayout.widget.ConstraintLayout>
         <ImageView
             android:id="@+id/memorandum_item_iv_delete"
@@ -102,5 +107,6 @@
             android:visibility="gone"
             app:layout_constraintTop_toTopOf="@id/memorandum_item_tv_date"
             app:layout_constraintEnd_toEndOf="parent"/>
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

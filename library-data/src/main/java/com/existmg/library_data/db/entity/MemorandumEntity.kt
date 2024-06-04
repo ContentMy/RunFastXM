@@ -15,14 +15,12 @@ import androidx.room.PrimaryKey
 data class MemorandumEntity(
     @PrimaryKey(autoGenerate = true)
     val id:Int? = null,//用于标记实体类中的一个字段作为主键。主键是数据库表中用于唯一标识每一行记录的字段
-    @ColumnInfo(name = "memorandumImg")
-    val memorandumImg:String = "",
+    @ColumnInfo(name = "memorandumIcon")
+    val memorandumIcon:String? = null,//用于存放图标的drawable名称，获取时转成id，去drawable获取展示
     @ColumnInfo(name = "memorandumTitle")
-    var memorandumTitle:String = "",//使用var方便在xml中直接使用双向绑定来完成EditText的设置和获取值，如果是val则无法使用，需要通过另外的手段来实现参数的传递从而实现双向绑定
+    val memorandumTitle:String? = null,//使用var方便在xml中直接使用双向绑定来完成EditText的设置和获取值，如果是val则无法使用，需要通过另外的手段来实现参数的传递从而实现双向绑定
     @ColumnInfo(name = "memorandumContent")
-    var memorandumContent:String = "",
-    @ColumnInfo(name = "memorandumContentImg")
-    val memorandumContentImg:String = "",
+    val memorandumContent:String? = null,//删除了内容的图片字段，单独使用另一个表来管理图片内容
     @ColumnInfo(name = "memorandumCreateTime")
     val memorandumCreateTime:Long = 0L,
     @ColumnInfo(name = "memorandumUpdateTime")
@@ -30,27 +28,24 @@ data class MemorandumEntity(
     ): Parcelable {
     constructor(parcel: Parcel) : this(
         parcel.readValue(Int::class.java.classLoader) as? Int,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
-        parcel.readString()!!,
+        parcel.readString(),
+        parcel.readString(),
+        parcel.readString(),
         parcel.readLong(),
         parcel.readLong()
     ) {
     }
 
     override fun toString(): String {
-        return "memorandumEntity(id=$id, memorandumImg='$memorandumImg', memorandumTitle='$memorandumTitle'," +
-                "memorandumContent='$memorandumContent',memorandumContentImg=$memorandumContentImg," +
+        return "memorandumEntity(id=$id, memorandumIcon='$memorandumIcon', memorandumTitle='$memorandumTitle'," +
+                "memorandumContent='$memorandumContent'," +
                 "memorandumCreateTime=$memorandumCreateTime,memorandumUpdateTime=$memorandumUpdateTime)"
     }
-
     override fun writeToParcel(parcel: Parcel, flags: Int) {
         parcel.writeValue(id)
-        parcel.writeString(memorandumImg)
+        parcel.writeString(memorandumIcon)
         parcel.writeString(memorandumTitle)
         parcel.writeString(memorandumContent)
-        parcel.writeString(memorandumContentImg)
         parcel.writeLong(memorandumCreateTime)
         parcel.writeLong(memorandumUpdateTime)
     }

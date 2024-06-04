@@ -12,11 +12,10 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        tools:context=".ui.RemindDetailActivity">
+        android:fitsSystemWindows="true">
         <include
             android:id="@+id/remind_detail_tb"
-            layout="@layout/ui_layout_base_toolbar"
-            />
+            layout="@layout/ui_layout_base_toolbar"/>
         <com.existmg.library_ui.views.countdown.CountDownClock
             android:id="@+id/remind_detail_cdc"
             android:layout_width="0dp"
@@ -41,5 +40,20 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/remind_detail_tb" />
+
+        <TextView
+            android:gravity="center"
+            android:id="@+id/remind_detail_completed_content"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            android:textColor="@color/ui_green"
+            android:textSize="@dimen/ui_sp_16"
+            android:lineSpacingExtra="@dimen/ui_dp_10"
+            android:text="@string/remind_detail_completed_string"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintBottom_toBottomOf="parent"/>
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

@@ -74,11 +74,11 @@ class SlideRecycleView : RecyclerView{
                     }else{
                         INVALID_CHILD_WIDTH
                     }
-                    println("子view数量 $mFlingView?.childCount")
+//                    println("子view数量 $mFlingView?.childCount")
                 }
             }
             MotionEvent.ACTION_MOVE->{
-                println("拦截move")
+//                println("拦截move")
                 mVelocityTracker?.computeCurrentVelocity(1000)//计算当前滑动的速度，秒为单位
                 // 此处有俩判断，满足其一则认为是侧滑：
                 // 1.如果x方向速度大于y方向速度，且大于最小速度限制；
@@ -93,7 +93,7 @@ class SlideRecycleView : RecyclerView{
                 }
             }
             MotionEvent.ACTION_UP->{
-                println("拦截up")
+//                println("拦截up")
                 releaseVelocity()
                 return false
             }
@@ -110,11 +110,11 @@ class SlideRecycleView : RecyclerView{
             obtainVelocity(e)
             when(e.action){
                 MotionEvent.ACTION_DOWN->{//因为没有拦截，所以不会被调用到
-                    println("touch down")
+//                    println("touch down")
                     mLastX = x
                 }
                 MotionEvent.ACTION_MOVE->{
-                    println("touch move")
+//                    println("touch move")
                     //随手指滑动
                     if (mMenuViewWidth != INVALID_CHILD_WIDTH ){
                         val dx = mLastX - x
@@ -130,7 +130,7 @@ class SlideRecycleView : RecyclerView{
 //                    mLastX = x
                 }
                 MotionEvent.ACTION_UP->{
-                    println("touch up")
+//                    println("touch up")
                     if (mMenuViewWidth != INVALID_CHILD_WIDTH){
                         val scrollX = mFlingView?.scrollX
                         mVelocityTracker?.computeCurrentVelocity(1000)

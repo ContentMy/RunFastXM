@@ -1,18 +1,30 @@
 <?xml version="1.0" encoding="utf-8"?>
-<manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.existmg.module_remind">
-
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
     <application
         android:allowBackup="true"
         android:supportsRtl="true">
+        <service
+            android:name=".services.RemindIntentService"
+            android:exported="false"/>
+
         <activity
             android:name=".ui.RemindDetailActivity"
             android:exported="false" />
         <activity
             android:name=".ui.RemindCreateActivity"
+            android:exported="false"
             android:theme="@style/ui.Theme.RunFastXM.Translucent"
-            android:exported="false" />
-        <receiver android:name=".notification.RemindNotificationBroadcastReceiver"
+            android:windowSoftInputMode="adjustResize"/>
+
+        <activity android:name=".ui.RemindCompletedActivity"
+            android:exported="false"/>
+
+        <activity android:name=".guide.RemindGuideActivity"
+            android:exported="false"
+            android:theme="@style/ui.Theme.RunFastXM.Translucent"/>
+
+        <receiver
+            android:name=".notification.RemindNotificationBroadcastReceiver"
             android:exported="false">
             <intent-filter>
                 <action android:name="com.existmg.notification.ACTION_START_ACTIVITY" />

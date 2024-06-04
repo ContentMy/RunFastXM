@@ -29,6 +29,7 @@ class RemindNotificationBroadcastReceiver:BroadcastReceiver() {
         // 创建一个 Intent，指定要启动的 Activity
         val activityIntent = Intent(context, RemindDetailActivity::class.java)
         activityIntent.putExtra("dataId",dataId)
+        activityIntent.putExtra("fromNotification",true)
 //        activityIntent.flags = Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TASK//独栈并且清除其他所有的activity
         activityIntent.flags =  Intent.FLAG_ACTIVITY_NEW_TASK or Intent.FLAG_ACTIVITY_CLEAR_TOP//栈顶
 

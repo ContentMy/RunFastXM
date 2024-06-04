@@ -80,7 +80,7 @@
             <TextView
                 android:id="@+id/target_recycle_item_tv_delete"
                 android:background="@color/ui_green"
-                android:text="删除"
+                android:text="@string/remind_string_delete"
                 android:gravity="center"
                 android:textColor="@color/ui_white"
                 android:layout_width="@dimen/ui_dp_80"

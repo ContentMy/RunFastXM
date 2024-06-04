@@ -10,13 +10,14 @@ ext {
             minSdkVersion    : 21,
             targetSdkVersion : 34,
             applicationId    : "com.existmg.runfastxm",
-            versionCode      : 1,
-            versionName      : "0.0.1",
+            versionCode      : 100,
+            versionName      : "1.0.0",
     ]
     libsVersion = [
             butterknife_version = "10.0.0",
             retrofit_version = "2.6.1",
             lifecycle_version = "2.2.0",
+            work_version = "2.7.0",
             room_version= "2.6.1",
             androidx_version = "1.6.1"
     ]
@@ -44,7 +45,8 @@ ext {
             navigation            : "androidx.navigation:navigation-fragment:$rootProject.lifecycle_version",
             navigationUI          : "androidx.navigation:navigation-ui:$rootProject.lifecycle_version",
             /*navigation --end*/
-            work                  : "androidx.work:work-runtime:$rootProject.lifecycle_version",
+            work                  : "androidx.work:work-runtime:$rootProject.work_version",
+            workKtx               : "androidx.work:work-runtime-ktx:$rootProject.work_version",
 
     ]
     //依赖第三方配置
@@ -72,7 +74,12 @@ ext {
             websocket                       : "com.neovisionaries:nv-websocket-client:2.7",
             slidingpanellayout              : "androidx.slidingpanelayout:slidingpanelayout:1.1.0",
             mmkv                            : "com.tencent:mmkv-static:1.2.2",
-            glide                           : "com.github.bumptech.glide:glide:4.9.0",
+            glide                           : "com.github.bumptech.glide:glide:4.12.0",
+            glideCompiler                   : "com.github.bumptech.glide:compiler:4.12.0",
+            immersionbar                    : "com.geyifeng.immersionbar:immersionbar:3.2.2",
+            immersionbarKtx                 : "com.geyifeng.immersionbar:immersionbar-ktx:3.2.2",
+            bugly                           : "com.tencent.bugly:crashreport:4.1.9.3",
+            leakcanary                      : "com.squareup.leakcanary:leakcanary-android:2.14",
     ]
 
 }

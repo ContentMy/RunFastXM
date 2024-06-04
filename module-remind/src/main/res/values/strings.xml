@@ -1,5 +1,31 @@
 <resources>
     <string name="remind_app_name">module-remind</string>
+    <string name="remind_module_list_name">提醒列表</string>
 
     <string name="remind_default_content">再也不怕忘掉啦~\n点击“+”添加提醒吧！</string>
+    <string name="remind_completed_default_content">还没有已完成的提醒哦，快去添加提醒吧！</string>
+
+    <string name="remind_default_create_name_content">请输入想要提醒的事项</string>
+    <string name="remind_default_create_time_prompt">请选择提醒时间：</string>
+
+    <string name="remind_toast_create_name_content">请输入想要提醒的事项后再确认哦</string>
+
+    <string name="remind_string_exchanged">修改</string>
+    <string name="remind_string_clear">清空</string>
+    <string name="remind_string_completed_remind">已完成提醒</string>
+    <string name="remind_string_delete">删除</string>
+    <string name="remind_string_reset">重新提醒</string>
+
+    <string name="remind_guide_btn_close_string">关闭引导</string>
+    <string name="remind_guide_btn_step_one_string">下一步</string>
+    <string name="remind_guide_tv_step_one_string">点击“+”添加提醒</string>
+    <string name="remind_guide_btn_step_two_string">结束引导</string>
+    <string name="remind_guide_tv_step_two_string">点击这里可以跳转查看结束的提醒喔！</string>
+
+
+    <string name="remind_detail_completed_string">已经到达预计的提醒时间了哦！\n赶快完成你的事情吧！</string>
+
+    <string name="remind_optimization_title_string">提醒优化小Tips</string>
+    <string name="remind_optimization_content_string">为了让提醒更加及时，点击立即优化吧！</string>
+    <string name="remind_optimization_jump_string">立即优化</string>
 </resources>

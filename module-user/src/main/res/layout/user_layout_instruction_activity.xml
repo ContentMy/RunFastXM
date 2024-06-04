@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="viewModel"
+            type="com.existmg.module_user.viewmodel.UserInstructionViewModel" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:fitsSystemWindows="true">
+        <include
+            android:id="@+id/user_instruction_toolbar"
+            layout="@layout/ui_layout_base_toolbar"/>
+
+
+        <Button
+            android:id="@+id/user_instruction_btn_remind"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_instruction_remind_string"
+            android:textColor="@color/ui_white"
+            android:background="@drawable/ui_shape_rounded_rectangle_background_green"
+            android:layout_marginStart="@dimen/ui_dp_20"
+            android:layout_marginEnd="@dimen/ui_dp_20"
+            android:layout_marginTop="@dimen/ui_dp_20"
+            app:layout_constraintTop_toBottomOf="@id/user_instruction_toolbar"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:id="@+id/user_instruction_btn_target"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_instruction_target_string"
+            android:textColor="@color/ui_white"
+            android:background="@drawable/ui_shape_rounded_rectangle_background_green"
+            android:layout_marginStart="@dimen/ui_dp_20"
+            android:layout_marginEnd="@dimen/ui_dp_20"
+            android:layout_marginTop="@dimen/ui_dp_20"
+            app:layout_constraintTop_toBottomOf="@id/user_instruction_btn_remind"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+
+        <Button
+            android:id="@+id/user_instruction_btn_memorandum"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/user_instruction_memorandum_string"
+            android:textColor="@color/ui_white"
+            android:background="@drawable/ui_shape_rounded_rectangle_background_green"
+            android:layout_marginStart="@dimen/ui_dp_20"
+            android:layout_marginEnd="@dimen/ui_dp_20"
+            android:layout_marginTop="@dimen/ui_dp_20"
+            app:layout_constraintTop_toBottomOf="@id/user_instruction_btn_target"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>

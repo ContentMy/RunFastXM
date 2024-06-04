@@ -37,7 +37,7 @@ class NotificationWork(
 
             return OneTimeWorkRequest.Builder(NotificationWork::class.java)
                 .setInputData(inputData)
-                .setInitialDelay(duration, TimeUnit.MINUTES)
+                .setInitialDelay(duration, TimeUnit.MILLISECONDS)//这里使用时间戳的格式也就是毫秒来统一时间单位
                 .build()
         }
     }
@@ -62,27 +62,24 @@ class NotificationWork(
             val channel = NotificationChannel(CHANNEL_ID, CHANNEL_NAME, NotificationManager.IMPORTANCE_DEFAULT)
             notificationManager.createNotificationChannel(channel)
         }
-        //创建广播接收器的意图，这个是点击通知会给出的反馈，而addAction是通知有对应的按钮，点击按钮会有对应的跳转
-        val broadcastIntent = Intent(context, NotificationReceiver::class.java)
-        val pendingIntent = PendingIntent.getBroadcast(context, 0, broadcastIntent, PendingIntent.FLAG_UPDATE_CURRENT)
 
         // 创建广播接收器的意图并添加操作到通知中
         val actionIntent = Intent(context, NotificationReceiver::class.java)
-        println("在worker中拿到的id为：$dataId")
+//        println("在worker中拿到的id为：$dataId")
         actionIntent.putExtra("dataId",dataId)
-        actionIntent.putExtra("notificationId", NOTIFICATION_ID)
-        val actionPendingIntent = PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
-        val action = NotificationCompat.Action.Builder(R.drawable.ui_remind, "Action", actionPendingIntent).build()
-
+        val actionPendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
+            PendingIntent.getBroadcast(context, dataId, actionIntent, PendingIntent.FLAG_IMMUTABLE)
+        } else {
+            PendingIntent.getBroadcast(context, dataId, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+        }
 
         val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(content)
             .setSmallIcon(iconResId)
             .setAutoCancel(true)
-//            .setContentIntent(pendingIntent)
-            .addAction(action)
+            .setContentIntent(actionPendingIntent)
 
-        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
+        notificationManager.notify(dataId, notificationBuilder.build())//把提醒的数据表id作为通知的id，保证了唯一
     }
 }

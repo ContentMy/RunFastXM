@@ -1,15 +1,18 @@
 package com.existmg.module_memorandum.ui
 
 import android.app.Application
+import android.net.Uri
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactoryWithParams
+import androidx.recyclerview.widget.GridLayoutManager
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_data.accessor.MemorandumModuleRoomAccessor
-import com.existmg.library_data.db.entity.MemorandumEntity
+import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 import com.existmg.library_data.repository.MemorandumRepository
 import com.existmg.module_memorandum.R
 import com.existmg.module_memorandum.databinding.MemorandumLayoutActivityMemorandumUpdateBinding
+import com.existmg.module_memorandum.ui.adapter.MemorandumCreateImgRecycleViewAdapter
 import com.existmg.module_memorandum.viewmodel.MemorandumUpdateViewModel
 
 /**
@@ -22,7 +25,7 @@ class MemorandumUpdateActivity : BaseMVVMActivity<MemorandumUpdateViewModel, Mem
     override fun getViewModelClass(): Class<MemorandumUpdateViewModel> {
         return MemorandumUpdateViewModel::class.java
     }
-
+    private lateinit var mAdapter:MemorandumCreateImgRecycleViewAdapter
     override fun bindViewModel() {
         mBinding.viewModel = mViewModel
     }
@@ -40,12 +43,24 @@ class MemorandumUpdateActivity : BaseMVVMActivity<MemorandumUpdateViewModel, Mem
     override fun initView() {
         mBinding.memorandumUpdateToolbar.uiToolbarTvTitle.text = "记录详情"
         mBinding.memorandumUpdateToolbar.uiToolbarTvRight.text = "修改"
+        mAdapter = MemorandumCreateImgRecycleViewAdapter(
+            this,false,
+            onAddImageClick = {
+
+            },
+            onDeleteImageClick = { position ->
+
+            }
+        )
+        val linearLayoutManager = GridLayoutManager(this,3, GridLayoutManager.VERTICAL,false)
+        mBinding.memorandumUpdateRv.layoutManager = linearLayoutManager
+        mBinding.memorandumUpdateRv.adapter = mAdapter
     }
 
     override fun initData() {
-        val memorandumEntity = intent.getParcelableExtra<MemorandumEntity>("memorandumEntity")
-        if (memorandumEntity != null){
-            mViewModel.initMemorandumData(memorandumEntity)
+        val memorandumWithImagesEntity = intent.getParcelableExtra<MemorandumWithImagesEntity>("memorandumWithImagesEntity")
+        if (memorandumWithImagesEntity != null){
+            mViewModel.initMemorandumData(memorandumWithImagesEntity)
         }
     }
 
@@ -67,6 +82,12 @@ class MemorandumUpdateActivity : BaseMVVMActivity<MemorandumUpdateViewModel, Mem
         mViewModel.memorandumContentString.observe(this){
             if (it.isNullOrEmpty()){
                 mBinding.memorandumUpdateTvContent.text = "这里还没有写内容哦！"
+            }
+        }
+
+        mViewModel.memorandumImgData.observe(this){ list ->
+            list.forEach {
+                mAdapter.addImage(Uri.parse(it.memorandumImgFilePath))
             }
         }
     }

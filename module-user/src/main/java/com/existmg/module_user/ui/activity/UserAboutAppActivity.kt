@@ -2,8 +2,8 @@ package com.existmg.module_user.ui.activity
 
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactory
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactory
 import com.existmg.library_common.utils.getAppVersionName
 import com.existmg.module_user.R
 import com.existmg.module_user.databinding.UserLayoutAboutAppActivityBinding
@@ -14,7 +14,8 @@ import com.existmg.module_user.viewmodel.UserAboutAppViewModel
  * @Date 2024/5/11 12:30 AM
  * @Description
  */
-class UserAboutAppActivity:BaseMVVMActivity<UserAboutAppViewModel,UserLayoutAboutAppActivityBinding>(),
+class UserAboutAppActivity:
+    BaseMVVMActivity<UserAboutAppViewModel, UserLayoutAboutAppActivityBinding>(),
     View.OnClickListener {
     override fun getViewModelClass(): Class<UserAboutAppViewModel> {
         return UserAboutAppViewModel::class.java

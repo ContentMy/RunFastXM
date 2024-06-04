@@ -34,7 +34,6 @@
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0dp"
                     android:textColor="@color/ui_black"
-                    android:text="@string/ui_8"
                     android:textSize="28sp"
                     app:ui_alignment="2" />
             </FrameLayout>
@@ -52,7 +51,6 @@
                     android:fontFamily="@font/ui_roboto_bold"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0dp"
-                    android:text="@string/ui_8"
                     android:textColor="@color/ui_black"
                     android:textSize="28sp"
                     app:ui_alignment="1" />
@@ -78,7 +76,6 @@
                     android:fontFamily="@font/ui_roboto_bold"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0dp"
-                    android:text="@string/ui_8"
                     android:textColor="@color/ui_black"
                     android:textSize="28sp"
                     app:ui_alignment="2" />
@@ -97,7 +94,6 @@
                     android:fontFamily="@font/ui_roboto_bold"
                     android:includeFontPadding="false"
                     android:lineSpacingExtra="0dp"
-                    android:text="@string/ui_8"
                     android:textColor="@color/ui_black"
                     android:textSize="28sp"
                     app:ui_alignment="1" />

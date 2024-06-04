@@ -1,6 +1,7 @@
 apply from:'../libModule.gradle'
 android{
     resourcePrefix 'ui_'
+    namespace 'com.existmg.library_ui'
 }
 dependencies {
     implementation 'androidx.activity:activity-ktx:1.6.1'

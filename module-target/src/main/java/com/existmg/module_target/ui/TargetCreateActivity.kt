@@ -1,11 +1,9 @@
 package com.existmg.module_target.ui
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -13,9 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactoryWithParams
-import com.existmg.library_common.utils.setLightStatusBar
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_data.local.IconsManager
 import com.existmg.library_ui.dialog.view.MyDataPickerDialog
 import com.existmg.library_ui.interfaces.DataPickerGetCalendarListener
@@ -34,6 +31,7 @@ import com.existmg.module_target.ui.adapter.TargetIconsRecycleViewAdapter
 import com.existmg.module_target.ui.adapter.TargetStatusRecycleViewAdapter
 import com.existmg.library_common.utils.calenderToDateString
 import com.existmg.library_data.repository.TargetRepository
+import com.existmg.module_target.utils.logs.TargetLoggerManager
 import com.existmg.module_target.viewmodel.TargetCreateViewModel
 import java.util.Calendar
 
@@ -42,10 +40,11 @@ import java.util.Calendar
  * @Date: 2024/4/7 1:40 上午
  * @Description: 这里是新建目标页面，修改目标时也是复用了这个页面
  */
-class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivityTargetCreateBinding>(),
+class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel, TargetActivityTargetCreateBinding>(),
     View.OnClickListener,
     TargetStatusRecycleViewAdapter.OnItemSelectedCallback,
     TargetIconsRecycleViewAdapter.OnIconsItemSelectedCallback {
+    private val mLog = TargetLoggerManager.getLogger<TargetCreateActivity>()
     private val notificationReceiver = NotificationReceiver()
     private var isNewTarget = true
     private lateinit var statusAdapter: TargetStatusRecycleViewAdapter
@@ -102,9 +101,9 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
             val target = intent.getParcelableExtra<TargetEntity>("targetEntity")
             if (target != null){
                 mViewModel.initExistTarget(target)
-                println("目标状态为：${target.targetStatus}")
+                mLog.debug("目标状态为：${target.targetStatus}")
                 currentStatusPosition = target.targetStatus
-                currentIconsPosition = IconsManager().getIconPosition(target.targetImg)//因为目前是固定的资源，所以直接去根据icon的name去获取了固定列表中的下标来平替上次选择的对应下标
+                currentIconsPosition = IconsManager().getIconPosition(target.targetImg!!)//因为目前是固定的资源，所以直接去根据icon的name去获取了固定列表中的下标来平替上次选择的对应下标
             }
         }
     }
@@ -159,7 +158,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
         mViewModel.showDialog.observe(this){
             MyDataPickerDialog.Builder(this).setListener(object: DataPickerGetCalendarListener {
                 override fun getCalendar(calendar: Calendar) {
-                    println("回调到activity，日期为：${calenderToDateString(calendar)},来源为：${it.source}")
+                    mLog.debug("回调到activity，日期为：${calenderToDateString(calendar)},来源为：${it.source}")
                     mViewModel.getCalendar(it.source,calendar)
                 }
             }).build().show(it.timestamp)
@@ -189,7 +188,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
         mBinding.targetCreateIvIcon.setImageResource(R.drawable.ui_icon_sleep)
     }
 
-    override fun onClick(v: View?) {
+    override fun onClick(v: View?) {//TODO:bug.在软键盘弹出时，点击其他非输入框，会有事件响应，保存关闭页面，软键盘也不会收回。待解决
         when(v){
             mBinding.targetCreateToolbar.uiToolbarTvRight ->
                 mViewModel.saveTarget(isNewTarget)
@@ -209,7 +208,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivi
         if (position == currentStatusPosition){
             holder.dataBinding?.targetStatusRecycleTvName?.setTextColor(Color.WHITE)
             holder.dataBinding?.targetStatusRecycleCl?.setBackgroundResource(R.drawable.ui_shape_rounded_rectangle_background_black)
-            println("名称：$displayName,位置：$position")
+            mLog.debug("名称：$displayName,位置：$position")
             mViewModel.chooseStatus(displayName)
         }else{
             holder.dataBinding?.targetStatusRecycleTvName?.setTextColor(Color.BLACK)

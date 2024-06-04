@@ -32,17 +32,33 @@ android {
 
         }
         multiDexEnabled true
+
+        ndk {
+            // 设置支持的SO库架构
+            abiFilters 'armeabi' //, 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
+        }
     }
 
     buildTypes {
+
+        debug {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "LOG_DEBUG", "true"
+        }
+
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            buildConfigField "boolean", "LOG_DEBUG", "false"
         }
     }
     compileOptions {
-        sourceCompatibility JavaVersion.VERSION_1_8
-        targetCompatibility JavaVersion.VERSION_1_8
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+    kotlinOptions {
+        jvmTarget = "17"
     }
     sourceSets {
         /*
@@ -66,9 +82,6 @@ android {
             }
         }
     }
-    kotlinOptions {
-        jvmTarget = '1.8'
-    }
 
     buildFeatures {
         dataBinding true
@@ -80,13 +93,10 @@ dependencies {
 //    testImplementation 'junit:junit:4.+'
 //    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-//    api project(':library-base')
-//
     //组件依赖基础库
     // TODO：这里使用api的原因是要把依赖关系传递给app壳。原因是app壳有用到基础模块和公共模块的对应内容，
     //  目前因为功能模块依赖了基础和公共模块，所以暂时通过依赖传递的方式来完成。
     //  也可以直接在app壳直接依赖基本模块和公共模块，后续项目成型后可能会修改依赖方式
-    api project(':library-base')
     api project(':library-common')
     api project(':library-ui')
     api project(':library-data')
@@ -97,6 +107,14 @@ dependencies {
         implementation 'com.alibaba:arouter-api:1.5.2'
         kapt 'com.alibaba:arouter-compiler:1.5.2'
     }
+
+    implementation rootProject.ext.dependencies.glide
+    kapt rootProject.ext.dependencies.glideCompiler
+    api rootProject.ext.dependencies.bugly
+    //TODO：离谱。在基础模块配置了room，功能模块依赖后依然需要配置，不然无法在对应模块调用
+    implementation rootProject.ext.androidx.room
+    implementation rootProject.ext.androidx.roomKtx
+    kapt rootProject.ext.androidx.roomCompiler
 }
 ///*ARouter配置*/
 //kapt {

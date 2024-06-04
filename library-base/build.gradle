@@ -1,9 +1,0 @@
-apply from:'../libModule.gradle'
-android{
-    resourcePrefix 'ui_'
-}
-
-dependencies {
-    api rootProject.ext.androidx.activityX
-    api rootProject.ext.androidx.fragmentX
-}

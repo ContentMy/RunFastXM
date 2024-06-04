@@ -5,10 +5,13 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.existmg.library_base.viewmodel.BaseApplicationViewModel
+import com.existmg.library_common.viewmodel.BaseApplicationViewModel
+import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_data.db.entity.MemorandumEntity
+import com.existmg.library_data.db.entity.MemorandumImgEntity
 import com.existmg.library_data.repository.MemorandumRepository
-import com.existmg.module_memorandum.R
+import com.existmg.module_memorandum.model.MemorandumImageItem
+import com.existmg.module_memorandum.utils.logs.MemorandumLoggerManager
 import kotlinx.coroutines.launch
 
 /**
@@ -18,29 +21,35 @@ import kotlinx.coroutines.launch
  */
 class MemorandumCreateViewModel(
     private var repository:MemorandumRepository,
-    application: Application):BaseApplicationViewModel(application) {
-
+    application: Application): BaseApplicationViewModel(application) {
+    private val mLog = MemorandumLoggerManager.getLogger<MemorandumCreateViewModel>()
     var memorandumTitleString = MutableLiveData<String>()
 
     var memorandumContentString = MutableLiveData<String>()
 
     private var _finishActivity = MutableLiveData<Boolean>()
     val finishActivity:LiveData<Boolean> get() = _finishActivity
-    fun insertMemorandum(){
+    fun insertMemorandum(imgList: List<MemorandumImageItem>) {
         if (memorandumTitleString.value.isNullOrEmpty()){
-            Toast.makeText(getApplication(), "记录下心情才能保存哦", Toast.LENGTH_SHORT).show()
+            ToastUtil.showShort(getApplication(), "记录下心情才能保存哦")
             return
         }
         viewModelScope.launch {
             try {
                 val memorandumEntity = MemorandumEntity(
                     memorandumTitle = memorandumTitleString.value!!,
-                    memorandumContent = if(memorandumContentString.value == null) "" else memorandumContentString.value!!,
+                    memorandumContent = memorandumContentString.value ?: "",
                     memorandumCreateTime = System.currentTimeMillis()
                 )
-                repository.insertMemorandum(memorandumEntity)
+                val imgEntities = imgList.map {
+                    MemorandumImgEntity(
+                        memorandumImgFilePath = it.uri.toString()
+                    )
+                }
+                repository.insertMemorandumWithImg(memorandumEntity,imgEntities)
                 _finishActivity.value = true
             } catch (e: Exception) {
+                mLog.error("数据库插入单个日记数据时发生异常：",e)
                 e.printStackTrace()
             }
         }

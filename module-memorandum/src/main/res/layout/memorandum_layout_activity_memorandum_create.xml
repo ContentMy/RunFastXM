@@ -14,76 +14,113 @@
         android:layout_height="match_parent"
         android:orientation="vertical"
         android:fitsSystemWindows="true">
+        <!--TODO：bug，点击ui_layout_base_title_toolbar区域时，CustomLinearLayout的外部点击消失没有相应，待解决-->
         <include
-            android:visibility="invisible"
-            layout="@layout/ui_layout_base_title_toolbar"/>
-
-        <EditText
-            android:id="@+id/memorandum_create_et_title"
+            android:id="@+id/memorandum_create_toolbar"
+            layout="@layout/ui_layout_base_toolbar"/>
+        <!--标题长度限制50以内-->
+        <ScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/ui_shape_rounded_rectangle_background"
-            android:layout_margin="@dimen/ui_dp_20"
-            android:padding="@dimen/ui_dp_10"
-            android:textSize="@dimen/ui_sp_16"
-            android:textColor="@color/ui_black"
-            android:hint="@string/ui_memorandum_title_hint"
-            android:text="@={viewModel.memorandumTitleString}"
-            android:textColorHint="@color/ui_gray"
-            android:inputType="textMultiLine"/>
-
-
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/memorandum_create_cl"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_margin="@dimen/ui_dp_10"
-            android:background="@drawable/ui_shape_background_rounded_white">
-            <TextView
-                android:id="@+id/memorandum_create_tv_content_prompt"
+            android:layout_height="wrap_content">
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/memorandum_create_cl"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/ui_dp_20"
-                android:text="@string/ui_memorandum_create_content_prompt"
-                android:layout_marginTop="@dimen/ui_dp_20"
-                android:textColor="@color/ui_gray"
-                android:textSize="@dimen/ui_sp_12"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
-            <EditText
-                android:id="@+id/memorandum_create_et_content"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:minHeight="@dimen/ui_dp_200"
-                android:background="@drawable/ui_shape_rounded_rectangle_background"
-                android:layout_marginStart="@dimen/ui_dp_20"
-                android:layout_marginEnd="@dimen/ui_dp_20"
-                android:layout_marginTop="@dimen/ui_dp_10"
-                android:paddingStart="@dimen/ui_dp_10"
-                android:paddingEnd="@dimen/ui_dp_10"
-                android:paddingTop="@dimen/ui_dp_14"
-                android:textSize="@dimen/ui_sp_16"
-                android:textColor="@color/ui_black"
-                android:hint="@string/ui_memorandum_create_content_hint"
-                android:text="@={viewModel.memorandumContentString}"
-                android:textColorHint="@color/ui_gray"
-                android:inputType="textMultiLine"
-                android:gravity="start"
-                app:layout_constraintTop_toBottomOf="@id/memorandum_create_tv_content_prompt"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"/>
+                android:layout_height="wrap_content">
 
-            <Button
-                android:id="@+id/memorandum_create_btn_save"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="bottom"
-                android:layout_margin="@dimen/ui_dp_20"
-                android:text="@string/ui_memorandum_create_save"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintBottom_toBottomOf="parent"/>
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                <EditText
+                    android:id="@+id/memorandum_create_et_title"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/ui_shape_rounded_rectangle_background"
+                    android:layout_margin="@dimen/ui_dp_20"
+                    android:padding="@dimen/ui_dp_10"
+                    android:textSize="@dimen/ui_sp_16"
+                    android:textColor="@color/ui_black"
+                    android:hint="@string/ui_memorandum_title_hint"
+                    android:text="@={viewModel.memorandumTitleString}"
+                    android:textColorHint="@color/ui_gray"
+                    android:inputType="textMultiLine"
+                    app:layout_constraintTop_toTopOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/memorandum_create_tv_content_prompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/ui_dp_20"
+                    android:text="@string/ui_memorandum_create_content_prompt"
+                    android:layout_marginTop="@dimen/ui_dp_30"
+                    android:textColor="@color/ui_gray"
+                    android:textSize="@dimen/ui_sp_12"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memorandum_create_et_title"/>
+
+                <!--内容长度限制500以内-->
+                <EditText
+                    android:id="@+id/memorandum_create_et_content"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:minHeight="@dimen/ui_dp_200"
+                    android:background="@drawable/ui_shape_rounded_rectangle_background"
+                    android:layout_marginStart="@dimen/ui_dp_20"
+                    android:layout_marginEnd="@dimen/ui_dp_20"
+                    android:layout_marginTop="@dimen/ui_dp_10"
+                    android:paddingStart="@dimen/ui_dp_10"
+                    android:paddingEnd="@dimen/ui_dp_10"
+                    android:paddingTop="@dimen/ui_dp_14"
+                    android:textSize="@dimen/ui_sp_16"
+                    android:textColor="@color/ui_black"
+                    android:hint="@string/ui_memorandum_create_content_hint"
+                    android:text="@={viewModel.memorandumContentString}"
+                    android:textColorHint="@color/ui_gray"
+                    android:inputType="textMultiLine"
+                    android:gravity="start"
+                    app:layout_constraintTop_toBottomOf="@id/memorandum_create_tv_content_prompt"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"/>
+
+                <TextView
+                    android:id="@+id/memorandum_create_tv_img_prompt"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/ui_dp_20"
+                    android:text="@string/ui_memorandum_create_img_prompt"
+                    android:layout_marginTop="@dimen/ui_dp_20"
+                    android:textColor="@color/ui_gray"
+                    android:textSize="@dimen/ui_sp_12"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memorandum_create_et_content"/>
+
+                <!--添加图片限制9张以内-->
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/memorandum_create_rv"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ui_dp_10"
+                    android:layout_marginStart="@dimen/ui_dp_20"
+                    android:layout_marginEnd="@dimen/ui_dp_20"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memorandum_create_tv_img_prompt"
+                    app:layout_constraintBottom_toTopOf="@id/memorandum_create_btn_save"/>
+
+                <Button
+                    android:visibility="gone"
+                    android:id="@+id/memorandum_create_btn_save"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="bottom"
+                    android:layout_margin="@dimen/ui_dp_20"
+                    android:text="@string/ui_memorandum_create_save"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toBottomOf="@id/memorandum_create_rv"
+                    app:layout_constraintBottom_toBottomOf="parent"/>
+            </androidx.constraintlayout.widget.ConstraintLayout>
+        </ScrollView>
+
     </com.existmg.library_ui.views.CustomLinearLayout>
 </layout>

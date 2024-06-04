@@ -1,3 +1,11 @@
 <resources>
     <string name="main_app_name">小马快跑(main)</string>
+
+    <string name="main_guide_step_one_title_string">即时提醒</string>
+    <string name="main_guide_step_one_content_string">不在担心忙于其他事错过时间\n也不用烦恼扭头忘记了想要做的事情\n想做什么先把它记录下来，我来为您提醒</string>
+    <string name="main_guide_step_two_title_string">制定目标</string>
+    <string name="main_guide_step_two_content_string">突然没有什么目标和计划心里很慌？\n又或者有想做的目标和计划总是偷懒？\n让小马为你记录你的目标，每天打卡坚持吧</string>
+    <string name="main_guide_step_three_title_string">记录生活</string>
+    <string name="main_guide_step_three_content_string">生活总有美好的瞬间值得我们记录下来\n文字、心情、图片，记录生活的形式多种多样\n偶尔回过头看看，也是蛮不错的喔</string>
+    <string name="main_guide_step_three_btn_string">开始</string>
 </resources>

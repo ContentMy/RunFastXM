@@ -1,5 +1,6 @@
 <resources>
     <string name="memorandum_app_name">module-memorandum</string>
 
+    <string name="memorandum_create_title_string">新建记录</string>
     <string name="memorandum_default_content">这里还没有生活记录哦~\n点击上面的输入框写下你的生活记录吧！</string>
 </resources>

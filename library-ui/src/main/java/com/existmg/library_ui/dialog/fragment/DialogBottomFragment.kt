@@ -163,24 +163,10 @@ internal class DialogBottomFragment :DialogBaseMvvmFragment<DialogBottomViewMode
         // TODO: 这里是手动去调用隐藏软键盘的方法
         if (inputMethodManager != null) {
             if (view.windowToken!=null){
-                println("不为空")
+                inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
             }
-            inputMethodManager?.hideSoftInputFromWindow(view.windowToken, 0)
+
         }
-    }
-
-    override fun onCancel(dialog: DialogInterface) {
-        super.onCancel(dialog)
-        println("onCancel")
-    }
-
-    override fun onDismiss(dialog: DialogInterface) {
-//        val view = requireActivity().window.currentFocus
-//        println("${view?.javaClass}")
-//        view?.let { hideSoftInput(it) }
-//        hideSoftInput(mBinding.uiDialogBottomEtTitle)
-        super.onDismiss(dialog)
-        println("onDismiss")
     }
 
 }

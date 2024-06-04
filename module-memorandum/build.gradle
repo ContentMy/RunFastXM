@@ -1,12 +1,14 @@
 apply from:'../appModule.gradle'
 android {
     defaultConfig {
+        //TODO:更新环境后，目前的gradle版本为8.4，运行单个模块已经不需要配置applicationId，namespace的参数无论是否处于模块还是应用状态，都可以声明，不会报出异常
         //只有是运行模块状态时才可以使用以下的参数，如果是依赖模块的话，以下参数是非法的
-        if (!isRelease){
-            applicationId "com.existmg.module_memorandum"
-        }
+//        if (!isRelease){
+//            applicationId "com.existmg.module_memorandum"
+//        }
     }
     resourcePrefix 'memorandum_'//资源文件和属性名的命名规范
+    namespace 'com.existmg.module_memorandum'
 }
 
 dependencies {

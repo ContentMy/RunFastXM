@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+    </data>
+
+    <ImageView
+        android:id="@+id/memorandum_item_img_iv_img"
+        android:layout_width="@dimen/ui_dp_50"
+        android:layout_height="@dimen/ui_dp_50"
+        android:layout_margin="@dimen/ui_dp_6"/>
+</layout>

@@ -1,6 +1,6 @@
 package com.existmg.module_user
 
-import com.existmg.library_base.application.BaseApplication
+import com.existmg.library_common.application.BaseApplication
 
 /**
  * @Author ContentMy
