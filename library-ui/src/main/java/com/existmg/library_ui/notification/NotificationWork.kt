@@ -67,23 +67,19 @@ class NotificationWork(
         val actionIntent = Intent(context, NotificationReceiver::class.java)
         println("在worker中拿到的id为：$dataId")
         actionIntent.putExtra("dataId",dataId)
-        actionIntent.putExtra("notificationId", NOTIFICATION_ID)
         val actionPendingIntent = if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.S) {
-            PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_IMMUTABLE)
+            PendingIntent.getBroadcast(context, dataId, actionIntent, PendingIntent.FLAG_IMMUTABLE)
         } else {
-            PendingIntent.getBroadcast(context, 0, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
+            PendingIntent.getBroadcast(context, dataId, actionIntent, PendingIntent.FLAG_UPDATE_CURRENT)
         }
-        val action = NotificationCompat.Action.Builder(R.drawable.ui_remind, "Action", actionPendingIntent).build()
-
 
         val notificationBuilder = NotificationCompat.Builder(context, CHANNEL_ID)
             .setContentTitle(title)
             .setContentText(content)
             .setSmallIcon(iconResId)
             .setAutoCancel(true)
-//            .setContentIntent(pendingIntent)
-            .addAction(action)
+            .setContentIntent(actionPendingIntent)
 
-        notificationManager.notify(NOTIFICATION_ID, notificationBuilder.build())
+        notificationManager.notify(dataId, notificationBuilder.build())//把提醒的数据表id作为通知的id，保证了唯一
     }
 }

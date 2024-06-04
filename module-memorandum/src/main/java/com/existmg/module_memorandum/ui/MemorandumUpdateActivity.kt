@@ -44,7 +44,7 @@ class MemorandumUpdateActivity : BaseMVVMActivity<MemorandumUpdateViewModel, Mem
         mBinding.memorandumUpdateToolbar.uiToolbarTvTitle.text = "记录详情"
         mBinding.memorandumUpdateToolbar.uiToolbarTvRight.text = "修改"
         mAdapter = MemorandumCreateImgRecycleViewAdapter(
-            this,
+            this,false,
             onAddImageClick = {
 
             },
