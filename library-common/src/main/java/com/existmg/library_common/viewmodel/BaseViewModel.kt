@@ -1,10 +1,10 @@
-package com.existmg.library_base.viewmodel
+package com.existmg.library_common.viewmodel
 
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.LifecycleEventObserver
 import androidx.lifecycle.LifecycleOwner
 import androidx.lifecycle.ViewModel
-import com.existmg.library_base.viewmodel.lifecycle.BaseViewModelLifecycleObserver
+import com.existmg.library_common.viewmodel.lifecycle.BaseViewModelLifecycleObserver
 
 
 /**

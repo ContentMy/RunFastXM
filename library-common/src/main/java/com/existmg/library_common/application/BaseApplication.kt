@@ -1,4 +1,4 @@
-package com.existmg.library_base.application
+package com.existmg.library_common.application
 
 import androidx.multidex.MultiDex
 import androidx.multidex.MultiDexApplication

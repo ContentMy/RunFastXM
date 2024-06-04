@@ -1,11 +1,9 @@
 package com.existmg.module_target.ui
 
-import android.annotation.SuppressLint
 import android.app.Application
 import android.content.IntentFilter
 import android.graphics.Color
 import android.graphics.drawable.GradientDrawable
-import android.os.Bundle
 import android.view.View
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.ViewModelProvider
@@ -13,9 +11,8 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.BaseQuickAdapter
 import com.chad.library.adapter.base.listener.OnItemClickListener
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactoryWithParams
-import com.existmg.library_common.utils.setLightStatusBar
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_data.local.IconsManager
 import com.existmg.library_ui.dialog.view.MyDataPickerDialog
 import com.existmg.library_ui.interfaces.DataPickerGetCalendarListener
@@ -43,7 +40,7 @@ import java.util.Calendar
  * @Date: 2024/4/7 1:40 上午
  * @Description: 这里是新建目标页面，修改目标时也是复用了这个页面
  */
-class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel,TargetActivityTargetCreateBinding>(),
+class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel, TargetActivityTargetCreateBinding>(),
     View.OnClickListener,
     TargetStatusRecycleViewAdapter.OnItemSelectedCallback,
     TargetIconsRecycleViewAdapter.OnIconsItemSelectedCallback {

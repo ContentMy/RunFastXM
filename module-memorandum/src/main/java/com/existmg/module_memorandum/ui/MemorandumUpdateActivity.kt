@@ -5,8 +5,8 @@ import android.net.Uri
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_data.accessor.MemorandumModuleRoomAccessor
 import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 import com.existmg.library_data.repository.MemorandumRepository

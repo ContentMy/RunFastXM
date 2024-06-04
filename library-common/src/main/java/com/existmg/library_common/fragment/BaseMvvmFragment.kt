@@ -1,28 +1,38 @@
-package com.existmg.library_base.activity
+package com.existmg.library_common.fragment
 
-import android.graphics.Color
+import android.annotation.SuppressLint
+import android.content.Context
 import android.os.Bundle
+import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
+import android.view.View.OnTouchListener
+import android.view.ViewGroup
+import android.view.inputmethod.InputMethodManager
 import androidx.databinding.DataBindingUtil
 import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.get
-import com.existmg.library_base.viewmodel.BaseViewModel
+import com.existmg.library_common.viewmodel.BaseViewModel
+
 
 /**
- * @Author:ContentMy
- * @Date: 2024/4/6 10:46 AM
- * @Description: 这里是基于MVVM的基类Activity，继承了最基本的封装的基类，然后加入了mvvm相关的封装内容
+ * @Author ContentMy
+ * @Date 2024/3/28 11:37 PM
+ * @Description 这里是基于MVVM的基类Fragment，继承了最基本的封装的基类，然后加入了mvvm相关的封装内容
  */
-abstract class BaseMVVMActivity<VM : BaseViewModel, VB : ViewDataBinding> : BaseActivity() {
+abstract class BaseMvvmFragment<VM : BaseViewModel, VB : ViewDataBinding> : BaseFragment() {
     protected lateinit var mViewModel: VM
     protected lateinit var mBinding: VB
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        initObserver()
-        lifecycle.addObserver(mViewModel)
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        mBinding = DataBindingUtil.inflate(inflater, getLayoutId(),container,false)
+        addCustomView()
+        return mBinding.root
     }
 
     /**
@@ -30,13 +40,15 @@ abstract class BaseMVVMActivity<VM : BaseViewModel, VB : ViewDataBinding> : Base
      * @Description: 实现基类的beforeInit用来做MVVM的相关初始化操作
      */
     override fun beforeInit() {
-        super.beforeInit()
-        mBinding = DataBindingUtil.setContentView(this, getLayoutId())
-        mBinding.lifecycleOwner = this
         mViewModel = createViewModel()
+        lifecycle.addObserver(mViewModel)
         bindViewModel()
     }
 
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        initObserver()
+    }
     /**
      * @Author: ContentMy
      * @return: 返回viewmodel的class对象
@@ -62,6 +74,14 @@ abstract class BaseMVVMActivity<VM : BaseViewModel, VB : ViewDataBinding> : Base
      * @Description: 初始化observe的相关操作
      */
     open fun initObserver(){
+
+    }
+
+    /**
+     * @Author: ContentMy
+     * @Description: 用于开放式在onCreateView回调增加一些view操作时的需求
+     */
+    open fun addCustomView(){
 
     }
 

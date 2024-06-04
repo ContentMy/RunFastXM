@@ -14,6 +14,7 @@
             </intent-filter>
         </activity>
         <activity android:name=".ui.MainActivity"
+            android:launchMode="singleTask"
             android:exported="false"/>
         <activity android:name=".ui.MainGuideActivity"
             android:exported="false"/>

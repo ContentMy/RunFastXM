@@ -93,13 +93,10 @@ dependencies {
 //    testImplementation 'junit:junit:4.+'
 //    androidTestImplementation 'androidx.test.ext:junit:1.1.2'
 //    androidTestImplementation 'androidx.test.espresso:espresso-core:3.3.0'
-//    api project(':library-base')
-//
     //组件依赖基础库
     // TODO：这里使用api的原因是要把依赖关系传递给app壳。原因是app壳有用到基础模块和公共模块的对应内容，
     //  目前因为功能模块依赖了基础和公共模块，所以暂时通过依赖传递的方式来完成。
     //  也可以直接在app壳直接依赖基本模块和公共模块，后续项目成型后可能会修改依赖方式
-    api project(':library-base')
     api project(':library-common')
     api project(':library-ui')
     api project(':library-data')

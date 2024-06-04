@@ -1,4 +1,4 @@
-package com.existmg.library_base.activity
+package com.existmg.library_common.activity
 
 import android.graphics.Color
 import android.os.Build
@@ -9,6 +9,7 @@ import android.view.WindowInsetsController
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
+import com.existmg.library_common.managers.ActivityStackManager
 import com.gyf.immersionbar.ImmersionBar
 
 /**
@@ -30,6 +31,7 @@ abstract class BaseActivity: AppCompatActivity() {
         initView()
         initData()
         initListener()
+        ActivityStackManager.addActivity(this)
     }
 
     /**
@@ -129,4 +131,8 @@ abstract class BaseActivity: AppCompatActivity() {
         }
     }
     /*==============沉浸式逻辑结束================*/
+    override fun onDestroy() {
+        super.onDestroy()
+        ActivityStackManager.removeActivity(this)
+    }
 }

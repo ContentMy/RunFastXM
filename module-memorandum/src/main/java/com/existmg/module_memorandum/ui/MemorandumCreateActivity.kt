@@ -1,18 +1,16 @@
 package com.existmg.module_memorandum.ui
 
-import android.Manifest
 import android.app.Application
 import android.content.Context
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.net.Uri
 import android.view.View
 import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_data.accessor.MemorandumModuleRoomAccessor
 import com.existmg.library_data.repository.MemorandumRepository
 import com.existmg.library_ui.views.CustomLinearLayout
@@ -30,7 +28,7 @@ import com.existmg.module_memorandum.viewmodel.MemorandumCreateViewModel
  * 方案二：目前是完全按照activity的方案做的，只不过设置了透明模糊以及根布局点击finish来达到效果
  * 最新：更改页面样式，不再使用仿dialog的样式来做，因为增加了图片选择与展示，页面需要滑动，而这种ui在dialog这种看着滑动比较突兀，先改为正常的activity展示
  */
-class MemorandumCreateActivity : BaseMVVMActivity<MemorandumCreateViewModel,MemorandumLayoutActivityMemorandumCreateBinding>(){
+class MemorandumCreateActivity : BaseMVVMActivity<MemorandumCreateViewModel, MemorandumLayoutActivityMemorandumCreateBinding>(){
     private val inputMethodManager:InputMethodManager? by lazy{
         getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
     }

@@ -3,7 +3,7 @@ package com.existmg.runfastxm
 import androidx.work.OneTimeWorkRequest
 import androidx.work.WorkManager
 import com.alibaba.android.arouter.launcher.ARouter
-import com.existmg.library_base.application.BaseApplication
+import com.existmg.library_common.application.BaseApplication
 import com.existmg.library_data.accessor.MemorandumModuleRoomAccessor
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.repository.RemindRepository

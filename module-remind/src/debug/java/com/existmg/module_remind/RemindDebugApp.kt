@@ -1,6 +1,6 @@
 package com.existmg.module_remind
 
-import com.existmg.library_base.application.BaseApplication
+import com.existmg.library_common.application.BaseApplication
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.db.database.AppDatabase
 import com.existmg.library_data.repository.RemindRepository

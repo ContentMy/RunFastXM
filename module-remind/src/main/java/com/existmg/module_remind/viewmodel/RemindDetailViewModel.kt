@@ -3,7 +3,7 @@ package com.existmg.module_remind.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.existmg.library_base.viewmodel.BaseViewModel
+import com.existmg.library_common.viewmodel.BaseViewModel
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
 import com.existmg.module_remind.utils.logs.RemindLoggerManager

@@ -77,7 +77,6 @@ dependencies {
         kapt 'com.alibaba:arouter-compiler:1.5.2'
     }else{
         //引入基础模块保证编译
-        implementation project(':library-base')
         implementation project(':library-common')
         implementation project(':library-ui')
         implementation project(':library-data')

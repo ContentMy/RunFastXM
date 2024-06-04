@@ -4,8 +4,8 @@ import android.content.Intent
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.existmg.library_base.fragment.BaseMvvmFragment
-import com.existmg.library_base.manager.viewModelFactory
+import com.existmg.library_common.fragment.BaseMvvmFragment
+import com.existmg.library_common.managers.viewModelFactory
 import com.existmg.library_common.router.RouterFragmentPath
 import com.existmg.module_user.R
 import com.existmg.module_user.databinding.UserLayoutFragmentBinding
@@ -21,7 +21,7 @@ import com.existmg.module_user.viewmodel.UserViewModel
  * @Description 这里是个人设置模块的入口Fragment
  */
 @Route(path = RouterFragmentPath.User.PAGER_USER)
-class UserFragment:BaseMvvmFragment<UserViewModel,UserLayoutFragmentBinding>(),
+class UserFragment: BaseMvvmFragment<UserViewModel, UserLayoutFragmentBinding>(),
     View.OnClickListener {
     override fun getViewModelClass(): Class<UserViewModel> {
         return UserViewModel::class.java

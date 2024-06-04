@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.existmg.library_base.viewmodel.BaseApplicationViewModel
+import com.existmg.library_common.viewmodel.BaseApplicationViewModel
 import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_data.db.entity.MemorandumEntity
 import com.existmg.library_data.db.entity.MemorandumImgEntity
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
  */
 class MemorandumCreateViewModel(
     private var repository:MemorandumRepository,
-    application: Application):BaseApplicationViewModel(application) {
+    application: Application): BaseApplicationViewModel(application) {
     private val mLog = MemorandumLoggerManager.getLogger<MemorandumCreateViewModel>()
     var memorandumTitleString = MutableLiveData<String>()
 

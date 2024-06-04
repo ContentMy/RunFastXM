@@ -7,7 +7,7 @@ import androidx.databinding.ObservableLong
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.existmg.library_base.viewmodel.BaseApplicationViewModel
+import com.existmg.library_common.viewmodel.BaseApplicationViewModel
 import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_common.utils.timeLongToString
 import com.existmg.library_common.utils.timeLongToStringWithHourMinSec
@@ -25,7 +25,7 @@ import kotlinx.coroutines.launch
  */
 class MemorandumUpdateViewModel(
     private var repository:MemorandumRepository,
-    application: Application):BaseApplicationViewModel(application) {
+    application: Application): BaseApplicationViewModel(application) {
     private val mLog = MemorandumLoggerManager.getLogger<MemorandumUpdateViewModel>()
     var memorandumTitleString = MutableLiveData<String>()
 

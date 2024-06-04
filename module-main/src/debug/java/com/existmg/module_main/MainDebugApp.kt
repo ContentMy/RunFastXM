@@ -1,7 +1,7 @@
 package com.existmg.module_main
 
 import com.alibaba.android.arouter.launcher.ARouter
-import com.existmg.library_base.application.BaseApplication
+import com.existmg.library_common.application.BaseApplication
 
 /**
  * @Author ContentMy

@@ -1,4 +1,4 @@
-package com.existmg.library_base.fragment
+package com.existmg.library_common.fragment
 
 import android.content.Context
 import android.os.Bundle

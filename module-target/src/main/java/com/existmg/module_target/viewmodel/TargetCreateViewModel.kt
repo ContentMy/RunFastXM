@@ -8,7 +8,7 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
-import com.existmg.library_base.viewmodel.BaseApplicationViewModel
+import com.existmg.library_common.viewmodel.BaseApplicationViewModel
 import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_data.local.IconsManager
 import com.existmg.library_ui.notification.NotificationRepository

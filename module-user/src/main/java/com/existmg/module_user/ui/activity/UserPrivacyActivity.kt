@@ -1,8 +1,8 @@
 package com.existmg.module_user.ui.activity
 
 import androidx.lifecycle.ViewModelProvider
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactory
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactory
 import com.existmg.module_user.R
 import com.existmg.module_user.databinding.UserLayoutPrivacyActivityBinding
 import com.existmg.module_user.viewmodel.UserPrivacyViewModel
@@ -12,7 +12,8 @@ import com.existmg.module_user.viewmodel.UserPrivacyViewModel
  * @Date 2024/6/3 12:36 AM
  * @Description
  */
-class UserPrivacyActivity :BaseMVVMActivity<UserPrivacyViewModel,UserLayoutPrivacyActivityBinding>() {
+class UserPrivacyActivity :
+    BaseMVVMActivity<UserPrivacyViewModel, UserLayoutPrivacyActivityBinding>() {
     override fun getViewModelClass(): Class<UserPrivacyViewModel> {
         return UserPrivacyViewModel::class.java
     }

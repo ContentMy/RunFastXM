@@ -6,8 +6,8 @@ import android.animation.ObjectAnimator
 import android.content.Intent
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactory
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactory
 import com.existmg.module_main.R
 import com.existmg.module_main.databinding.MainLayoutActivityGuideMainBinding
 import com.existmg.module_main.viewmodel.MainGuideViewModel
@@ -17,7 +17,7 @@ import com.existmg.module_main.viewmodel.MainGuideViewModel
  * @Date 2024/5/28 8:43 PM
  * @Description
  */
-class MainGuideActivity:BaseMVVMActivity<MainGuideViewModel,MainLayoutActivityGuideMainBinding>() {
+class MainGuideActivity: BaseMVVMActivity<MainGuideViewModel, MainLayoutActivityGuideMainBinding>() {
     override fun getViewModelClass(): Class<MainGuideViewModel> {
         return MainGuideViewModel::class.java
     }

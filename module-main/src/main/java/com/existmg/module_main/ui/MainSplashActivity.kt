@@ -4,8 +4,8 @@ import android.app.Application
 import android.content.Intent
 import android.os.Handler
 import androidx.lifecycle.ViewModelProvider
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.module_main.R
 import com.existmg.module_main.databinding.MainLayoutActivitySplashMainBinding
 import com.existmg.module_main.viewmodel.MainSplashViewModel
@@ -19,7 +19,8 @@ import com.existmg.module_main.viewmodel.MainSplashViewModel
  *          1.合成icon+文字的图片，用来设置在theme避免启动白屏
  *          2.继续调研SplashScreen的可能性，目前根据api设置较为死板，有没有其他ui图片提供，所以暂不使用SplashScreen
  */
-class MainSplashActivity:BaseMVVMActivity<MainSplashViewModel,MainLayoutActivitySplashMainBinding>() {
+class MainSplashActivity:
+    BaseMVVMActivity<MainSplashViewModel, MainLayoutActivitySplashMainBinding>() {
     override fun getViewModelClass(): Class<MainSplashViewModel> {
         return MainSplashViewModel::class.java
     }

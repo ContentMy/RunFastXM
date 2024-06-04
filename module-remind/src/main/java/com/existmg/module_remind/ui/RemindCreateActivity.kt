@@ -7,14 +7,13 @@ import android.graphics.Color
 import android.os.Build
 import android.view.View
 import android.view.inputmethod.InputMethodManager
-import android.widget.Toast
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_common.utils.PermissionUtils
 import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
@@ -32,7 +31,7 @@ import com.existmg.module_remind.viewmodel.RemindCreateViewModel
  * @Date: 2024/4/27 12:34 PM
  * @Description: 这里是dialog样式的新建提醒的activity页面
  */
-class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel,RemindActivityRemindCreateBinding>(),
+class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel, RemindActivityRemindCreateBinding>(),
     HorizontalItemTimeSelectRecycleViewAdapter.OnHorizontalItemSelectedCallback,
     View.OnClickListener {
     private lateinit var mAdapter: HorizontalItemTimeSelectRecycleViewAdapter//TODO：优化时要考虑做封装，与UI模块解耦。方案：考虑放入common模块，资源统一在使用时去ui模块获取或者放到功能模块下

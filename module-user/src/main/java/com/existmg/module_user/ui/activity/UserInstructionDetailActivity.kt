@@ -1,8 +1,8 @@
 package com.existmg.module_user.ui.activity
 
 import androidx.lifecycle.ViewModelProvider
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactory
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactory
 import com.existmg.module_user.R
 import com.existmg.module_user.databinding.UserLayoutInstructionDetailActivityBinding
 import com.existmg.module_user.viewmodel.UserInstructionDetailViewModel

@@ -6,12 +6,12 @@ package com.existmg.library_common.router
  * @Description 这里是阿里ARouter的路由地址类，统一封装了各个模块入口的地址
  */
 class RouterFragmentPath {
-    /** 首页组件（已废弃） */
-    object Home {
-        private const val HOME = "/home"
+    /** 主页组件 */
+    object Main {
+        private const val MAIN = "/main"
 
-        /** 首页 （已废弃）*/
-        const val PAGER_HOME = "$HOME/Home"
+        /** 主页 */
+        const val PAGE_MAIN = "$MAIN/Main"
     }
 
     /** 提醒倒计时组件  */

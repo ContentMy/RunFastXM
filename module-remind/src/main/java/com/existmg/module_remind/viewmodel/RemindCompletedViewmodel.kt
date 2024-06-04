@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
 import androidx.work.WorkManager
-import com.existmg.library_base.viewmodel.BaseViewModel
+import com.existmg.library_common.viewmodel.BaseViewModel
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
 import com.existmg.library_ui.notification.NotificationRepository

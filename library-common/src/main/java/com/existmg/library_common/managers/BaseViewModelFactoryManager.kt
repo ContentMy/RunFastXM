@@ -1,4 +1,4 @@
-package com.existmg.library_base.manager
+package com.existmg.library_common.managers
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider

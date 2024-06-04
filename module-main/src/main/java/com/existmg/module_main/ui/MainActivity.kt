@@ -3,8 +3,10 @@ package com.existmg.module_main.ui
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.viewpager2.widget.ViewPager2
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactory
+import com.alibaba.android.arouter.facade.annotation.Route
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactory
+import com.existmg.library_common.router.RouterFragmentPath
 import com.existmg.module_main.R
 import com.existmg.module_main.databinding.MainActivityMainBinding
 import com.existmg.module_main.ui.adapter.ViewPagerAdapter
@@ -17,6 +19,8 @@ import com.tencent.bugly.crashreport.CrashReport
  * @Date: 2024/4/6 12:22 PM
  * @Description: 这里是项目入口,使用了ViewPager2+BottomNavigationView实现整体的ui架构，点击跳转到对应模块的fragment入口
  */
+
+@Route(path = RouterFragmentPath.Main.PAGE_MAIN)
 class MainActivity : BaseMVVMActivity<MainViewModel, MainActivityMainBinding>() {
     private lateinit var adapter: ViewPagerAdapter
 //    private lateinit var vibrator: Vibrator

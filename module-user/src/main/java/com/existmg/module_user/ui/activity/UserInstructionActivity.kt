@@ -3,8 +3,8 @@ package com.existmg.module_user.ui.activity
 import android.content.Intent
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactory
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactory
 import com.existmg.module_user.R
 import com.existmg.module_user.databinding.UserLayoutInstructionActivityBinding
 import com.existmg.module_user.viewmodel.UserInstructionViewModel
@@ -14,7 +14,8 @@ import com.existmg.module_user.viewmodel.UserInstructionViewModel
  * @Date 2024/6/3 12:58 AM
  * @Description
  */
-class UserInstructionActivity:BaseMVVMActivity<UserInstructionViewModel,UserLayoutInstructionActivityBinding>(),
+class UserInstructionActivity:
+    BaseMVVMActivity<UserInstructionViewModel, UserLayoutInstructionActivityBinding>(),
     View.OnClickListener {
     override fun getViewModelClass(): Class<UserInstructionViewModel> {
         return UserInstructionViewModel::class.java

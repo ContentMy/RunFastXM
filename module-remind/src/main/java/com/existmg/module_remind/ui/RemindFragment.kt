@@ -11,10 +11,9 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.alibaba.android.arouter.launcher.ARouter
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
-import com.existmg.library_base.fragment.BaseMvvmFragment
-import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.fragment.BaseMvvmFragment
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_common.router.RouterFragmentPath
-import com.existmg.library_common.utils.ToastUtil
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
@@ -40,7 +39,7 @@ import com.existmg.module_remind.viewmodel.RemindViewModel
  *
  */
 @Route(path = RouterFragmentPath.Remind.PAGER_REMIND)
-class RemindFragment : BaseMvvmFragment<RemindViewModel,RemindLayoutRemindFragmentBinding>(),DialogDatabaseDelegate,
+class RemindFragment : BaseMvvmFragment<RemindViewModel, RemindLayoutRemindFragmentBinding>(),DialogDatabaseDelegate,
     RemindRecycleAdapter.OnItemDeleteClickCallback {
     private val mLog = RemindLoggerManager.getLogger<RemindFragment>()
     private lateinit var adapter: RemindRecycleAdapter

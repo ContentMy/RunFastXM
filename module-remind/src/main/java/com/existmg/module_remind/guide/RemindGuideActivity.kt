@@ -4,12 +4,9 @@ import android.app.Application
 import android.graphics.Rect
 import android.view.View
 import android.view.ViewTreeObserver
-import android.widget.Toast
-import androidx.databinding.ViewDataBinding
 import androidx.lifecycle.ViewModelProvider
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactory
-import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_common.utils.ToastUtil
 import com.existmg.module_remind.R
 import com.existmg.module_remind.databinding.RemindActivityGuideBinding
@@ -30,7 +27,7 @@ import com.existmg.module_remind.databinding.RemindActivityGuideBinding
  *          按钮（完成引导）
  *
  */
-class RemindGuideActivity:BaseMVVMActivity<RemindGuideViewModel,RemindActivityGuideBinding>() {
+class RemindGuideActivity: BaseMVVMActivity<RemindGuideViewModel, RemindActivityGuideBinding>() {
     override fun getViewModelClass(): Class<RemindGuideViewModel> {
         return RemindGuideViewModel::class.java
     }

@@ -7,8 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
-import com.existmg.library_base.fragment.BaseMvvmFragment
-import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.fragment.BaseMvvmFragment
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_common.router.RouterFragmentPath
 import com.existmg.module_target.R
 import com.existmg.library_data.accessor.TargetModuleRoomAccessor
@@ -27,7 +27,7 @@ import com.existmg.module_target.utils.logs.TargetLoggerManager
  * @Description 这里是目标模块的入口Fragment
  */
 @Route(path = RouterFragmentPath.Target.PAGER_TARGET)
-class TargetFragment:BaseMvvmFragment<TargetViewModel,TargetLayoutFragmentBinding>(),TargetRecycleViewAdapter.OnItemDeleteClickCallback,
+class TargetFragment: BaseMvvmFragment<TargetViewModel, TargetLayoutFragmentBinding>(),TargetRecycleViewAdapter.OnItemDeleteClickCallback,
     TargetRecycleViewAdapter.OnItemCheckInCallback {
     private val mLog = TargetLoggerManager.getLogger<TargetFragment>()
     private lateinit var adapter: TargetRecycleViewAdapter

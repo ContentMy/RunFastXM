@@ -3,7 +3,7 @@ package com.existmg.module_target.viewmodel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.viewModelScope
-import com.existmg.library_base.viewmodel.BaseViewModel
+import com.existmg.library_common.viewmodel.BaseViewModel
 import com.existmg.library_common.utils.getEndTimeOfDay
 import com.existmg.library_common.utils.getStartTimeOfDay
 import com.existmg.library_data.db.entity.TargetCheckInEntity

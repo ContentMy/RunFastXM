@@ -6,13 +6,12 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
-import com.existmg.library_base.fragment.BaseMvvmFragment
-import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.fragment.BaseMvvmFragment
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_common.interfaces.OnItemClickListener
 import com.existmg.library_common.interfaces.OnItemLongClickListener
 import com.existmg.library_common.router.RouterFragmentPath
 import com.existmg.library_data.accessor.MemorandumModuleRoomAccessor
-import com.existmg.library_data.db.entity.MemorandumEntity
 import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 import com.existmg.library_data.repository.MemorandumRepository
 import com.existmg.library_ui.views.DiaryDividerItemDecoration
@@ -29,7 +28,7 @@ import kotlin.math.abs
  * @Description 这里是记录生活模块的页面入口
  */
 @Route(path = RouterFragmentPath.Memorandum.PAGER_MEMORANDUM)
-class MemorandumFragment : BaseMvvmFragment<MemorandumViewModel,MemorandumLayoutFragmentBinding>(){
+class MemorandumFragment : BaseMvvmFragment<MemorandumViewModel, MemorandumLayoutFragmentBinding>(){
     private lateinit var mAdapter:MemorandumRecycleViewAdapter
     private var mList = mutableListOf<MemorandumWithImagesEntity>()
     override fun getLayoutId(): Int {

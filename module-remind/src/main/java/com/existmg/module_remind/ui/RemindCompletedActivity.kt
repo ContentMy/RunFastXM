@@ -3,8 +3,8 @@ package com.existmg.module_remind.ui
 import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.existmg.library_base.activity.BaseMVVMActivity
-import com.existmg.library_base.manager.viewModelFactoryWithParams
+import com.existmg.library_common.activity.BaseMVVMActivity
+import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
@@ -20,7 +20,7 @@ import com.existmg.module_remind.viewmodel.RemindCompletedViewmodel
  * @Date 2024/5/14 12:46 AM
  * @Description
  */
-class RemindCompletedActivity : BaseMVVMActivity<RemindCompletedViewmodel,RemindActivityRemindCompletedBinding>() {
+class RemindCompletedActivity : BaseMVVMActivity<RemindCompletedViewmodel, RemindActivityRemindCompletedBinding>() {
     private val mLog = RemindLoggerManager.getLogger<RemindCompletedActivity>()
     private lateinit var mAdapter:RemindCompleteRecycleAdapter
     private val mList = mutableListOf<RemindEntity>()
