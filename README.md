@@ -4,10 +4,6 @@
 
 小马快跑是一款拥有事项提醒、目标管理和生活记录的工具类App，后续可能还会迭代其他的功能。
 
-目前是Beta版本，后续在现有功能需求完成100%后，会发布Release版本
-#### 分支
-Beta1：https://github.com/ContentMy/RunFastXM/tree/beta1
-
 #### 应用快照
 
 * 事项提醒功能模块
