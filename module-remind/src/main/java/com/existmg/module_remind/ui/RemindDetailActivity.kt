@@ -142,6 +142,10 @@ class RemindDetailActivity : BaseMVVMActivity<RemindDetailViewModel, RemindActiv
         super.finish()
     }
 
+    override fun onDestroy() {
+        super.onDestroy()
+        mBinding.remindDetailCdc.pauseCountDownTimer()
+    }
     private fun startActivityForName(
         context: Context,
         javaClass: Class<*>

@@ -557,6 +557,7 @@ class CountDownClock : LinearLayout {
 
     fun pauseCountDownTimer() {
         countDownTimer?.cancel()
+        countDownTimer = null
     }
 
     fun resumeCountDownTimer() {
