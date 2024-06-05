@@ -18,4 +18,6 @@
     <string name="user_optimization_self_start_content_string">允许应用自启动</string>
     <string name="user_optimization_self_start_switch_open_string">已允许</string>
     <string name="user_optimization_self_start_switch_close_string">未允许</string>
+
+    <string name="user_about_app_version_string">正式版 %1$s</string>
 </resources>

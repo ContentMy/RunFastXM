@@ -42,7 +42,8 @@ class UserAboutAppActivity:
         mBinding.userAboutAppToolbar.uiToolbarIvBack.setImageResource(R.drawable.ui_top_back_white)
         mBinding.userAboutAppToolbar.uiToolbarTvTitle.text = resources.getText(R.string.user_setting_string_about_us)
         mBinding.userAboutAppToolbar.uiToolbarTvTitle.setTextColor(resources.getColor(R.color.ui_white))
-        mBinding.userAboutAppVersion.text = "测试版 ${getAppVersionName(this)}"
+        mBinding.userAboutAppVersion.text =
+            getString(R.string.user_about_app_version_string, getAppVersionName(this))
     }
 
     override fun initListener() {
