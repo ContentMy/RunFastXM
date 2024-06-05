@@ -135,4 +135,16 @@ abstract class BaseActivity: AppCompatActivity() {
         super.onDestroy()
         ActivityStackManager.removeActivity(this)
     }
+
+
+    //解决Android Q（Android 10）引入的android.app.IRequestFinishCallback$Stub类引起的内存泄漏问题
+    override fun onBackPressed() {
+        // 检查是否是任务根，并且Fragment栈为空
+        if (isTaskRoot && supportFragmentManager.backStackEntryCount == 0) {
+            // 使用finishAfterTransition()替代super.onBackPressed()
+            finishAfterTransition()
+        } else {
+            super.onBackPressed()
+        }
+    }
 }
