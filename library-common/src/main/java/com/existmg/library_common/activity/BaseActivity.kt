@@ -1,14 +1,17 @@
 package com.existmg.library_common.activity
 
+import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.os.Bundle
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
+import android.view.inputmethod.InputMethodManager
 import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.WindowInsetsControllerCompat
+import com.existmg.library_common.R
 import com.existmg.library_common.managers.ActivityStackManager
 import com.gyf.immersionbar.ImmersionBar
 
@@ -18,6 +21,9 @@ import com.gyf.immersionbar.ImmersionBar
  * @Description: 这里是基类Activity，用于做通用的封装操作
  */
 abstract class BaseActivity: AppCompatActivity() {
+    private val inputMethodManager: InputMethodManager? by lazy{
+        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    }
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         /*==============沉浸式逻辑开始================*/
@@ -146,5 +152,15 @@ abstract class BaseActivity: AppCompatActivity() {
         } else {
             super.onBackPressed()
         }
+    }
+
+    open fun showSoftInput(v:View){
+        inputMethodManager?.let {
+            v.requestFocus()
+            it.showSoftInput(v, InputMethodManager.SHOW_IMPLICIT)
+        }
+    }
+    open fun hideSoftInput(v: View){//TODO:后续增加判断，如果软键盘显示的情况下再调用
+        inputMethodManager?.hideSoftInputFromWindow(v.windowToken, 0)
     }
 }

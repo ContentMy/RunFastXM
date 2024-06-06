@@ -31,6 +31,7 @@ import com.existmg.module_target.ui.adapter.TargetIconsRecycleViewAdapter
 import com.existmg.module_target.ui.adapter.TargetStatusRecycleViewAdapter
 import com.existmg.library_common.utils.calenderToDateString
 import com.existmg.library_data.repository.TargetRepository
+import com.existmg.library_ui.views.CustomLinearLayout
 import com.existmg.module_target.utils.logs.TargetLoggerManager
 import com.existmg.module_target.viewmodel.TargetCreateViewModel
 import java.util.Calendar
@@ -45,7 +46,6 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel, TargetActiv
     TargetStatusRecycleViewAdapter.OnItemSelectedCallback,
     TargetIconsRecycleViewAdapter.OnIconsItemSelectedCallback {
     private val mLog = TargetLoggerManager.getLogger<TargetCreateActivity>()
-    private val notificationReceiver = NotificationReceiver()
     private var isNewTarget = true
     private lateinit var statusAdapter: TargetStatusRecycleViewAdapter
     private lateinit var iconsAdapter: TargetIconsRecycleViewAdapter
@@ -135,10 +135,12 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel, TargetActiv
 
         })
 
-        val filter = IntentFilter().apply {
-            addAction("")
-        }
-//        registerReceiver(notificationReceiver,filter)
+        mBinding.targetCreateCl.setOnOutsideClickListener(object : CustomLinearLayout.OnOutsideClickListener{
+            override fun onOutsideClick(view: View) {
+                hideSoftInput(mBinding.targetCreateEtTitle)
+            }
+
+        })
     }
 
     /**
@@ -156,6 +158,7 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel, TargetActiv
         }
         //处理Dialog的点击观察回调以及数据回传
         mViewModel.showDialog.observe(this){
+            hideSoftInput(mBinding.targetCreateEtTitle)
             MyDataPickerDialog.Builder(this).setListener(object: DataPickerGetCalendarListener {
                 override fun getCalendar(calendar: Calendar) {
                     mLog.debug("回调到activity，日期为：${calenderToDateString(calendar)},来源为：${it.source}")
@@ -168,24 +171,6 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel, TargetActiv
         mViewModel.targetImageString.observe(this){
             mBinding.targetCreateIvIcon.setDrawableImageByName(it)
         }
-    }
-
-    // TODO: 暂时将反注册直接放在这个生命周期回调，后续封装lifecycle再优化这里
-    override fun onDestroy() {
-        super.onDestroy()
-//        unregisterReceiver(notificationReceiver)
-    }
-
-    /**
-     * @Author: ContentMy
-     * @Description: 设置icon的圆环
-     */
-    private fun setIconOval(){
-        val drawable = GradientDrawable()
-        drawable.shape = GradientDrawable.OVAL
-        drawable.setStroke(5, ContextCompat.getColor(this, R.color.ui_gray_light))
-        mBinding.targetCreateIvIcon.background = drawable
-        mBinding.targetCreateIvIcon.setImageResource(R.drawable.ui_icon_sleep)
     }
 
     override fun onClick(v: View?) {//TODO:bug.在软键盘弹出时，点击其他非输入框，会有事件响应，保存关闭页面，软键盘也不会收回。待解决
@@ -227,5 +212,11 @@ class TargetCreateActivity : BaseMVVMActivity<TargetCreateViewModel, TargetActiv
         }else{
             holder.dataBinding?.targetIconsRecycleCl?.setBackgroundResource(0)
         }
+    }
+
+    override fun finish() {
+        super.finish()
+        hideSoftInput(mBinding.targetCreateEtTitle)
+        overridePendingTransition(R.anim.ui_alpha_show,R.anim.ui_alpha_hide)//解决退出activity时黑屏的问题
     }
 }

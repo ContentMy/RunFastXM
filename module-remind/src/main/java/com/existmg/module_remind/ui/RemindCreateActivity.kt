@@ -2,11 +2,9 @@ package com.existmg.module_remind.ui
 
 import android.Manifest
 import android.app.Application
-import android.content.Context
 import android.graphics.Color
 import android.os.Build
 import android.view.View
-import android.view.inputmethod.InputMethodManager
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.app.NotificationManagerCompat
 import androidx.lifecycle.ViewModelProvider
@@ -36,9 +34,6 @@ class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel, RemindActiv
     View.OnClickListener {
     private lateinit var mAdapter: HorizontalItemTimeSelectRecycleViewAdapter//TODO：优化时要考虑做封装，与UI模块解耦。方案：考虑放入common模块，资源统一在使用时去ui模块获取或者放到功能模块下
     private var currentPosition = 0
-    private val inputMethodManager:InputMethodManager? by lazy{
-        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    }
     override fun getViewModelClass(): Class<RemindCreateViewModel> {
         return RemindCreateViewModel::class.java
     }
@@ -151,19 +146,12 @@ class RemindCreateActivity : BaseMVVMActivity<RemindCreateViewModel, RemindActiv
 
     override fun onResume() {
         super.onResume()
-        inputMethodManager?.let {
-            mBinding.remindCreateEtTitle.requestFocus()
-            it.showSoftInput(mBinding.remindCreateEtTitle, InputMethodManager.SHOW_IMPLICIT)
-        }
+        showSoftInput(mBinding.remindCreateEtTitle)
     }
     override fun finish() {
         super.finish()
         hideSoftInput(mBinding.remindCreateEtTitle)
         overridePendingTransition(R.anim.ui_alpha_show,R.anim.ui_alpha_hide)//解决退出activity时黑屏的问题
-    }
-
-    private fun hideSoftInput(v: View){//TODO:后续增加判断，如果软键盘显示的情况下再调用
-        inputMethodManager?.hideSoftInputFromWindow(v.windowToken, 0)
     }
 
     /*============================针对Android13以及以上版本的通知权限处理逻辑================================*/
