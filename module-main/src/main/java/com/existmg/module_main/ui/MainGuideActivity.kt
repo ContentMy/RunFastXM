@@ -8,6 +8,7 @@ import android.view.View
 import androidx.lifecycle.ViewModelProvider
 import com.existmg.library_common.activity.BaseMVVMActivity
 import com.existmg.library_common.managers.viewModelFactory
+import com.existmg.library_common.utils.setOnSingleClickListener
 import com.existmg.module_main.R
 import com.existmg.module_main.databinding.MainLayoutActivityGuideMainBinding
 import com.existmg.module_main.viewmodel.MainGuideViewModel
@@ -37,15 +38,15 @@ class MainGuideActivity: BaseMVVMActivity<MainGuideViewModel, MainLayoutActivity
     }
 
     override fun initListener() {
-        mBinding.mainGuideIvStepOneNext.setOnClickListener{
+        mBinding.mainGuideIvStepOneNext.setOnSingleClickListener{
             showStepTwo()
         }
 
-        mBinding.mainGuideIvStepTwoNext.setOnClickListener {
+        mBinding.mainGuideIvStepTwoNext.setOnSingleClickListener {
             showStepThree()
         }
 
-        mBinding.mainGuideBtnStepThreeStart.setOnClickListener {
+        mBinding.mainGuideBtnStepThreeStart.setOnSingleClickListener {
             // TODO: 封装到基类中
             val intent = Intent(this, MainActivity::class.java)
             startActivity(intent)
