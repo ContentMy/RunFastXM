@@ -8,8 +8,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.alibaba.android.arouter.facade.annotation.Route
 import com.existmg.library_common.fragment.BaseMvvmFragment
 import com.existmg.library_common.managers.viewModelFactoryWithParams
-import com.existmg.library_common.interfaces.OnItemClickListener
-import com.existmg.library_common.interfaces.OnItemLongClickListener
+import com.existmg.library_common.listeners.OnItemClickListener
+import com.existmg.library_common.listeners.OnItemLongClickListener
 import com.existmg.library_common.router.RouterFragmentPath
 import com.existmg.library_data.accessor.MemorandumModuleRoomAccessor
 import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
