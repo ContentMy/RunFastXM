@@ -1,4 +1,4 @@
-package com.existmg.library_common.interfaces
+package com.existmg.library_common.listeners
 
 import android.view.View
 

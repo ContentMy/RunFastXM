@@ -14,273 +14,277 @@
     android:focusable="true"//配合解决EditText进入页面就自动获取焦点的问题
     android:focusableInTouchMode="true"
     -->
-    <LinearLayout
-        android:orientation="vertical"
+    <ScrollView
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        tools:context=".ui.TargetCreateActivity"
-        android:fitsSystemWindows="true"
-        android:focusable="true"
-        android:focusableInTouchMode="true">
-
-        <include
-            android:id="@+id/target_create_toolbar"
-            layout="@layout/ui_layout_base_toolbar"/>
-
-        <ImageView
-            android:id="@+id/target_create_iv_icon"
-            android:layout_width="50dp"
-            android:layout_height="50dp"
-            android:layout_gravity="center"
-            android:layout_marginTop="@dimen/ui_dp_18"
-            android:padding="@dimen/ui_dp_10"/>
-
-        <!--target_title-->
-        <EditText
-            android:layout_gravity="center"
-            android:gravity="center"
-            android:id="@+id/target_create_et_title"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="@string/target_create_title_hint"
-            android:textSize="@dimen/ui_sp_14"
-            android:textColorHint="@color/ui_gray"
-            android:padding="@dimen/ui_dp_6"
-            android:layout_marginTop="@dimen/ui_dp_18"
-            android:background="@drawable/ui_shape_rounded_rectangle_background"
-            android:inputType="textMultiLine"
-            android:text="@={viewModel.targetTitleString}"/>
-
-        <LinearLayout
+        android:layout_height="wrap_content">
+        <com.existmg.library_ui.views.CustomLinearLayout
+            android:id="@+id/target_create_cl"
+            android:orientation="vertical"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/ui_dp_10"
-            android:layout_marginStart="@dimen/ui_dp_10"
-            android:layout_marginEnd="@dimen/ui_dp_10">
+            android:fitsSystemWindows="true"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <include
+                android:id="@+id/target_create_toolbar"
+                layout="@layout/ui_layout_base_toolbar"/>
+
             <ImageView
-                android:layout_width="@dimen/ui_dp_20"
-                android:layout_height="@dimen/ui_dp_20"
-                android:src="@drawable/ui_small_icon_choose_icon"/>
-            <TextView
+                android:id="@+id/target_create_iv_icon"
+                android:layout_width="50dp"
+                android:layout_height="50dp"
+                android:layout_gravity="center"
+                android:layout_marginTop="@dimen/ui_dp_18"
+                android:padding="@dimen/ui_dp_10"/>
+
+            <!--target_title-->
+            <EditText
+                android:layout_gravity="center"
+                android:gravity="center"
+                android:id="@+id/target_create_et_title"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:hint="@string/target_create_title_hint"
+                android:textSize="@dimen/ui_sp_14"
+                android:textColorHint="@color/ui_gray"
+                android:padding="@dimen/ui_dp_6"
+                android:layout_marginTop="@dimen/ui_dp_18"
+                android:background="@drawable/ui_shape_rounded_rectangle_background"
+                android:inputType="textMultiLine"
+                android:text="@={viewModel.targetTitleString}"/>
+
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/ui_dp_4"
-                android:textColor="@color/ui_black"
-                android:textSize="@dimen/ui_sp_14"
-                android:text="@string/target_create_icon_string"/>
-        </LinearLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/target_create_rl_icons"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="@dimen/ui_dp_10"
-            android:layout_marginStart="@dimen/ui_dp_10"
-            android:layout_marginEnd="@dimen/ui_dp_10"/>
-        <!--target_startTime-->
-       <LinearLayout
-           android:id="@+id/target_create_ll_start_time"
-           android:layout_width="match_parent"
-           android:layout_height="50dp"
-           android:orientation="horizontal"
-           android:gravity="center_vertical"
-           android:layout_marginTop="@dimen/ui_dp_10"
-           android:layout_marginStart="@dimen/ui_dp_10"
-           android:layout_marginEnd="@dimen/ui_dp_10"
-           android:onClick="@{()->viewModel.chooseStartTime()}">
-           <ImageView
-               android:layout_width="@dimen/ui_dp_20"
-               android:layout_height="@dimen/ui_dp_20"
-               android:src="@drawable/ui_small_icon_start_time"/>
-           <TextView
-               android:layout_width="0dp"
-               android:layout_weight="1"
-               android:layout_height="wrap_content"
-               android:layout_marginStart="@dimen/ui_dp_4"
-               android:textColor="@color/ui_black"
-               android:textSize="@dimen/ui_sp_14"
-               android:text="@string/target_create_start_time_string" />
-
-           <TextView
-               android:id="@+id/target_create_tv_start_time"
-               android:layout_width="wrap_content"
-               android:layout_height="wrap_content"
-               android:gravity="end"
-               android:hint="@string/target_create_start_time_hint"
-               android:text="@{viewModel.targetStartTimeString}"
-               android:textSize="@dimen/ui_sp_14" />
-           <ImageView
-               android:layout_width="@dimen/ui_dp_12"
-               android:layout_height="match_parent"
-               android:layout_marginStart="@dimen/ui_dp_6"
-               android:src="@drawable/ui_right_arrow_green"/>
-       </LinearLayout>
-
-        <!--target_endTime-->
-        <LinearLayout
-            android:id="@+id/target_create_ll_end_time"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/ui_dp_10"
-            android:layout_marginStart="@dimen/ui_dp_10"
-            android:layout_marginEnd="@dimen/ui_dp_10"
-            android:onClick="@{()->viewModel.chooseEndTime()}">
-            <ImageView
-                android:layout_width="@dimen/ui_dp_20"
-                android:layout_height="@dimen/ui_dp_20"
-                android:src="@drawable/ui_small_icon_end_time"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/ui_dp_4"
-                android:textColor="@color/ui_black"
-                android:textSize="@dimen/ui_sp_14"
-                android:text="@string/target_create_end_time_string"/>
-            <TextView
-                android:id="@+id/target_create_tv_end_time"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:textSize="@dimen/ui_sp_14"
-                android:hint="@string/target_create_end_time_hint"
-                android:text="@={viewModel.targetEndTimeString}"/>
-            <ImageView
-                android:layout_width="@dimen/ui_dp_12"
-                android:layout_height="match_parent"
-                android:layout_marginStart="@dimen/ui_dp_6"
-                android:src="@drawable/ui_right_arrow_green"/>
-        </LinearLayout>
-
-        <!--target_status-->
-        <androidx.constraintlayout.widget.ConstraintLayout
-            android:id="@+id/target_create_ll_status"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="@dimen/ui_dp_10"
-            android:layout_marginTop="@dimen/ui_dp_10"
-            android:layout_marginEnd="@dimen/ui_dp_10">
-
-            <ImageView
-                android:id="@+id/target_imageview"
-                android:layout_width="@dimen/ui_dp_20"
-                android:layout_height="@dimen/ui_dp_20"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
                 android:layout_marginTop="@dimen/ui_dp_10"
-                android:src="@drawable/ui_small_icon_calendar"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/target_textview"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="@string/target_create_status_string"
-                android:textColor="@color/ui_black"
-                android:textSize="@dimen/ui_sp_14"
-                android:layout_marginStart="@dimen/ui_dp_4"
-                app:layout_constraintStart_toEndOf="@+id/target_imageview"
-                app:layout_constraintTop_toTopOf="@+id/target_imageview" />
-
-            <TextView
-                android:id="@+id/target_create_tv_status"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:gravity="end"
-                android:hint="@string/target_create_status_hint"
-                android:text="@={viewModel.targetStatusString}"
-                android:textSize="@dimen/ui_sp_14"
-                android:layout_marginEnd="@dimen/ui_dp_16"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="@+id/target_textview" />
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:layout_marginEnd="@dimen/ui_dp_10">
+                <ImageView
+                    android:layout_width="@dimen/ui_dp_20"
+                    android:layout_height="@dimen/ui_dp_20"
+                    android:src="@drawable/ui_small_icon_choose_icon"/>
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/ui_dp_4"
+                    android:textColor="@color/ui_black"
+                    android:textSize="@dimen/ui_sp_14"
+                    android:text="@string/target_create_icon_string"/>
+            </LinearLayout>
 
             <androidx.recyclerview.widget.RecyclerView
-                android:id="@+id/target_create_rl_status"
+                android:id="@+id/target_create_rl_icons"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="@dimen/ui_dp_10"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/target_imageview" />
-        </androidx.constraintlayout.widget.ConstraintLayout>
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:layout_marginEnd="@dimen/ui_dp_10"/>
+            <!--target_startTime-->
+            <LinearLayout
+                android:id="@+id/target_create_ll_start_time"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/ui_dp_10"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:layout_marginEnd="@dimen/ui_dp_10"
+                android:onClick="@{()->viewModel.chooseStartTime()}">
+                <ImageView
+                    android:layout_width="@dimen/ui_dp_20"
+                    android:layout_height="@dimen/ui_dp_20"
+                    android:src="@drawable/ui_small_icon_start_time"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/ui_dp_4"
+                    android:textColor="@color/ui_black"
+                    android:textSize="@dimen/ui_sp_14"
+                    android:text="@string/target_create_start_time_string" />
 
-        <!--target_remind-->
-        <LinearLayout
-            android:visibility="gone"
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/ui_dp_10"
-            android:layout_marginStart="@dimen/ui_dp_10"
-            android:layout_marginEnd="@dimen/ui_dp_10">
-            <ImageView
-                android:layout_width="@dimen/ui_dp_20"
-                android:layout_height="@dimen/ui_dp_20"
-                android:src="@drawable/ui_small_icon_remind"/>
-            <TextView
-                android:layout_width="0dp"
-                android:layout_weight="1"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/ui_dp_4"
-                android:textColor="@color/ui_black"
-                android:textSize="@dimen/ui_sp_14"
-                android:text="@string/target_create_remind_string"/>
+                <TextView
+                    android:id="@+id/target_create_tv_start_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:hint="@string/target_create_start_time_hint"
+                    android:text="@{viewModel.targetStartTimeString}"
+                    android:textSize="@dimen/ui_sp_14" />
+                <ImageView
+                    android:layout_width="@dimen/ui_dp_12"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/ui_dp_6"
+                    android:src="@drawable/ui_right_arrow_green"/>
+            </LinearLayout>
 
-            <androidx.appcompat.widget.SwitchCompat
-                android:id="@+id/target_create_sc_remind"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:checked="@={viewModel.targetIsRemind}"/>
-        </LinearLayout>
-        <!--target_content-->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="50dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical"
-            android:layout_marginTop="@dimen/ui_dp_10"
-            android:layout_marginStart="@dimen/ui_dp_10"
-            android:layout_marginEnd="@dimen/ui_dp_10">
-            <ImageView
-                android:layout_width="@dimen/ui_dp_20"
-                android:layout_height="@dimen/ui_dp_20"
-                android:src="@drawable/ui_small_icon_record"/>
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="@dimen/ui_dp_4"
-                android:textColor="@color/ui_black"
-                android:textSize="@dimen/ui_sp_14"
-                android:text="@string/target_create_content_string" />
+            <!--target_endTime-->
+            <LinearLayout
+                android:id="@+id/target_create_ll_end_time"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/ui_dp_10"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:layout_marginEnd="@dimen/ui_dp_10"
+                android:onClick="@{()->viewModel.chooseEndTime()}">
+                <ImageView
+                    android:layout_width="@dimen/ui_dp_20"
+                    android:layout_height="@dimen/ui_dp_20"
+                    android:src="@drawable/ui_small_icon_end_time"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/ui_dp_4"
+                    android:textColor="@color/ui_black"
+                    android:textSize="@dimen/ui_sp_14"
+                    android:text="@string/target_create_end_time_string"/>
+                <TextView
+                    android:id="@+id/target_create_tv_end_time"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:textSize="@dimen/ui_sp_14"
+                    android:hint="@string/target_create_end_time_hint"
+                    android:text="@={viewModel.targetEndTimeString}"/>
+                <ImageView
+                    android:layout_width="@dimen/ui_dp_12"
+                    android:layout_height="match_parent"
+                    android:layout_marginStart="@dimen/ui_dp_6"
+                    android:src="@drawable/ui_right_arrow_green"/>
+            </LinearLayout>
 
-        </LinearLayout>
-        <EditText
-            android:id="@+id/target_create_et_content"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:minHeight="@dimen/ui_dp_100"
-            android:textSize="@dimen/ui_sp_12"
-            android:textColorHint="@color/ui_gray"
-            android:layout_marginTop="@dimen/ui_dp_6"
-            android:layout_marginStart="@dimen/ui_dp_10"
-            android:layout_marginEnd="@dimen/ui_dp_10"
-            android:padding="@dimen/ui_dp_6"
-            android:background="@drawable/ui_shape_rounded_rectangle_background"
-            android:inputType="textMultiLine"
-            android:gravity="start"
-            android:hint="@string/target_create_content_hint"
-            android:text="@={viewModel.targetContentString}"/>
-        <Button
-            android:id="@+id/target_create_bt_save"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_margin="@dimen/ui_dp_10"
-            android:textColor="@color/ui_white"
-            android:text="@string/target_create_btn_save_string"
-            android:background="@drawable/ui_shape_rounded_rectangle_background_green"/>
-    </LinearLayout>
+            <!--target_status-->
+            <androidx.constraintlayout.widget.ConstraintLayout
+                android:id="@+id/target_create_ll_status"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:layout_marginTop="@dimen/ui_dp_10"
+                android:layout_marginEnd="@dimen/ui_dp_10">
+
+                <ImageView
+                    android:id="@+id/target_imageview"
+                    android:layout_width="@dimen/ui_dp_20"
+                    android:layout_height="@dimen/ui_dp_20"
+                    android:layout_marginTop="@dimen/ui_dp_10"
+                    android:src="@drawable/ui_small_icon_calendar"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <TextView
+                    android:id="@+id/target_textview"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_weight="1"
+                    android:text="@string/target_create_status_string"
+                    android:textColor="@color/ui_black"
+                    android:textSize="@dimen/ui_sp_14"
+                    android:layout_marginStart="@dimen/ui_dp_4"
+                    app:layout_constraintStart_toEndOf="@+id/target_imageview"
+                    app:layout_constraintTop_toTopOf="@+id/target_imageview" />
+
+                <TextView
+                    android:id="@+id/target_create_tv_status"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="end"
+                    android:hint="@string/target_create_status_hint"
+                    android:text="@={viewModel.targetStatusString}"
+                    android:textSize="@dimen/ui_sp_14"
+                    android:layout_marginEnd="@dimen/ui_dp_16"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="@+id/target_textview" />
+
+                <androidx.recyclerview.widget.RecyclerView
+                    android:id="@+id/target_create_rl_status"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="@dimen/ui_dp_10"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/target_imageview" />
+            </androidx.constraintlayout.widget.ConstraintLayout>
+
+            <!--target_remind-->
+            <LinearLayout
+                android:visibility="gone"
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/ui_dp_10"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:layout_marginEnd="@dimen/ui_dp_10">
+                <ImageView
+                    android:layout_width="@dimen/ui_dp_20"
+                    android:layout_height="@dimen/ui_dp_20"
+                    android:src="@drawable/ui_small_icon_remind"/>
+                <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/ui_dp_4"
+                    android:textColor="@color/ui_black"
+                    android:textSize="@dimen/ui_sp_14"
+                    android:text="@string/target_create_remind_string"/>
+
+                <androidx.appcompat.widget.SwitchCompat
+                    android:id="@+id/target_create_sc_remind"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:checked="@={viewModel.targetIsRemind}"/>
+            </LinearLayout>
+            <!--target_content-->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="50dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical"
+                android:layout_marginTop="@dimen/ui_dp_10"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:layout_marginEnd="@dimen/ui_dp_10">
+                <ImageView
+                    android:layout_width="@dimen/ui_dp_20"
+                    android:layout_height="@dimen/ui_dp_20"
+                    android:src="@drawable/ui_small_icon_record"/>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="@dimen/ui_dp_4"
+                    android:textColor="@color/ui_black"
+                    android:textSize="@dimen/ui_sp_14"
+                    android:text="@string/target_create_content_string" />
+
+            </LinearLayout>
+            <EditText
+                android:id="@+id/target_create_et_content"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="@dimen/ui_dp_100"
+                android:textSize="@dimen/ui_sp_12"
+                android:textColorHint="@color/ui_gray"
+                android:layout_marginTop="@dimen/ui_dp_6"
+                android:layout_marginStart="@dimen/ui_dp_10"
+                android:layout_marginEnd="@dimen/ui_dp_10"
+                android:padding="@dimen/ui_dp_6"
+                android:background="@drawable/ui_shape_rounded_rectangle_background"
+                android:inputType="textMultiLine"
+                android:gravity="start"
+                android:hint="@string/target_create_content_hint"
+                android:text="@={viewModel.targetContentString}"/>
+            <Button
+                android:id="@+id/target_create_bt_save"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_margin="@dimen/ui_dp_10"
+                android:textColor="@color/ui_white"
+                android:text="@string/target_create_btn_save_string"
+                android:background="@drawable/ui_shape_rounded_rectangle_background_green"/>
+        </com.existmg.library_ui.views.CustomLinearLayout>
+    </ScrollView>
 </layout>

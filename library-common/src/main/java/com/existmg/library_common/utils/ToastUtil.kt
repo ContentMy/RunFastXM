@@ -18,7 +18,7 @@ object ToastUtil {
      * @Description: 短时间内展示一条Toast
      */
     fun showShort(context: Context, message: CharSequence) {
-        showToast(context, message, Toast.LENGTH_SHORT)
+        showToast(context.applicationContext, message, Toast.LENGTH_SHORT)
     }
 
     /**
@@ -28,7 +28,7 @@ object ToastUtil {
      * @Description: 短时间内展示一条Toast
      */
     fun showShort(context: Context, messageResId: Int) {
-        showToast(context, context.getString(messageResId), Toast.LENGTH_SHORT)
+        showToast(context.applicationContext, context.getString(messageResId), Toast.LENGTH_SHORT)
     }
 
     /**
@@ -38,7 +38,7 @@ object ToastUtil {
      * @Description: 较长时间内展示一条Toast
      */
     fun showLong(context: Context, message: CharSequence) {
-        showToast(context, message, Toast.LENGTH_LONG)
+        showToast(context.applicationContext, message, Toast.LENGTH_LONG)
     }
 
     /**
@@ -48,7 +48,7 @@ object ToastUtil {
      * @Description: 较长时间内展示一条Toast
      */
     fun showLong(context: Context, messageResId: Int) {
-        showToast(context, context.getString(messageResId), Toast.LENGTH_LONG)
+        showToast(context.applicationContext, context.getString(messageResId), Toast.LENGTH_LONG)
     }
 
     /**

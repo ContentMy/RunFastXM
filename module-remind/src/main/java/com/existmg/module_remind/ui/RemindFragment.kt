@@ -14,6 +14,7 @@ import com.chad.library.adapter.base.viewholder.BaseDataBindingHolder
 import com.existmg.library_common.fragment.BaseMvvmFragment
 import com.existmg.library_common.managers.viewModelFactoryWithParams
 import com.existmg.library_common.router.RouterFragmentPath
+import com.existmg.library_common.utils.setOnSingleClickListener
 import com.existmg.library_data.accessor.RemindModuleRoomAccessor
 import com.existmg.library_data.db.entity.RemindEntity
 import com.existmg.library_data.repository.RemindRepository
@@ -92,16 +93,14 @@ class RemindFragment : BaseMvvmFragment<RemindViewModel, RemindLayoutRemindFragm
         mBinding.remindIncludeTitleToolbar.uiTitleToolbarIvRight.setOnClickListener {
             startActivity(Intent(requireContext(),RemindCompletedActivity::class.java))
         }
+
+        mBinding.remindFab.setOnSingleClickListener {
+            val intent = Intent(context, RemindCreateActivity::class.java)
+            startActivity(intent)
+        }
     }
 
     override fun initObserver() {
-        mViewModel.navigateToCreateTargetActivity.observe(viewLifecycleOwner, Observer {
-            if (it){
-//                displayDialogBottomFragment(childFragmentManager,this) TODO：暂时不使用dialogFragment的效果来完成了，有点击外部区域软键盘无法收回的问题，使用activity的dialog方案作为替代
-                val intent = Intent(context, RemindCreateActivity::class.java)
-                startActivity(intent)
-            }
-        })
 
         mViewModel.remindData.observe(viewLifecycleOwner){
             mBinding.remindTvDefaultContent.visibility = if (it.isEmpty()) View.VISIBLE else View.GONE

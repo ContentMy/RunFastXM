@@ -2,14 +2,15 @@ package com.existmg.module_memorandum.ui.adapter
 
 import android.content.Context
 import android.view.LayoutInflater
+import android.view.MotionEvent
 import android.view.View
 import android.view.ViewGroup
 import android.widget.TextView
 import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.existmg.library_common.interfaces.OnItemClickListener
-import com.existmg.library_common.interfaces.OnItemLongClickListener
+import com.existmg.library_common.listeners.OnItemClickListener
+import com.existmg.library_common.listeners.OnItemLongClickListener
 import com.existmg.library_common.utils.timeLongToString
 import com.existmg.library_data.db.entity.MemorandumWithImagesEntity
 import com.existmg.module_memorandum.R
@@ -94,6 +95,13 @@ class MemorandumRecycleViewAdapter(
             val height: Int = holder.dataBinding.memorandumItemCl.height
             holder.dataBinding.memorandumItemViewBg.layoutParams.height = height
             holder.dataBinding.memorandumItemViewBg.requestLayout()
+        }
+
+        holder.dataBinding.memorandumItemRvImg.setOnTouchListener { v, event ->
+            if (event.action == MotionEvent.ACTION_UP) {
+                holder.itemView.performClick()
+            }
+            false
         }
     }
 

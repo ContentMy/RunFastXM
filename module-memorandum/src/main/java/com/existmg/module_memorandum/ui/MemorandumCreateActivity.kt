@@ -29,9 +29,6 @@ import com.existmg.module_memorandum.viewmodel.MemorandumCreateViewModel
  * 最新：更改页面样式，不再使用仿dialog的样式来做，因为增加了图片选择与展示，页面需要滑动，而这种ui在dialog这种看着滑动比较突兀，先改为正常的activity展示
  */
 class MemorandumCreateActivity : BaseMVVMActivity<MemorandumCreateViewModel, MemorandumLayoutActivityMemorandumCreateBinding>(){
-    private val inputMethodManager:InputMethodManager? by lazy{
-        getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
-    }
     private lateinit var mAdapter:MemorandumCreateImgRecycleViewAdapter
     private val pickImageLauncher =
         registerForActivityResult(ActivityResultContracts.OpenDocument()) { uri: Uri? ->
@@ -118,10 +115,7 @@ class MemorandumCreateActivity : BaseMVVMActivity<MemorandumCreateViewModel, Mem
     override fun onResume() {
         super.onResume()
         window.setWindowAnimations(R.style.ui_ActivityDialogAlphaAnimation)
-        inputMethodManager?.let {
-            mBinding.memorandumCreateEtTitle.requestFocus()//不起作用，需要handle延时提醒，因为dialog和软键盘会冲突
-            it.showSoftInput(mBinding.memorandumCreateEtTitle, InputMethodManager.SHOW_IMPLICIT)
-        }
+        showSoftInput(mBinding.memorandumCreateEtTitle)
     }
 
     override fun finish() {
@@ -130,8 +124,4 @@ class MemorandumCreateActivity : BaseMVVMActivity<MemorandumCreateViewModel, Mem
         overridePendingTransition(R.anim.ui_alpha_show,R.anim.ui_alpha_hide)//解决退出activity时黑屏的问题
     }
 
-    private fun hideSoftInput(v:View){//TODO:后续增加判断，如果软键盘显示的情况下再调用
-        val manager = getSystemService(INPUT_METHOD_SERVICE) as InputMethodManager
-        manager.hideSoftInputFromWindow(v.windowToken, 0)
-    }
 }

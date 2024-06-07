@@ -129,8 +129,7 @@
             app:srcCompat="@drawable/ui_add"
             android:backgroundTint="@color/ui_green"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            android:onClick="@{() -> viewModel.onFabClick()}"/>
+            app:layout_constraintEnd_toEndOf="parent"/>
 
         <TextView
             android:id="@+id/remind_tv_default_content"
