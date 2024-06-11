@@ -7,6 +7,9 @@
 #### 兼容性问题声明
 目前此开源项目在小米、华为设备上测试过，其他设备受限于现实因素暂无法进行测试。如果有相关问题欢迎提issues
 
+#### 其他版本
+Harmony版本：https://github.com/ContentMy/RunFastXM-Harmony
+
 #### 分支
 开发中：https://github.com/ContentMy/RunFastXM/tree/release1.0.0
 
