@@ -11,7 +11,7 @@
 Harmony版本：https://github.com/ContentMy/RunFastXM-Harmony
 
 #### 分支
-开发中：https://github.com/ContentMy/RunFastXM/tree/release1.0.0
+开发中：https://github.com/ContentMy/RunFastXM/tree/dev
 
 #### 应用快照
 
