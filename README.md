@@ -8,8 +8,7 @@
 目前此开源项目在小米、华为设备上测试过，其他设备受限于现实因素暂无法进行测试。如果有相关问题欢迎提issues
 
 #### 其他版本
-Harmony版本：https://github.com/ContentMy/RunFastXM-Harmony
-Flutter版本：https://github.com/ContentMy/runfastxm_flutter/tree/dev
+Harmony版本：https://github.com/ContentMy/RunFastXM-Harmony</BR>Flutter版本：https://github.com/ContentMy/runfastxm_flutter/tree/dev
 
 #### 分支
 开发中：https://github.com/ContentMy/RunFastXM/tree/dev
