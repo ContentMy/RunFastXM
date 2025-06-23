@@ -9,6 +9,7 @@
 
 #### 其他版本
 Harmony版本：https://github.com/ContentMy/RunFastXM-Harmony
+Flutter版本：https://github.com/ContentMy/runfastxm_flutter/tree/dev
 
 #### 分支
 开发中：https://github.com/ContentMy/RunFastXM/tree/dev
